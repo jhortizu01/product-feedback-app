@@ -1,47 +1,56 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
+import data from 'data.json';
 
 //styles
-import '../index.scss'
+import '../index.scss';
 
 //types
-interface Status {
-    status: string;
-    count: number;
-}
+import { Status, STATUSES } from 'types';
 
 export const Roadmap = () => {
-    let statuses:Status[] = [
-        {status: "Planned", count: 2},
-        {status: "In-Progress", count: 2},
-        {status: "Live", count: 2}
-    ]
+  let plannedCount = data.productRequests.filter((item) => {
+    return item.status === 'planned';
+  }).length;
 
-    return (
-        <section className='roadmap'>
-            <div className='roadmap__text'>
-                <span>Roadmap</span>
-                <span>View</span>
-            </div>
-            <div className='roadmap__list'>
-                {statuses.map((status:Status) => {
-                    const dotClass = classNames({
-                        "planned": status.status === "Planned",
-                        "in-progress": status.status === "In-Progress",
-                        "live": status.status === "Live",
-                        "roadmap__dot": true
-                    })
-                    return (
-                    <div className='roadmap__item'>
-                    <div className='roadmap__status'>
-                        <div className={dotClass} /> 
-                        {status.status}
-                    </div>
-                    <div>{status.count}</div>
-                    </div>
-                    )
-                })}
-            </div>
+  let inProgressCount = data.productRequests.filter((item) => {
+    return item.status === 'in-progress';
+  }).length;
 
-        </section>
-    )
-}
+  let liveCount = data.productRequests.filter((item) => {
+    return item.status === 'in-progress';
+  }).length;
+
+  let statuses: Status[] = [
+    { status: STATUSES.PLANNED, count: plannedCount },
+    { status: STATUSES.IN_PROGRESS, count: inProgressCount },
+    { status: STATUSES.LIVE, count: liveCount },
+  ];
+
+  return (
+    <section className="roadmap">
+      <div className="roadmap__text">
+        <span>Roadmap</span>
+        <span>View</span>
+      </div>
+      <div className="roadmap__list">
+        {statuses.map((status: Status) => {
+          const dotClass = classNames({
+            planned: status.status === STATUSES.PLANNED,
+            'in-progress': status.status === STATUSES.IN_PROGRESS,
+            live: status.status === STATUSES.LIVE,
+            roadmap__dot: true,
+          });
+          return (
+            <div className="roadmap__item">
+              <div className="roadmap__status">
+                <div className={dotClass} />
+                {status.status}
+              </div>
+              <div>{status.count}</div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
