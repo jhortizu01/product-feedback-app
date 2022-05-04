@@ -1,5 +1,6 @@
 export enum STATUSES {
-  PLANNED = 'Planned',
-  IN_PROGRESS = 'In-Progress',
-  LIVE = 'Live',
+  PLANNED = 'planned',
+  IN_PROGRESS = 'in-progress',
+  LIVE = 'live',
+  SUGGESTION = 'suggestion',
 }
