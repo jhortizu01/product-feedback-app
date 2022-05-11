@@ -1,42 +1,17 @@
 import React from 'react';
 import '../index.scss';
-import data from 'data.json';
+import { data } from 'data';
 import { RequestCard } from './RequestCard';
+import { ProductRequest } from 'types';
 
-//types
-import { STATUSES } from 'types';
-
-interface AllProductRequestProps {
-  productRequests: {
-    id: number;
-    title: string;
-    category: string;
-    upvotes: number;
-    status: string;
-    description: string;
-    comments?: {
-      id: number;
-      content: string;
-      user: {
-        image: string;
-        name: string;
-        username: string;
-      };
-      replies?: {
-        content: string;
-        replyingTo: string;
-        user: {
-          image: string;
-          name: string;
-          username: string;
-        };
-      }[];
-    }[];
-  }[];
+interface IProps {
+  showData: ProductRequest[];
 }
 
-export const RequestCards = ({ productRequests }: AllProductRequestProps) => {
-  let card = productRequests.map((request) => {
+export const RequestCards = (props: IProps) => {
+  const { showData } = props;
+
+  let card = showData.map((request) => {
     return (
       <div>
         <RequestCard

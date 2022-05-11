@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import data from 'data.json';
+import { data } from 'data';
 
 //styles
 import '../index.scss';

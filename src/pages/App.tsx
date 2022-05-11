@@ -6,25 +6,31 @@ import { Filter } from '../components/Filter';
 import { Roadmap } from '../components/Roadmap';
 import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
-import data from 'data.json';
+import { data } from 'data';
+import { ProductRequest } from 'types';
 
 const App = () => {
   const [allData, setAllData] = useState(data);
+  const [showData, setShowData] = useState<ProductRequest[]>(
+    allData.productRequests,
+  );
 
-  useEffect(() => {
-    setAllData(allData);
-  });
+  const { productRequests } = allData;
 
   return (
     <div className="App">
       <div className="App-col one">
         <FrontEndMentorHeader />
-        <Filter />
+        <Filter
+          productRequests={productRequests}
+          showData={showData}
+          setShowData={setShowData}
+        />
         <Roadmap />
       </div>
       <div className="App-col">
         <ToolBar />
-        <RequestCards productRequests={allData.productRequests} />
+        <RequestCards showData={showData} />
       </div>
     </div>
   );
