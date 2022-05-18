@@ -1,5 +1,4 @@
-import React from 'react';
-import { STATUSES, AllProductRequestProps, ProductRequest } from 'types';
+import { ProductRequest } from 'types';
 import '../index.scss';
 
 interface IProps {
@@ -10,7 +9,6 @@ interface IProps {
 
 export const Filter = (props: IProps) => {
   const { productRequests } = props;
-  const { showData } = props;
   const { setShowData } = props;
 
   const showAll = () => {
@@ -28,12 +26,54 @@ export const Filter = (props: IProps) => {
   return (
     <section className="filter">
       <div>
-        <button onClick={showAll}>All</button>
-        <button onClick={() => filter('ui')}>UI</button>
-        <button onClick={() => filter('ux')}>UX</button>
-        <button onClick={() => filter('enhancement')}>Enhancement</button>
-        <button onClick={() => filter('bug')}>Bug</button>
-        <button onClick={() => filter('feature')}>Feature</button>
+        <input
+          type="radio"
+          id="all"
+          name="filter"
+          value="all"
+          onClick={showAll}
+        ></input>
+        <label htmlFor="all">All</label>
+        <input
+          type="radio"
+          id="ui"
+          name="filter"
+          value="ui"
+          onClick={() => filter('ui')}
+        ></input>
+        <label htmlFor="ui">UI</label>
+        <input
+          type="radio"
+          id="ux"
+          name="filter"
+          value="ux"
+          onClick={() => filter('ux')}
+        ></input>
+        <label htmlFor="ux">UX</label>
+        <input
+          type="radio"
+          id="enhancement"
+          name="filter"
+          value="enhancement"
+          onClick={() => filter('enhancement')}
+        ></input>
+        <label htmlFor="enhancement">Enhancement</label>
+        <input
+          type="radio"
+          id="bug"
+          name="filter"
+          value="bug"
+          onClick={() => filter('bug')}
+        ></input>
+        <label htmlFor="bug">Bug</label>
+        <input
+          type="radio"
+          id="feature"
+          name="filter"
+          value="feature"
+          onClick={() => filter('feature')}
+        ></input>
+        <label htmlFor="feature">Feature</label>
       </div>
     </section>
   );

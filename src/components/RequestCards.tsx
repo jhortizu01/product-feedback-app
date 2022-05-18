@@ -1,6 +1,4 @@
-import React from 'react';
 import '../index.scss';
-import { data } from 'data';
 import { RequestCard } from './RequestCard';
 import { ProductRequest } from 'types';
 

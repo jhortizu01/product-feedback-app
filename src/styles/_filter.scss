@@ -1,22 +1,32 @@
-.filter {
-    align-items: center;
+.filter {        
+    height: 165px;
+    width: 250px;
     background-color: $white;
     border-radius: $border-radius;
     display: flex;
-    flex-wrap: wrap;
-    font-family: $font-jost;
-    height: 165px;
-    justify-content: center;
-    width: 250px;
+    align-items: center;
     
     div {
+        align-items: center;
+        height: 85%;
         display: flex;
         flex-wrap: wrap;
-        height: 85%;
-        width: 85%;
+        font-family: $font-jost;
     }
 
-    button {
+    input[type="radio"]{
+        visibility:hidden;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         background-color: $mid-gray;
         border-radius: $border-radius;
         border: none;
@@ -34,8 +44,6 @@
             color: $blurple;
             cursor: pointer;
         }
-
-
     }
 
 

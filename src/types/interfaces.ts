@@ -1,5 +1,5 @@
 import { STATUSES } from './enums';
-import { ProductRequest, Comment, User, Reply } from './types';
+import { ProductRequest } from './types';
 
 export interface Status {
   status: STATUSES;
