@@ -1,0 +1,76 @@
+.roadmap {
+    width: 220px;
+    background-color: $white;
+    font-family: $font-jost;
+    border-radius: $border-radius;
+    padding: 15px;
+
+    &__text {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 25px;
+       
+        span:nth-child(1) {
+            color: $darker-gray;
+            font-weight: bold;
+        }
+
+        span:nth-child(2) {
+            color: $blurple;
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 13px;
+        }
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: column;
+
+        div:nth-child(-n + 2) {
+            margin-bottom: 8px;
+        }
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        div:nth-child(2) {
+            font-weight: bold;
+            color: $dark-gray;
+        }
+    }
+
+    &__status {
+        display: flex;
+        align-items: center;
+        color: $dark-gray;
+        line-height: 23px;      
+    }
+
+    &__dot {
+        display: inline-flex;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        margin-right: 15px;
+
+        &.planned {
+            background-color: $peach;
+        }
+    
+        &.in-progress {
+            background-color: $violet;
+        }    
+    
+        &.live {
+            background-color: $sky-blue;
+        }
+    }
+
+
+   
+}
