@@ -8,15 +8,29 @@ import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { ProductRequest } from 'types';
-
+import { NoFeedback } from 'components/NoFeedback';
 const App = () => {
   const [allData, setAllData] = useState(data);
   const [showData, setShowData] = useState<ProductRequest[]>(
     allData.productRequests,
   );
 
-  const { productRequests } = allData;
+  const filter = (productCategory: string) => {
+    let filteredItems = productRequests.filter((request) => {
+      return request.category === productCategory;
+    });
+    setShowData(filteredItems);
+  };
 
+  const showCards =
+    showData.length === 0 ? (
+      <NoFeedback />
+    ) : (
+      <RequestCards showData={showData} />
+    );
+
+  const { productRequests } = allData;
+  console.log(showData);
   return (
     <div className="App">
       <div className="App-col one">
@@ -30,7 +44,7 @@ const App = () => {
       </div>
       <div className="App-col">
         <ToolBar />
-        <RequestCards showData={showData} />
+        {showCards}
       </div>
     </div>
   );
