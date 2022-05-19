@@ -22,6 +22,11 @@
         }
     }
 
+    input[type="radio"]:checked + label {
+        background-color: $blurple;
+        color: $white;
+    }
+
     label {
         display: flex;
         flex-direction: column;
