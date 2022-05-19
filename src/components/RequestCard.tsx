@@ -29,9 +29,9 @@ export const RequestCard = ({
 
   return (
     <div className="request-card">
-      <button onClick={addUpvote}>
+      <button onClick={addUpvote} disabled={disabled}>
         <KeyboardArrowUpIcon sx={{ color: indigo[500] }} />
-        {upvotes}
+        {upvoteState}
       </button>
       <section className="request-card-text">
         <div className="request-card-title">{title}</div>
