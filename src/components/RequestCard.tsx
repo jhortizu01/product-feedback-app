@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import '../index.scss';
 import { data } from 'data';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -18,9 +18,18 @@ export const RequestCard = ({
 }: ProductRequest) => {
   let userComments = comments?.length === undefined ? 0 : comments?.length;
 
+  const [upvoteState, setUpvoteState] = useState(upvotes);
+  const [disabled, setDisabled] = useState(false);
+
+  const addUpvote = () => {
+    let increment = upvoteState + 1;
+    setUpvoteState(increment);
+    setDisabled(true);
+  };
+
   return (
     <div className="request-card">
-      <button>
+      <button onClick={addUpvote}>
         <KeyboardArrowUpIcon sx={{ color: indigo[500] }} />
         {upvotes}
       </button>
