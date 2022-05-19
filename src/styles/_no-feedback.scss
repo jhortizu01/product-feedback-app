@@ -1,0 +1,30 @@
+.no-feedback {
+    max-width: 825px;
+    height: 600px;
+    border-radius: $border-radius;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-jost;
+
+    img {
+        margin-bottom: 55px;
+    }
+
+    span:first-of-type {
+        color: $darker-gray;
+        font-weight: 500;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    span:last-of-type {
+        color: $dark-gray;
+        font-size: 16px;
+        max-width: 410px;
+        margin-bottom: 50px;
+    }
+}
