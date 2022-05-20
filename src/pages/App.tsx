@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import '../styles/App.scss';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
 import { Filter } from '../components/Filter';

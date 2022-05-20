@@ -1,5 +1,3 @@
-import { STATUSES } from './enums';
-
 export type ProductRequest = {
   id: number;
   title: string;
