@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import '../index.scss';
-import { data } from 'data';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import CommentIcon from '@mui/icons-material/Comment';
-import { indigo } from '@mui/material/colors';
+
 //types
-import { STATUSES, ProductRequest } from 'types';
+import { ProductRequest } from 'types';
 
 export const RequestCard = ({
   id,
@@ -16,7 +13,7 @@ export const RequestCard = ({
   description,
   comments,
 }: ProductRequest) => {
-  let userComments = comments?.length === undefined ? 0 : comments?.length;
+  const userComments = comments?.length === undefined ? 0 : comments?.length;
 
   const [upvoteState, setUpvoteState] = useState(upvotes);
   const [disabled, setDisabled] = useState(false);
@@ -30,7 +27,7 @@ export const RequestCard = ({
   return (
     <div className="request-card">
       <button onClick={addUpvote} disabled={disabled}>
-        <KeyboardArrowUpIcon sx={{ color: indigo[500] }} />
+        <i className="fa-solid fa-chevron-up"></i>
         {upvoteState}
       </button>
       <section className="request-card-text">
@@ -39,7 +36,7 @@ export const RequestCard = ({
         <div className="request-card-category">{category}</div>
       </section>
       <div className="request-card-comments">
-        <CommentIcon sx={{ color: indigo[100] }} />
+        <i className="fa-solid fa-comment"></i>
         <span>{userComments}</span>
       </div>
     </div>
