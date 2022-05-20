@@ -7,9 +7,10 @@ interface IProps {
   setShowData: any;
 }
 
+const filterCategories = ['ui', 'ux', 'enhancement', 'bug', 'feature'];
+
 export const Filter = (props: IProps) => {
-  const { productRequests } = props;
-  const { setShowData } = props;
+  const { productRequests, setShowData } = props;
 
   const showAll = () => {
     setShowData(productRequests);
@@ -23,23 +24,6 @@ export const Filter = (props: IProps) => {
     setShowData(filteredItems);
   };
 
-  const filterCategories = ['ui', 'ux', 'enhancement', 'bug', 'feature'];
-
-  let category = filterCategories.map((category) => {
-    return (
-      <>
-        <input
-          type="radio"
-          id={category}
-          name="filter"
-          value={category}
-          onClick={() => filter(category)}
-        ></input>
-        <label htmlFor={category}> {category}</label>
-      </>
-    );
-  });
-
   return (
     <section className="filter">
       <div>
@@ -51,7 +35,20 @@ export const Filter = (props: IProps) => {
           onClick={showAll}
         ></input>
         <label htmlFor="all">All</label>
-        {category}
+        {filterCategories.map((category) => {
+          return (
+            <>
+              <input
+                type="radio"
+                id={category}
+                name="filter"
+                value={category}
+                onClick={() => filter(category)}
+              ></input>
+              <label htmlFor={category}> {category}</label>
+            </>
+          );
+        })}
       </div>
     </section>
   );
