@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProductRequest } from 'types';
 import '../index.scss';
 
@@ -8,10 +7,10 @@ interface IProps {
   setShowData: any;
 }
 
+const filterCategories = ['ui', 'ux', 'enhancement', 'bug', 'feature'];
+
 export const Filter = (props: IProps) => {
-  const { productRequests } = props;
-  const { showData } = props;
-  const { setShowData } = props;
+  const { productRequests, setShowData } = props;
 
   const showAll = () => {
     setShowData(productRequests);
@@ -27,12 +26,28 @@ export const Filter = (props: IProps) => {
   return (
     <section className="filter">
       <div>
-        <button onClick={showAll}>All</button>
-        <button onClick={() => filter('ui')}>UI</button>
-        <button onClick={() => filter('ux')}>UX</button>
-        <button onClick={() => filter('enhancement')}>Enhancement</button>
-        <button onClick={() => filter('bug')}>Bug</button>
-        <button onClick={() => filter('feature')}>Feature</button>
+        <input
+          type="radio"
+          id="all"
+          name="filter"
+          value="all"
+          onClick={showAll}
+        ></input>
+        <label htmlFor="all">All</label>
+        {filterCategories.map((category) => {
+          return (
+            <>
+              <input
+                type="radio"
+                id={category}
+                name="filter"
+                value={category}
+                onClick={() => filter(category)}
+              ></input>
+              <label htmlFor={category}> {category}</label>
+            </>
+          );
+        })}
       </div>
     </section>
   );

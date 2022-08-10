@@ -1,15 +1,20 @@
+
+import '../index.scss';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import CommentIcon from '@mui/icons-material/Comment';
+import { indigo } from '@mui/material/colors';
+
 import { useState } from 'react';
 import '../index.scss';
+
 
 //types
 import { ProductRequest } from 'types';
 
 export const RequestCard = ({
-  id,
   title,
   category,
   upvotes,
-  status,
   description,
   comments,
 }: ProductRequest) => {
