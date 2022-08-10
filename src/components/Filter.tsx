@@ -1,5 +1,5 @@
 import React from 'react';
-import { STATUSES, AllProductRequestProps, ProductRequest } from 'types';
+import { ProductRequest } from 'types';
 import '../index.scss';
 
 interface IProps {
@@ -21,7 +21,6 @@ export const Filter = (props: IProps) => {
     let filteredItems = productRequests.filter((request) => {
       return request.category === productCategory;
     });
-
     setShowData(filteredItems);
   };
 
