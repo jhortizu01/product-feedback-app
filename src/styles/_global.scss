@@ -1,0 +1,21 @@
+.add-feedback {
+    align-items: center;
+    background-color: $violet;
+    border-radius: $border-radius;
+    border: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    height: 45px;
+    justify-content: center;
+    width: 160px;
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    img {
+        margin-right: 5px;
+    }
+}

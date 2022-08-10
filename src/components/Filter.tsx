@@ -20,7 +20,6 @@ export const Filter = (props: IProps) => {
     let filteredItems = productRequests.filter((request) => {
       return request.category === productCategory;
     });
-
     setShowData(filteredItems);
   };
 

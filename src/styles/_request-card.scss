@@ -11,6 +11,10 @@
 
     button {
         width: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         height: 55px;
         background-color: $gray;
         border: none;
@@ -20,6 +24,26 @@
         margin-top: 30px;
         margin-left: 30px;
         margin-right: 40px;
+        
+
+        i {
+            color: $blurple;
+            margin-bottom: 5px;
+        }
+
+        &:disabled {
+            background-color: $blurple;
+            color: $white;
+
+            i {
+                color: $white;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: $button-hover-background;
+        }
     }
 
     &-text {
@@ -67,6 +91,10 @@
 
         span {
             margin-left: 5px;
+        }
+
+        i {
+            color: $comment-bubble;
         }
     }
 }
