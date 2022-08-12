@@ -1,100 +1,99 @@
 .request-card {
-    background-color: $white;
-    border-radius: $border-radius;
-    font-family: $font-jost;
+  background-color: $white;
+  border-radius: $border-radius;
+  font-family: $font-jost;
+  display: flex;
+  flex-direction: row;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  button {
+    width: 40px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    background-color: $gray;
+    border: none;
+    border-radius: $border-radius;
+    font-weight: 700;
+    color: $navy;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 40px;
+    color: $blurple;
+
+    span {
+      font-family: $font-jost;
+    }
+
+    &:disabled {
+      background-color: $blurple;
+      color: $white;
+
+      i {
+        color: $white;
+      }
+    }
 
     &:hover {
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      cursor: pointer;
+      background-color: $button-hover-background;
+    }
+  }
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  &-title {
+    font-weight: 700;
+    color: $darker-gray;
+    margin-bottom: 10px;
+  }
+
+  &-description {
+    color: $dark-gray;
+    margin-bottom: 10px;
+  }
+
+  &-category {
+    font-weight: 600;
+    padding: 5px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $gray;
+    color: $blurple;
+    width: fit-content;
+    height: 30px;
+    border-radius: $border-radius;
+    text-transform: capitalize;
+  }
+
+  &-comments {
+    font-weight: 700;
+    color: $navy;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      margin-left: 5px;
     }
 
-    button {
-        width: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 55px;
-        background-color: $gray;
-        border: none;
-        border-radius: $border-radius;
-        font-weight: 700;
-        color: $navy;
-        margin-top: 30px;
-        margin-left: 30px;
-        margin-right: 40px;
-        
-
-        i {
-            color: $blurple;
-            margin-bottom: 5px;
-        }
-
-        &:disabled {
-            background-color: $blurple;
-            color: $white;
-
-            i {
-                color: $white;
-            }
-        }
-
-        &:hover {
-            cursor: pointer;
-            background-color: $button-hover-background;
-        }
+    i {
+      color: $comment-bubble;
     }
-
-    &-text {
-        display: flex;
-        flex-direction: column;
-        width: 75%;
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-
-    &-title {
-        font-weight: 700;
-        color: $darker-gray;
-        margin-bottom: 10px;
-    }
-
-    &-description {
-        color: $dark-gray;
-        margin-bottom: 10px;
-    }
-
-    &-category {
-        font-weight: 600;
-        padding: 5px 16px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        background-color: $gray;
-        color: $blurple;
-        width: fit-content;
-        height: 30px;
-        border-radius: $border-radius;
-        text-transform: capitalize;
-    }
-
-    &-comments {
-        font-weight: 700;
-        color: $navy;
-        display: flex;
-        flex-direction: row;
-        flex-grow: 2;
-        align-items: center;
-        justify-content: center;
-
-        span {
-            margin-left: 5px;
-        }
-
-        i {
-            color: $comment-bubble;
-        }
-    }
+  }
 }

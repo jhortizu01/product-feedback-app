@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../index.scss';
 import gear from '../assets/icon-gear.svg';
 import plus from '../assets/shared/icon-plus.svg';
 
-export const ToolBar = () => {
+interface IProps {
+  callback(event: any): void;
+  sortOption: string;
+}
+
+export const ToolBar = (props: IProps) => {
+  const { callback, sortOption } = props;
+
   return (
     <div className="toolbar">
       <aside className="toolbar-left">
@@ -13,11 +20,11 @@ export const ToolBar = () => {
         </div>
         <div className="toolbar-left-sort">
           <span>Sort By:</span>
-          <select name="sortBy">
-            <option value="1">Most Up Votes</option>
-            <option value="1">1</option>
-            <option value="1">1</option>
-            <option value="1">1</option>
+          <select defaultValue={sortOption} onChange={callback}>
+            <option value="Most Up Votes">Most Up Votes</option>
+            <option value="Least Up Votes">Least Up Votes</option>
+            <option value="Most Comments">Most Comments</option>
+            <option value="Least Comments">Least Comments</option>
           </select>
         </div>
       </aside>

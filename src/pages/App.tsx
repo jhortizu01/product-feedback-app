@@ -9,11 +9,21 @@ import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
+import { CollectionsBookmarkOutlined } from '@mui/icons-material';
+
 const App = () => {
   const [allData, setAllData] = useState(data);
   const [showData, setShowData] = useState<ProductRequest[]>(
-    allData.productRequests,
+    allData.productRequests.sort((a, b) => {
+      return b.upvotes - a.upvotes;
+    }),
   );
+
+  const [sortOption, setSortOption] = useState<string>('Most Up Votes');
+
+  const showAll = () => {
+    setShowData(productRequests);
+  };
 
   const filter = (productCategory: string) => {
     let filteredItems = productRequests.filter((request) => {
@@ -22,28 +32,65 @@ const App = () => {
     setShowData(filteredItems);
   };
 
+  const handleChangeSort = (event: any) => {
+    const newSortOption = event.target.value;
+
+    if (newSortOption === 'Most Up Votes') {
+      let mostUpVotes = showData.sort((a: any, b: any) => {
+        return b.upvotes - a.upvotes;
+      });
+      setShowData(mostUpVotes);
+    } else if (newSortOption === 'Least Up Votes') {
+      let leastUpVotes = showData.sort((a: any, b: any) => {
+        return a.upvotes - b.upvotes;
+      });
+      setShowData(leastUpVotes);
+    } else if (newSortOption === 'Most Comments') {
+      let mostComments = showData.sort((a: any, b: any) => {
+        return b.comments - a.comments;
+      });
+      setShowData(mostComments);
+    } else {
+      let leastComments = showData.sort((a: any, b: any) => {
+        return a.comments - b.comments;
+      });
+      setShowData(leastComments);
+    }
+
+    setSortOption(newSortOption);
+  };
+
+  const addUpVote = (event: any) => {
+    const addVotes = showData.map((data) => {
+      if (event.target.id === data.title) {
+        data.upvotes += 1;
+        return data;
+      } else {
+        return data;
+      }
+    });
+
+    setShowData(addVotes);
+  };
+
   const showCards =
     showData.length === 0 ? (
       <NoFeedback />
     ) : (
-      <RequestCards showData={showData} />
+      <RequestCards showData={showData} addUpVote={addUpVote} />
     );
 
   const { productRequests } = allData;
-  console.log(showData);
+
   return (
     <div className="App">
       <div className="App-col one">
         <FrontEndMentorHeader />
-        <Filter
-          productRequests={productRequests}
-          showData={showData}
-          setShowData={setShowData}
-        />
+        <Filter filter={filter} showAll={showAll} />
         <Roadmap />
       </div>
       <div className="App-col">
-        <ToolBar />
+        <ToolBar callback={handleChangeSort} sortOption={sortOption} />
         {showCards}
       </div>
     </div>

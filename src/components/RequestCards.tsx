@@ -1,31 +1,50 @@
-import React from 'react';
+import { CurrencyYenTwoTone, DisabledByDefault } from '@mui/icons-material';
+import { useState } from 'react';
 import '../index.scss';
-import { data } from 'data';
-import { RequestCard } from './RequestCard';
-import { ProductRequest } from 'types';
 
-interface IProps {
-  showData: ProductRequest[];
-}
+export const RequestCards = (props: any) => {
+  const { showData, addUpVote } = props;
+  const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
+  const [justClicked, setJustClicked] = useState<any>();
 
-export const RequestCards = (props: IProps) => {
-  const { showData } = props;
+  return showData.map((item: any) => {
+    const userComments =
+      item.comments?.length === undefined ? 0 : item.comments?.length;
 
-  let card = showData.map((request) => {
+    const onClick = (event: any) => {
+      addUpVote(event);
+
+      if (event.target.id === item.title) {
+        disabledUpVotes.push(item);
+      }
+    };
+
+    const findDisabled = disabledUpVotes.find((upvote: any) => {
+      return upvote.title === item.title;
+    });
+
+    const test = findDisabled ? true : false;
+
     return (
-      <div>
-        <RequestCard
-          id={request.id}
-          title={request.title}
-          category={request.category}
-          upvotes={request.upvotes}
-          status={request.status}
-          description={request.description}
-          comments={request.comments}
-        />
+      <div className="request-card">
+        <button
+          onClick={onClick}
+          id={item.title}
+          disabled={test}
+          className={`fa-solid fa-chevron-up`}
+        >
+          <span>{item.upvotes}</span>
+        </button>
+        <section className="request-card-text">
+          <div className="request-card-title">{item.title}</div>
+          <div className="request-card-description">{item.description}</div>
+          <div className="request-card-category">{item.category}</div>
+        </section>
+        <div className="request-card-comments">
+          <i className="fa-solid fa-comment"></i>
+          <span>{userComments}</span>
+        </div>
       </div>
     );
   });
-
-  return <div className="request-cards">{card}</div>;
 };

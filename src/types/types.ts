@@ -28,3 +28,8 @@ export type Reply = {
   replyingTo: string;
   user: User;
 };
+
+export type AllData = {
+  currentUser: User;
+  productRequests: ProductRequest[];
+};
