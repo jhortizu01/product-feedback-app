@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+
 import '../styles/App.scss';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
 import { Filter } from '../components/Filter';
@@ -9,14 +9,11 @@ import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
-import { CollectionsBookmarkOutlined } from '@mui/icons-material';
 
 const App = () => {
   const [allData, setAllData] = useState(data);
   const [showData, setShowData] = useState<ProductRequest[]>(
-    allData.productRequests.sort((a, b) => {
-      return b.upvotes - a.upvotes;
-    }),
+    allData.productRequests,
   );
 
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
@@ -45,6 +42,8 @@ const App = () => {
         return a.upvotes - b.upvotes;
       });
       setShowData(leastUpVotes);
+      console.log('least', leastUpVotes);
+      console.log('show', showData);
     } else if (newSortOption === 'Most Comments') {
       let mostComments = showData.sort((a: any, b: any) => {
         return b.comments - a.comments;

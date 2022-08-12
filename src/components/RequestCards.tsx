@@ -5,7 +5,6 @@ import '../index.scss';
 export const RequestCards = (props: any) => {
   const { showData, addUpVote } = props;
   const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
-  const [justClicked, setJustClicked] = useState<any>();
 
   return showData.map((item: any) => {
     const userComments =
