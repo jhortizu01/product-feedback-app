@@ -16,6 +16,7 @@ const App = () => {
     allData.productRequests,
   );
 
+  const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
 
@@ -67,7 +68,7 @@ const App = () => {
 
     setSortOption(newSortOption);
   };
-
+  //make addvotes a state?
   const addUpVote = (event: any) => {
     const addVotes = showData.map((data) => {
       if (event.target.id === data.title) {
@@ -77,7 +78,6 @@ const App = () => {
         return data;
       }
     });
-
     setShowData(addVotes);
   };
 
@@ -85,7 +85,11 @@ const App = () => {
     noData === 'none' ? (
       <NoFeedback />
     ) : (
-      <RequestCards showData={showData} addUpVote={addUpVote} />
+      <RequestCards
+        showData={showData}
+        addUpVote={addUpVote}
+        disabledUpVotes={disabledUpVotes}
+      />
     );
 
   const { productRequests } = allData;

@@ -1,5 +1,3 @@
-import React from 'react';
-import { ProductRequest } from 'types';
 import '../index.scss';
 
 interface IProps {
