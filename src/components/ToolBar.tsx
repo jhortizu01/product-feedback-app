@@ -11,8 +11,6 @@ interface IProps {
 export const ToolBar = (props: IProps) => {
   const { callback, sortOption } = props;
 
-  console.log(sortOption);
-
   return (
     <div className="toolbar">
       <aside className="toolbar-left">

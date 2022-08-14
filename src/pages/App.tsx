@@ -16,17 +16,28 @@ const App = () => {
     allData.productRequests,
   );
 
+  const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
 
   const showAll = () => {
+    setNoData('');
     setShowData(productRequests);
   };
+
+  //bug: can't go from ui/ux to show all filters, but can go from enhancement/bug/feature to all.
+  // wanted behavior: click ui/ux show none, all able/disable is correct
 
   const filter = (productCategory: string) => {
     let filteredItems = productRequests.filter((request) => {
       return request.category === productCategory;
     });
-    setShowData(filteredItems);
+
+    if (filteredItems.length === 0) {
+      setNoData('none');
+    } else {
+      setNoData('');
+      setShowData(filteredItems);
+    }
   };
 
   const handleChangeSort = (event: any) => {
@@ -42,8 +53,6 @@ const App = () => {
         return a.upvotes - b.upvotes;
       });
       setShowData(leastUpVotes);
-      console.log('least', leastUpVotes);
-      console.log('show', showData);
     } else if (newSortOption === 'Most Comments') {
       let mostComments = showData.sort((a: any, b: any) => {
         return b.comments - a.comments;
@@ -73,7 +82,7 @@ const App = () => {
   };
 
   const showCards =
-    showData.length === 0 ? (
+    noData === 'none' ? (
       <NoFeedback />
     ) : (
       <RequestCards showData={showData} addUpVote={addUpVote} />
