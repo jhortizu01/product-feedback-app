@@ -9,7 +9,6 @@ interface IProps {
 }
 
 export const RequestCards = (props: IProps) => {
-  console.log({ props });
   const { productRequests, addUpVote, disabledUpVotes } = props;
 
   return (

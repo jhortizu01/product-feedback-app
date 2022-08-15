@@ -10,10 +10,10 @@ import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
 
 const App = () => {
-  const [initialData, setInitialData] = useState<AllData>(data);
   const [productRequests, setProductRequests] = useState<ProductRequest[]>(
     data.productRequests,
   );
+  const [initialData, setInitialData] = useState<ProductRequest[]>([]);
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
@@ -21,19 +21,20 @@ const App = () => {
 
   const showAll = () => {
     setNoData('');
-    setProductRequests(productRequests);
+    setProductRequests(initialData);
   };
 
+  //not sure why but this works?
   useEffect(() => {
-    let mostUpVotes = initialData.productRequests.sort((a: any, b: any) => {
+    let mostUpVotes = productRequests.sort((a: any, b: any) => {
       setSortOption('Most Up Votes');
       return b.upvotes - a.upvotes;
     });
-    setProductRequests(mostUpVotes);
+    setInitialData(mostUpVotes);
   }, []);
 
   const filter = (productCategory: string): void => {
-    const filteredItems: ProductRequest[] = productRequests.filter(
+    const filteredItems: ProductRequest[] = initialData.filter(
       (request: ProductRequest) => {
         return request.category === productCategory;
       },
@@ -65,16 +66,18 @@ const App = () => {
         .map((data) => {
           if (data.comments === undefined) {
             data.comments = [];
+
             return data;
           } else {
             return data;
           }
         })
         .sort((a: any, b: any) => {
+          setSortOption('Most Comments');
+
           return b.comments.length - a.comments.length;
         });
       setProductRequests(mostComments);
-      setSortOption('Most Comments');
     } else {
       let leastComments = productRequests
         .map((data) => {
@@ -86,9 +89,10 @@ const App = () => {
           }
         })
         .sort((a: any, b: any) => {
+          setSortOption('Least Comments');
+
           return a.comments.length - b.comments.length;
         });
-      setSortOption('Least Comments');
       setProductRequests(leastComments);
     }
   };
