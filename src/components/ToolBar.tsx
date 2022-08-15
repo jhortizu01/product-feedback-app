@@ -34,28 +34,28 @@ export const ToolBar = (props: IProps) => {
             <button
               onClick={() => callback('most-upvotes')}
               id="most-upvotes"
-              className={check}
+              className={sortOption === 'Most Up Votes' ? 'check' : ''}
             >
               Most Upvotes
             </button>
             <button
               onClick={() => callback('least-upvotes')}
               id="least-upvotes"
-              className={check}
+              className={sortOption === 'Least Up Votes' ? 'check' : ''}
             >
               Least Upvotes
             </button>
             <button
               onClick={() => callback('most-comments')}
               id="most-comments"
-              className={check}
+              className={sortOption === 'Most Comments' ? 'check' : ''}
             >
               Most Comments
             </button>
             <button
               onClick={() => callback('least-comments')}
               id="least-comments"
-              className={check}
+              className={sortOption === 'Least Comments' ? 'check' : ''}
             >
               Least Comments
             </button>
