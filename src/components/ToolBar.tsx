@@ -6,10 +6,20 @@ import plus from '../assets/shared/icon-plus.svg';
 interface IProps {
   callback(event: any): void;
   sortOption: string;
+  check: any;
 }
 
 export const ToolBar = (props: IProps) => {
-  const { callback, sortOption } = props;
+  const { callback, sortOption, check } = props;
+  const [hiddenState, setHiddenState] = useState<string>('hidden');
+
+  const toggleSort = () => {
+    if (hiddenState === 'hidden') {
+      setHiddenState('');
+    } else {
+      setHiddenState('hidden');
+    }
+  };
 
   return (
     <div className="toolbar">
@@ -18,14 +28,22 @@ export const ToolBar = (props: IProps) => {
           <img src={gear} alt="gear icon" />
           <span>6 Suggestions</span>
         </div>
-        <div className="toolbar-left-sort">
-          <span>Sort By:</span>
-          <select defaultValue={sortOption} onChange={callback}>
-            <option value="Most Up Votes">Most Up Votes</option>
-            <option value="Least Up Votes">Least Up Votes</option>
-            <option value="Most Comments">Most Comments</option>
-            <option value="Least Comments">Least Comments</option>
-          </select>
+        <div className={`toolbar-left__sort`} onClick={toggleSort}>
+          <span>Sort By: {sortOption}</span>
+          <div className={`${hiddenState}`}>
+            <button onClick={callback} id="most-upvotes" className={check}>
+              Most Upvotes
+            </button>
+            <button onClick={callback} id="least-upvotes" className={check}>
+              Least Upvotes
+            </button>
+            <button onClick={callback} id="most-comments" className={check}>
+              Most Comments
+            </button>
+            <button onClick={callback} id="least-comments" className={check}>
+              Least Comments
+            </button>
+          </div>
         </div>
       </aside>
       <aside className="toolbar-right">

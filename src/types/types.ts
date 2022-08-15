@@ -7,7 +7,7 @@ export type ProductRequest = {
   upvotes: number;
   status: string;
   description: string;
-  comments?: Comment[];
+  comments?: Comment[] | number;
 };
 
 export type Comment = {

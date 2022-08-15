@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-import '../styles/App.scss';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
 import { Filter } from '../components/Filter';
 import { Roadmap } from '../components/Roadmap';
@@ -9,24 +7,23 @@ import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
+import '../styles/App.scss';
+import { EventBusyTwoTone, SafetyCheckRounded } from '@mui/icons-material';
+import { isTemplateTail } from 'typescript';
 
 const App = () => {
   const [allData, setAllData] = useState(data);
   const [showData, setShowData] = useState<ProductRequest[]>(
     allData.productRequests,
   );
-
   const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
-
+  const [check, setCheck] = useState('');
   const showAll = () => {
     setNoData('');
     setShowData(productRequests);
   };
-
-  //bug: can't go from ui/ux to show all filters, but can go from enhancement/bug/feature to all.
-  // wanted behavior: click ui/ux show none, all able/disable is correct
 
   const filter = (productCategory: string) => {
     let filteredItems = productRequests.filter((request) => {
@@ -42,33 +39,53 @@ const App = () => {
   };
 
   const handleChangeSort = (event: any) => {
-    const newSortOption = event.target.value;
+    const newSortOption = event.target.id;
 
-    if (newSortOption === 'Most Up Votes') {
+    if (newSortOption === 'most-upvotes') {
       let mostUpVotes = showData.sort((a: any, b: any) => {
+        setSortOption('Most Up Votes');
         return b.upvotes - a.upvotes;
       });
       setShowData(mostUpVotes);
-    } else if (newSortOption === 'Least Up Votes') {
+    } else if (newSortOption === 'least-upvotes') {
       let leastUpVotes = showData.sort((a: any, b: any) => {
+        setSortOption('Least Up Votes');
         return a.upvotes - b.upvotes;
       });
       setShowData(leastUpVotes);
-    } else if (newSortOption === 'Most Comments') {
-      let mostComments = showData.sort((a: any, b: any) => {
-        return b.comments - a.comments;
-      });
+    } else if (newSortOption === 'most-comments') {
+      let mostComments = showData
+        .map((data) => {
+          if (data.comments === undefined) {
+            data.comments = [];
+            return data;
+          } else {
+            return data;
+          }
+        })
+        .sort((a: any, b: any) => {
+          return b.comments.length - a.comments.length;
+        });
       setShowData(mostComments);
+      setSortOption('Most Comments');
     } else {
-      let leastComments = showData.sort((a: any, b: any) => {
-        return a.comments - b.comments;
-      });
+      let leastComments = showData
+        .map((data) => {
+          if (data.comments === undefined) {
+            data.comments = [];
+            return data;
+          } else {
+            return data;
+          }
+        })
+        .sort((a: any, b: any) => {
+          return a.comments.length - b.comments.length;
+        });
+      setSortOption('Least Comments');
       setShowData(leastComments);
     }
-
-    setSortOption(newSortOption);
   };
-  //make addvotes a state?
+
   const addUpVote = (event: any) => {
     const addVotes = showData.map((data) => {
       if (event.target.id === data.title) {
@@ -102,7 +119,11 @@ const App = () => {
         <Roadmap />
       </div>
       <div className="App-col">
-        <ToolBar callback={handleChangeSort} sortOption={sortOption} />
+        <ToolBar
+          callback={handleChangeSort}
+          sortOption={sortOption}
+          check={check}
+        />
         {showCards}
       </div>
     </div>

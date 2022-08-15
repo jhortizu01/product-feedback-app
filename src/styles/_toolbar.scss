@@ -1,51 +1,97 @@
 .toolbar {
-    background-color: $navy;
-    border-radius: $border-radius;
+  background-color: $navy;
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: row;
+  font-family: $font-jost;
+  height: 70px;
+  width: 825px;
+
+  &-left {
+    align-items: center;
+    color: $white;
     display: flex;
     flex-direction: row;
-    font-family: $font-jost;
-    height: 70px;
-    width: 825px;
-    
-    &-left {
-        align-items: center;
-        color: $white;
+    font-size: 18px;
+    font-weight: 700;
+    height: 100%;
+    justify-content: space-between;
+    width: 50%;
+
+    &__sort {
+      font-size: 14px;
+      position: relative;
+      span {
+        display: block;
+        font-weight: 400;
+        width: 160px;
+
+        &:hover {
+            cursor: pointer;
+        }
+      }
+
+      div.hidden {
+          display: none;
+      }
+
+      div {
+        position: absolute;
+        width: 255px;
+        height: 192px;
+        border: solid white 1px;
         display: flex;
-        flex-direction: row;
-        font-size: 18px;
-        font-weight: 700;
-        height: 100%;
-        justify-content: space-between;
-        width: 50%;
-        
-        &-sort {
-            font-size: 14px;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        top: 50px;
 
-            span {
-                font-weight: 400;
-            }
+        button {
+          height: 48px;
+          background-color: transparent;
+          border: none;
+          color: #647196;
+          border-bottom: 1px solid lightgray;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding-left: 24px;
 
-            select {
-                margin-right: 15px;
-            }
+          &:last-of-type {
+            border-bottom: none;
+          }
+
+          &:hover {
+            color: #ad1fea;
+            cursor: pointer;
+          }
         }
-        
-        img {
-            height: 15px;
-            margin-left: 30px;
-            margin-right: 15px;
-            width: 15px;
+
+        .check {
+          &:after {
+            background-color: lime;
+          }
         }
+      }
     }
 
-    &-right {
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: end;
-        margin-right: 25px;
-        width: 50%;
-        
-
+    img {
+      height: 15px;
+      margin-left: 30px;
+      margin-right: 15px;
+      width: 15px;
     }
+  }
+
+  &-right {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-right: 25px;
+    width: 50%;
+  }
 }
+
+
