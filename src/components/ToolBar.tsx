@@ -4,7 +4,7 @@ import gear from '../assets/icon-gear.svg';
 import plus from '../assets/shared/icon-plus.svg';
 
 interface IProps {
-  callback(event: any): void;
+  callback(id: string): void;
   sortOption: string;
   check: any;
 }
@@ -31,16 +31,32 @@ export const ToolBar = (props: IProps) => {
         <div className={`toolbar-left__sort`} onClick={toggleSort}>
           <span>Sort By: {sortOption}</span>
           <div className={`${hiddenState}`}>
-            <button onClick={callback} id="most-upvotes" className={check}>
+            <button
+              onClick={() => callback('most-upvotes')}
+              id="most-upvotes"
+              className={check}
+            >
               Most Upvotes
             </button>
-            <button onClick={callback} id="least-upvotes" className={check}>
+            <button
+              onClick={() => callback('least-upvotes')}
+              id="least-upvotes"
+              className={check}
+            >
               Least Upvotes
             </button>
-            <button onClick={callback} id="most-comments" className={check}>
+            <button
+              onClick={() => callback('most-comments')}
+              id="most-comments"
+              className={check}
+            >
               Most Comments
             </button>
-            <button onClick={callback} id="least-comments" className={check}>
+            <button
+              onClick={() => callback('least-comments')}
+              id="least-comments"
+              className={check}
+            >
               Least Comments
             </button>
           </div>

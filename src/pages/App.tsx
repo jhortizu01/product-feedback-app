@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
 import { Filter } from '../components/Filter';
 import { Roadmap } from '../components/Roadmap';
@@ -8,14 +8,11 @@ import { data } from 'data';
 import { ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
-import { EventBusyTwoTone, SafetyCheckRounded } from '@mui/icons-material';
-import { isTemplateTail } from 'typescript';
 
 const App = () => {
   const [allData, setAllData] = useState(data);
-  const [showData, setShowData] = useState<ProductRequest[]>(
-    allData.productRequests,
-  );
+  const { productRequests } = allData;
+  const [showData, setShowData] = useState<ProductRequest[]>(productRequests);
   const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
@@ -24,6 +21,10 @@ const App = () => {
     setNoData('');
     setShowData(productRequests);
   };
+
+  useEffect(() => {
+    handleChangeSort('most-upvotes');
+  }, []);
 
   const filter = (productCategory: string) => {
     let filteredItems = productRequests.filter((request) => {
@@ -38,22 +39,20 @@ const App = () => {
     }
   };
 
-  const handleChangeSort = (event: any) => {
-    const newSortOption = event.target.id;
-
-    if (newSortOption === 'most-upvotes') {
+  const handleChangeSort = (id: string) => {
+    if (id === 'most-upvotes') {
       let mostUpVotes = showData.sort((a: any, b: any) => {
         setSortOption('Most Up Votes');
         return b.upvotes - a.upvotes;
       });
       setShowData(mostUpVotes);
-    } else if (newSortOption === 'least-upvotes') {
+    } else if (id === 'least-upvotes') {
       let leastUpVotes = showData.sort((a: any, b: any) => {
         setSortOption('Least Up Votes');
         return a.upvotes - b.upvotes;
       });
       setShowData(leastUpVotes);
-    } else if (newSortOption === 'most-comments') {
+    } else if (id === 'most-comments') {
       let mostComments = showData
         .map((data) => {
           if (data.comments === undefined) {
@@ -108,8 +107,6 @@ const App = () => {
         disabledUpVotes={disabledUpVotes}
       />
     );
-
-  const { productRequests } = allData;
 
   return (
     <div className="App">
