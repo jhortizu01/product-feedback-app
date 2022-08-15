@@ -33,7 +33,7 @@ export const Roadmap = () => {
         <span>View</span>
       </div>
       <div className="roadmap__list">
-        {statuses.map((status: Status) => {
+        {statuses.map((status: Status, idx: number) => {
           const dotClass = classNames({
             planned: status.status === STATUSES.PLANNED,
             'in-progress': status.status === STATUSES.IN_PROGRESS,
@@ -41,7 +41,7 @@ export const Roadmap = () => {
             roadmap__dot: true,
           });
           return (
-            <div className="roadmap__item">
+            <div className="roadmap__item" key={idx}>
               <div className="roadmap__status">
                 <div className={dotClass} />
                 {status.status}

@@ -5,55 +5,63 @@ import { Roadmap } from '../components/Roadmap';
 import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
-import { ProductRequest } from 'types';
+import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
 
 const App = () => {
-  const [allData, setAllData] = useState(data);
-  const { productRequests } = allData;
-  const [showData, setShowData] = useState<ProductRequest[]>(productRequests);
-  const [disabledUpVotes, setDisableUpVote] = useState<any>([]);
+  const [initialData, setInitialData] = useState<AllData>(data);
+  const [productRequests, setProductRequests] = useState<ProductRequest[]>(
+    data.productRequests,
+  );
+  const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
   const [check, setCheck] = useState('');
+
   const showAll = () => {
     setNoData('');
-    setShowData(productRequests);
+    setProductRequests(productRequests);
   };
 
   useEffect(() => {
-    handleChangeSort('most-upvotes');
+    let mostUpVotes = initialData.productRequests.sort((a: any, b: any) => {
+      setSortOption('Most Up Votes');
+      return b.upvotes - a.upvotes;
+    });
+    setProductRequests(mostUpVotes);
   }, []);
 
-  const filter = (productCategory: string) => {
-    let filteredItems = productRequests.filter((request) => {
-      return request.category === productCategory;
-    });
+  const filter = (productCategory: string): void => {
+    const filteredItems: ProductRequest[] = productRequests.filter(
+      (request: ProductRequest) => {
+        return request.category === productCategory;
+      },
+    );
 
     if (filteredItems.length === 0) {
       setNoData('none');
     } else {
       setNoData('');
-      setShowData(filteredItems);
+      setProductRequests(filteredItems);
     }
   };
 
   const handleChangeSort = (id: string) => {
     if (id === 'most-upvotes') {
-      let mostUpVotes = showData.sort((a: any, b: any) => {
+      let mostUpVotes = productRequests.sort((a: any, b: any) => {
         setSortOption('Most Up Votes');
         return b.upvotes - a.upvotes;
       });
-      setShowData(mostUpVotes);
+      setProductRequests(mostUpVotes);
     } else if (id === 'least-upvotes') {
-      let leastUpVotes = showData.sort((a: any, b: any) => {
+      let leastUpVotes = productRequests.sort((a: any, b: any) => {
         setSortOption('Least Up Votes');
         return a.upvotes - b.upvotes;
       });
-      setShowData(leastUpVotes);
+      setProductRequests(leastUpVotes);
     } else if (id === 'most-comments') {
-      let mostComments = showData
+      let mostComments = productRequests
         .map((data) => {
           if (data.comments === undefined) {
             data.comments = [];
@@ -65,10 +73,10 @@ const App = () => {
         .sort((a: any, b: any) => {
           return b.comments.length - a.comments.length;
         });
-      setShowData(mostComments);
+      setProductRequests(mostComments);
       setSortOption('Most Comments');
     } else {
-      let leastComments = showData
+      let leastComments = productRequests
         .map((data) => {
           if (data.comments === undefined) {
             data.comments = [];
@@ -81,12 +89,12 @@ const App = () => {
           return a.comments.length - b.comments.length;
         });
       setSortOption('Least Comments');
-      setShowData(leastComments);
+      setProductRequests(leastComments);
     }
   };
 
   const addUpVote = (event: any) => {
-    const addVotes = showData.map((data) => {
+    const addVotes = productRequests.map((data) => {
       if (event.target.id === data.title) {
         data.upvotes += 1;
         return data;
@@ -94,19 +102,8 @@ const App = () => {
         return data;
       }
     });
-    setShowData(addVotes);
+    setProductRequests(addVotes);
   };
-
-  const showCards =
-    noData === 'none' ? (
-      <NoFeedback />
-    ) : (
-      <RequestCards
-        showData={showData}
-        addUpVote={addUpVote}
-        disabledUpVotes={disabledUpVotes}
-      />
-    );
 
   return (
     <div className="App">
@@ -121,7 +118,15 @@ const App = () => {
           sortOption={sortOption}
           check={check}
         />
-        {showCards}
+        {noData === 'none' || productRequests?.length === 0 ? (
+          <NoFeedback />
+        ) : (
+          <RequestCards
+            productRequests={productRequests}
+            addUpVote={addUpVote}
+            disabledUpVotes={disabledUpVotes}
+          />
+        )}
       </div>
     </div>
   );

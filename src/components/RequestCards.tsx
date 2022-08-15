@@ -1,46 +1,57 @@
 import '../index.scss';
+import { ProductRequest } from '../types';
 
-export const RequestCards = (props: any) => {
-  const { showData, addUpVote, disabledUpVotes } = props;
+// Types
+interface IProps {
+  productRequests: ProductRequest[];
+  addUpVote(e: any): void;
+  disabledUpVotes: ProductRequest[];
+}
 
-  return showData.map((item: any) => {
-    const userComments =
-      item.comments?.length === undefined ? 0 : item.comments?.length;
+export const RequestCards = (props: IProps) => {
+  console.log({ props });
+  const { productRequests, addUpVote, disabledUpVotes } = props;
 
-    const onClick = (event: any) => {
-      addUpVote(event);
+  return (
+    <>
+      {productRequests.map((item: ProductRequest) => {
+        const { category, comments, description, id, title, upvotes } = item;
+        const userComments: number = !comments ? 0 : comments?.length;
 
-      if (event.target.id === item.title) {
-        disabledUpVotes.push(item);
-      }
-    };
+        const onClick = (event: any): void => {
+          addUpVote(event);
 
-    const findDisabled = disabledUpVotes.find((upvote: any) => {
-      return upvote.title === item.title;
-    });
+          if (event.target.id === title) {
+            disabledUpVotes.push(item);
+          }
+        };
 
-    const test = findDisabled ? true : false;
+        const findDisabled = disabledUpVotes.find((upvote: ProductRequest) => {
+          return upvote.title === title;
+        });
 
-    return (
-      <div className="request-card">
-        <button
-          onClick={onClick}
-          id={item.title}
-          disabled={test}
-          className={`fa-solid fa-chevron-up`}
-        >
-          <span>{item.upvotes}</span>
-        </button>
-        <section className="request-card-text">
-          <div className="request-card-title">{item.title}</div>
-          <div className="request-card-description">{item.description}</div>
-          <div className="request-card-category">{item.category}</div>
-        </section>
-        <div className="request-card-comments">
-          <i className="fa-solid fa-comment"></i>
-          <span>{userComments}</span>
-        </div>
-      </div>
-    );
-  });
+        return (
+          <div className="request-card" key={id}>
+            <button
+              onClick={onClick}
+              id={title}
+              disabled={!!findDisabled}
+              className={`fa-solid fa-chevron-up`}
+            >
+              <span>{upvotes}</span>
+            </button>
+            <section className="request-card-text">
+              <div className="request-card-title">{title}</div>
+              <div className="request-card-description">{description}</div>
+              <div className="request-card-category">{category}</div>
+            </section>
+            <div className="request-card-comments">
+              <i className="fa-solid fa-comment"></i>
+              <span>{userComments}</span>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 };
