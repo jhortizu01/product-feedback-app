@@ -13,7 +13,7 @@ export const ToolBar = (props: IProps) => {
   const { callback, sortOption, check } = props;
   const [hiddenState, setHiddenState] = useState<string>('hidden');
 
-  const toggleSort = () => {
+  const toggleSort = (): void => {
     if (hiddenState === 'hidden') {
       setHiddenState('');
     } else {
@@ -28,7 +28,7 @@ export const ToolBar = (props: IProps) => {
           <img src={gear} alt="gear icon" />
           <span>6 Suggestions</span>
         </div>
-        <div className={`toolbar-left__sort`} onClick={toggleSort}>
+        <div className={`toolbar-left__sort`} onClick={toggleSort} id="sort">
           <span>Sort By: {sortOption}</span>
           <div className={`${hiddenState}`}>
             <button
