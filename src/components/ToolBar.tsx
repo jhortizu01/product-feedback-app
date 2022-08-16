@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export const ToolBar = (props: IProps) => {
-  const { callback, sortOption, check } = props;
+  const { callback, sortOption } = props;
   const [hiddenState, setHiddenState] = useState<string>('hidden');
 
   const toggleSort = (): void => {
