@@ -1,28 +1,12 @@
-import React from 'react';
-import { ProductRequest } from 'types';
 import '../index.scss';
 
 interface IProps {
-  productRequests: ProductRequest[];
-  showData: ProductRequest[];
-  setShowData: any;
+  filter: any;
+  showAll: any;
 }
 
 export const Filter = (props: IProps) => {
-  const { productRequests } = props;
-  const { showData } = props;
-  const { setShowData } = props;
-
-  const showAll = () => {
-    setShowData(productRequests);
-  };
-
-  const filter = (productCategory: string) => {
-    let filteredItems = productRequests.filter((request) => {
-      return request.category === productCategory;
-    });
-    setShowData(filteredItems);
-  };
+  const { filter, showAll } = props;
 
   return (
     <section className="filter">

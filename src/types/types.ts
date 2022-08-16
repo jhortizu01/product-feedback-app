@@ -7,7 +7,7 @@ export type ProductRequest = {
   upvotes: number;
   status: string;
   description: string;
-  comments?: Comment[];
+  comments?: Comment[] | null;
 };
 
 export type Comment = {
@@ -27,4 +27,9 @@ export type Reply = {
   content: string;
   replyingTo: string;
   user: User;
+};
+
+export type AllData = {
+  currentUser: User;
+  productRequests: ProductRequest[];
 };
