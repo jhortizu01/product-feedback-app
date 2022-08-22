@@ -7,10 +7,11 @@ interface IProps {
   callback(id: string): void;
   sortOption: string;
   check: any;
+  mobileOverlay: string;
 }
 
 export const ToolBar = (props: IProps) => {
-  const { callback, sortOption } = props;
+  const { callback, sortOption, mobileOverlay } = props;
   const [hiddenState, setHiddenState] = useState<string>('hidden');
 
   const toggleSort = (): void => {
@@ -22,7 +23,7 @@ export const ToolBar = (props: IProps) => {
   };
 
   return (
-    <div className="toolbar">
+    <div className={`toolbar ${mobileOverlay}`}>
       <aside className="toolbar-left">
         <div>
           <img src={gear} alt="gear icon" />

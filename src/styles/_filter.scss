@@ -1,44 +1,46 @@
+@import 'mixins.scss';
+
 .filter {
-    align-items: center;
-    background-color: $white;
-    border-radius: $border-radius;
+  position: relative;
+  align-items: center;
+  background-color: $white;
+  border-radius: $border-radius;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: $font-jost;
+  height: 165px;
+  justify-content: center;
+  width: 250px;
+  margin: 30px;
+  
+  @include for-desktop() {
+    position: relative;
+  }
+
+  div {
     display: flex;
     flex-wrap: wrap;
-    font-family: $font-jost;
-    height: 165px;
-    justify-content: center;
-    width: 250px;
-    
-    div {
-        display: flex;
-        flex-wrap: wrap;
-        height: 85%;
-        width: 85%;
+    height: 85%;
+    width: 85%;
+  }
+
+  button {
+    background-color: $mid-gray;
+    border-radius: $border-radius;
+    border: none;
+    color: $blurple;
+    font-size: 14px;
+    font-weight: 600;
+    height: 30px;
+    line-height: 19px;
+    margin-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:hover {
+      background-color: #cfd7ff;
+      color: $blurple;
+      cursor: pointer;
     }
-
-    button {
-        background-color: $mid-gray;
-        border-radius: $border-radius;
-        border: none;
-        color: $blurple;
-        font-size: 14px;
-        font-weight: 600;
-        height: 30px;
-        line-height: 19px;
-        margin-right: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-
-        &:hover {
-            background-color: #CFD7FF;
-            color: $blurple;
-            cursor: pointer;
-        }
-
-
-    }
-
-
-
-
+  }
 }

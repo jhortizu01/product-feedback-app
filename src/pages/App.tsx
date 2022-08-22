@@ -19,7 +19,8 @@ const App = () => {
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
   const [check, setCheck] = useState('');
   const [hamburger, setHamburgerState] = useState<string>('close');
-
+  const [modalMobile, setModalMobile] = useState<string>('hidden');
+  const [mobileOverlay, setMobileOverlay] = useState<string>('');
   const showAll = () => {
     setNoData('');
     setProductRequests(initialData);
@@ -37,10 +38,12 @@ const App = () => {
   const mobileToggleHamburger = (): void => {
     if (hamburger === 'close') {
       setHamburgerState('open');
-      console.log(hamburger);
+      setModalMobile('');
+      setMobileOverlay('show-overlay');
     } else {
       setHamburgerState('close');
-      console.log(hamburger);
+      setModalMobile('hidden');
+      setMobileOverlay('');
     }
   };
 
@@ -127,14 +130,17 @@ const App = () => {
           hamburger={hamburger}
           mobileToggleHamburger={mobileToggleHamburger}
         />
-        <Filter filter={filter} showAll={showAll} />
-        <Roadmap />
+        <div className={`mobile-menu ${modalMobile}`}>
+          <Filter filter={filter} showAll={showAll} />
+          <Roadmap />
+        </div>
       </div>
-      <div className="App-col">
+      <div className={`App-col`}>
         <ToolBar
           callback={handleChangeSort}
           sortOption={sortOption}
           check={check}
+          mobileOverlay={mobileOverlay}
         />
         {noData === 'none' || productRequests?.length === 0 ? (
           <NoFeedback />
