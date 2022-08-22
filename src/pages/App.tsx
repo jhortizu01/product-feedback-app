@@ -18,6 +18,7 @@ const App = () => {
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
   const [check, setCheck] = useState('');
+  const [hamburger, setHamburgerState] = useState<string>('close');
 
   const showAll = () => {
     setNoData('');
@@ -32,6 +33,16 @@ const App = () => {
     });
     setInitialData(mostUpVotes);
   }, []);
+
+  const mobileToggleHamburger = (): void => {
+    if (hamburger === 'close') {
+      setHamburgerState('open');
+      console.log(hamburger);
+    } else {
+      setHamburgerState('close');
+      console.log(hamburger);
+    }
+  };
 
   const filter = (productCategory: string): void => {
     const filteredItems: ProductRequest[] = initialData.filter(
@@ -112,7 +123,10 @@ const App = () => {
   return (
     <div className="App">
       <div className="App-col one">
-        <FrontEndMentorHeader />
+        <FrontEndMentorHeader
+          hamburger={hamburger}
+          mobileToggleHamburger={mobileToggleHamburger}
+        />
         <Filter filter={filter} showAll={showAll} />
         <Roadmap />
       </div>

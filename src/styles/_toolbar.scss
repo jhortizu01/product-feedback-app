@@ -1,11 +1,16 @@
+@import '_mixins.scss';
+
 .toolbar {
   background-color: $navy;
   border-radius: $border-radius;
   display: flex;
   flex-direction: row;
   font-family: $font-jost;
-  height: 70px;
-  width: 825px;
+
+  @include for-desktop {
+    height: 70px;
+    width: 825px;    
+  }
 
   &-left {
     align-items: center;
