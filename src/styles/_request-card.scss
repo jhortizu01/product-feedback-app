@@ -11,6 +11,11 @@
   justify-content: space-between;
   width: 327px;
 
+  @include for-tablet-portrait-up() {
+    width: 689px;
+    flex-wrap: nowrap;
+  }
+
   @include for-desktop() {
     flex-direction: row;
     width: 100%;
@@ -37,6 +42,12 @@
     margin: 0 40px 24px 25px;
     color: $blurple;
     order: 2;
+
+    @include for-tablet-portrait-up() {
+      order: 1;
+      margin-left: 32px;
+      margin-top: 28px;
+    }
 
     @include for-desktop() {
       margin-top: 30px;
@@ -72,6 +83,13 @@
     padding: 24px 0 16px;
     order: 1;
     margin: 0 25px;
+
+    @include for-tablet-portrait-up() {
+      margin-left: 0;
+      order: 2;
+      padding-bottom: 28px;
+      width: 418.88px;
+    }
 
     @include for-desktop() {
       order: 2;
@@ -116,6 +134,10 @@
     order: 3;
     margin-right: 25px;
     margin: 0 25px 24px;
+
+    @include for-tablet-portrait-up() {
+      margin: 0 25px 0;
+    }
     
     @include for-desktop() {
       order: 3;
