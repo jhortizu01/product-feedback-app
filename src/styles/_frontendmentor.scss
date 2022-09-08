@@ -11,7 +11,7 @@
 
   .close {
     &::after {
-      content: url('../assets/shared/mobile/icon-close.svg');
+      content: url('../assets/shared/mobile/icon-hamburger.svg');
       display: inline-block;
       width: 12px;
       margin-right: 25px;
@@ -21,7 +21,8 @@
 
   .open {
     &::after {
-      content: url('../assets/shared/mobile/icon-hamburger.svg');
+      content: url('../assets/shared/mobile/icon-close.svg');
+
       display: inline-block;
       width: 12px;
       margin-right: 25px;
