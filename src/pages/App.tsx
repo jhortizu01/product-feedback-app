@@ -18,6 +18,11 @@ const App = () => {
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
   const [check, setCheck] = useState('');
+  const [hamburger, setHamburgerState] = useState<string>('close');
+  const [modalMobile, setModalMobile] = useState<string>('');
+  const [mobileOverlay, setMobileOverlay] = useState<string>('');
+  const [onMobile, setOnMobile] = useState<string>('hidden');
+  const [windowWidth, setWindowWidth] = useState<number>(1);
 
   const showAll = () => {
     setNoData('');
@@ -31,7 +36,32 @@ const App = () => {
       return b.upvotes - a.upvotes;
     });
     setInitialData(mostUpVotes);
+    detectScreenSize();
   }, []);
+
+  const mobileToggleHamburger = (): void => {
+    if (hamburger === 'close') {
+      setHamburgerState('open');
+      setModalMobile('');
+      setOnMobile('');
+      setMobileOverlay('show-overlay');
+    } else {
+      setHamburgerState('close');
+      setModalMobile('hidden');
+      setMobileOverlay('');
+      setOnMobile('hidden');
+    }
+  };
+
+  const detectScreenSize = () => {
+    console.log(window.innerWidth);
+    if (window.innerWidth <= 425) {
+      setOnMobile('mobile-menu');
+      setModalMobile('hidden');
+    } else {
+      setModalMobile('');
+    }
+  };
 
   const filter = (productCategory: string): void => {
     const filteredItems: ProductRequest[] = initialData.filter(
@@ -112,15 +142,21 @@ const App = () => {
   return (
     <div className="App">
       <div className="App-col one">
-        <FrontEndMentorHeader />
-        <Filter filter={filter} showAll={showAll} />
-        <Roadmap />
+        <FrontEndMentorHeader
+          hamburger={hamburger}
+          mobileToggleHamburger={mobileToggleHamburger}
+        />
+        <div className={`${onMobile} ${modalMobile} filters`}>
+          <Filter filter={filter} showAll={showAll} />
+          <Roadmap />
+        </div>
       </div>
-      <div className="App-col">
+      <div className={`App-col ${mobileOverlay}`}>
         <ToolBar
           callback={handleChangeSort}
           sortOption={sortOption}
           check={check}
+          mobileOverlay={mobileOverlay}
         />
         {noData === 'none' || productRequests?.length === 0 ? (
           <NoFeedback />

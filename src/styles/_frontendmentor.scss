@@ -1,29 +1,91 @@
-.front-end-mentor-header{
+@import '_mixins.scss';
+
+.front-end-mentor-header {
+  background-image: url('../assets/suggestions/desktop/background-header.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  font-family: $font-jost;
+  color: $white;
+  line-height: 30px;
+  height: fit-content;
+
+  .close {
+    &::after {
+      content: url('../assets/shared/mobile/icon-hamburger.svg');
+      display: inline-block;
+      width: 12px;
+      margin-right: 25px;
+      height: 12px;
+    }
+  }
+
+  .open {
+    &::after {
+      content: url('../assets/shared/mobile/icon-close.svg');
+
+      display: inline-block;
+      width: 12px;
+      margin-right: 25px;
+      height: 12px;
+    }
+  }
+
+  @include for-desktop {
     width: 255px;
     height: 140px;
-    font-family: $font-jost;
-    color: $white;
-    background-image: url('../assets/suggestions/desktop/background-header.png');
-    line-height: 30px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 10px;
+  }
 
-    span:nth-child(1) {
-        font-weight: bold;
-        font-size: 20px;
+  span:nth-child(1) {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-left: 24px;
+    @include for-desktop {
+    }
+  }
+
+  span:nth-child(2) {
+    font-weight: normal;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-left: 24px;
+    @include for-desktop {
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    @include for-desktop {
+      height: 100%;
+      align-items: end;
     }
 
-    span:nth-child(2) {
-        font-weight: normal;
-        font-size: 16px;
-        margin-bottom: 15px;
+    div {
+      display: flex;
+      flex-direction: column;
     }
 
-    &__text {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        margin-left: 15px;
-        height: 100%;
+    .mobile-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: fit-content;
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      @include for-desktop {
+        display: none;
+      }
     }
+  }
 }

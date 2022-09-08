@@ -1,30 +1,51 @@
+@import 'mixins.scss';
+
 .request-card {
   background-color: $white;
   border-radius: $border-radius;
   font-family: $font-jost;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  margin: 16px auto;
+  justify-content: space-between;
+  width: 327px;
+
+  @include for-desktop() {
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+  }
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   button {
-    width: 40px;
+    width: 70px !important;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    height: 55px;
+    height: 32px;
     background-color: $gray;
     border: none;
     border-radius: $border-radius;
     font-weight: 700;
     color: $navy;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 40px;
+    margin: 0 40px 24px 25px;
     color: $blurple;
+    order: 2;
+
+    @include for-desktop() {
+      margin-top: 30px;
+      flex-direction: column;
+      order: 1;
+      width: 40px;
+      justify-content: center;
+      height: 55px;
+    }
 
     span {
       font-family: $font-jost;
@@ -48,9 +69,15 @@
   &-text {
     display: flex;
     flex-direction: column;
-    width: 75%;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 24px 0 16px;
+    order: 1;
+    margin: 0 25px;
+
+    @include for-desktop() {
+      order: 2;
+      width: 75%;
+      padding: 30px 0;
+    }
   }
 
   &-title {
@@ -84,9 +111,15 @@
     color: $navy;
     display: flex;
     flex-direction: row;
-    flex-grow: 2;
     align-items: center;
     justify-content: center;
+    order: 3;
+    margin-right: 25px;
+    margin: 0 25px 24px;
+    
+    @include for-desktop() {
+      order: 3;
+    }
 
     span {
       margin-left: 5px;
