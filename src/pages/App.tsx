@@ -21,8 +21,8 @@ const App = () => {
   const [hamburger, setHamburgerState] = useState<string>('close');
   const [modalMobile, setModalMobile] = useState<string>('');
   const [mobileOverlay, setMobileOverlay] = useState<string>('');
-  const [onMobile, setOnMobile] = useState<string>('hidden');
-  const [windowWidth, setWindowWidth] = useState<number>(1);
+  const [ontablet, setIsTablet] = useState('not-tablet');
+  const [screenSize, setScreenSize] = useState('mobile');
 
   const showAll = () => {
     setNoData('');
@@ -37,30 +37,42 @@ const App = () => {
     });
     setInitialData(mostUpVotes);
     detectScreenSize();
+    window.addEventListener('resize', detectScreenSize);
   }, []);
 
   const mobileToggleHamburger = (): void => {
     if (hamburger === 'close') {
       setHamburgerState('open');
       setModalMobile('');
-      setOnMobile('');
       setMobileOverlay('show-overlay');
     } else {
       setHamburgerState('close');
       setModalMobile('hidden');
       setMobileOverlay('');
-      setOnMobile('hidden');
     }
   };
 
   const detectScreenSize = () => {
-    console.log(window.innerWidth);
-    if (window.innerWidth <= 425) {
-      setOnMobile('mobile-menu');
+    console.log('inner', window.innerWidth);
+    if (window.innerWidth <= 600) {
       setModalMobile('hidden');
+      setScreenSize('mobile');
+      setHamburgerState('close');
     } else {
       setModalMobile('');
     }
+
+    if (window.innerWidth >= 600) {
+      setScreenSize('tablet');
+      setModalMobile('');
+      setHamburgerState('hidden');
+    }
+
+    if (window.innerWidth >= 1024) {
+      setScreenSize('desktop');
+    }
+
+    console.log(window.innerWidth);
   };
 
   const filter = (productCategory: string): void => {
@@ -141,12 +153,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="App-col one">
+      <div className={`App-col one ${screenSize}`}>
         <FrontEndMentorHeader
           hamburger={hamburger}
           mobileToggleHamburger={mobileToggleHamburger}
         />
-        <div className={`${onMobile} ${modalMobile} filters`}>
+        <div className={`${modalMobile} filters`}>
           <Filter filter={filter} showAll={showAll} />
           <Roadmap />
         </div>
