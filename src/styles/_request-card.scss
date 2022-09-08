@@ -10,7 +10,7 @@
   margin: 16px auto;
   justify-content: space-between;
   width: 327px;
-  
+
   @include for-desktop() {
     flex-direction: row;
     width: 100%;
@@ -34,7 +34,7 @@
     border-radius: $border-radius;
     font-weight: 700;
     color: $navy;
-    margin: 0 40px 24px 30px;
+    margin: 0 40px 24px 25px;
     color: $blurple;
     order: 2;
 
