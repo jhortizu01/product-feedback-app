@@ -27,7 +27,7 @@
   }
 
   button {
-    width: 70px !important;
+    width: 70px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -47,6 +47,8 @@
       order: 1;
       margin-left: 32px;
       margin-top: 28px;
+      width: 40px;
+      height: 55px;
     }
 
     @include for-desktop() {

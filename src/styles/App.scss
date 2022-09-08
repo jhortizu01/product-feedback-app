@@ -65,10 +65,20 @@ html {
       flex-direction: row;
       background-color: transparent;
     }
+
+    @include for-desktop() {
+      position: relative;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .App-col.one.tablet {
     margin: 56px 40px 40px;
+  }
+
+  .App-col.one.desktop {
+    flex-direction: column;
   }
 }
 
