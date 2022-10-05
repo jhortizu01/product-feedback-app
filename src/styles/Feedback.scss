@@ -126,9 +126,10 @@
 
   &__container {
     background-color: $white;
-    margin-right: 24px;
-    margin-left: 24px;
+    margin-right: auto;
+    margin-left: auto;
     border-radius: 10px;
+    width: 327px;
 
     h2 {
       font-size: 18px;
@@ -139,31 +140,30 @@
     }
 
     .feedback__user-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 16px;
+
+      div {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 16px;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 13px;
+        line-height: 19px;
 
-        div {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          font-size: 13px;
-          line-height: 19px;
+        span:first-of-type {
+          color: #3a4374;
+          font-weight: 700;
+        }
 
-          span:first-of-type {
-              color: #3A4374;
-              font-weight: 700;
-          }
-
-          span:last-of-type {
-              color: #647196;
-              font-weight: 400;
-          }
+        span:last-of-type {
+          color: #647196;
+          font-weight: 400;
         }
       }
-    
+    }
 
     .feedback__comments {
       border-bottom: solid #8c92b3 1px;
@@ -194,16 +194,59 @@
     }
 
     .reply {
-        color: #4661E6;
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 19px;
-        text-decoration: none;
+      color: #4661e6;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 19px;
+      text-decoration: none;
     }
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+    width: 327px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 24px auto;
+
+    fieldset {
+      border: transparent;
+      margin: 24px;
+      padding: 0;
+
+      label {
+        color: #3a4374;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+
+      textarea {
+        font-family: $font-jost;
+        background-color: #f7f8fd;
+        border: transparent;
+        padding: 16px;
+        width: calc(100% - 32px);
+        margin-top: 24px;
+      }
+    }
+
+    section {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-bottom: 24px;
+
+      span {
+        width: fit-content;
+        color: #647196;
+      }
+
+      .add-feedback {
+        width: 120px;
+      }
+    }
+
   }
 }

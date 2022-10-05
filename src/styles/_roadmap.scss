@@ -13,17 +13,6 @@
     padding: 0;
   }
 
-<<<<<<< Updated upstream
-    @include for-tablet-portrait-up() {
-        width: 223px !important;
-        height: 178px !important;
-        margin: 0 0 0 10px;
-        padding: 0;
-      }
-
-    @include for-desktop {
-        position: relative
-=======
   @include for-desktop {
     position: relative;
     width: 255px;
@@ -36,7 +25,6 @@
 
     @include for-tablet {
       margin: 20px 24px 24px 24px;
->>>>>>> Stashed changes
     }
 
     span:nth-child(1) {

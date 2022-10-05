@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ProductRequest } from '../types';
 import { Link, useParams } from 'react-router-dom';
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 export const Feedback = (props: IProps) => {
+  const [inputText, setInputText] = useState<string>();
   const { productRequests, currentFeedback, addUpVote, disabledUpVotes } =
     props;
   const { id } = useParams();
@@ -32,6 +34,11 @@ export const Feedback = (props: IProps) => {
   const findDisabled = disabledUpVotes.find((upvote: ProductRequest) => {
     return upvote.title === title;
   });
+
+  const onInput = (event: any) => {
+    setInputText(event.target.value);
+    console.log(inputText);
+  };
 
   return (
     <div className="feedback">
@@ -113,15 +120,28 @@ export const Feedback = (props: IProps) => {
         })}
       </section>
 
-      <form action="/action_page.php">
-        <label htmlFor="comment">Add Comment</label>
-        <textarea
-          id="comment"
-          name="comment"
-          value="butts"
-          rows={5}
-          cols={32}
-        />
+      <form>
+        <fieldset>
+          <label htmlFor="comment">Add Comment</label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={inputText}
+            rows={5}
+            cols={32}
+            maxLength={250}
+            placeholder="Your text here"
+            onChange={(event) => onInput(event)}
+          />
+        </fieldset>
+
+        <section>
+          <span>
+            {inputText !== undefined ? 250 - inputText.length : 250} Characters
+            Left
+          </span>
+          <button className="add-feedback">Post Comment</button>
+        </section>
       </form>
     </div>
   );
