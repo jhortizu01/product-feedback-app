@@ -1,11 +1,19 @@
 .roadmap {
-    position: relative;
-    width: 220px;
-    background-color: $white;
-    font-family: $font-jost;
-    border-radius: $border-radius;
-    padding: 15px;
+  position: relative;
+  width: 220px;
+  background-color: $white;
+  font-family: $font-jost;
+  border-radius: $border-radius;
+  padding: 15px;
 
+  @include for-tablet {
+    width: 223px;
+    height: 178px;
+    margin: 0 0 0 10px;
+    padding: 0;
+  }
+
+<<<<<<< Updated upstream
     @include for-tablet-portrait-up() {
         width: 223px !important;
         height: 178px !important;
@@ -15,80 +23,83 @@
 
     @include for-desktop {
         position: relative
-    }
-    &__text {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+=======
+  @include for-desktop {
+    position: relative;
+    width: 255px;
+    margin: 0;
+  }
+  &__text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-        @include for-tablet-portrait-up() {
-            margin: 20px 24px 24px 24px;
-        }
-     
-        span:nth-child(1) {
-            color: $darker-gray;
-            font-weight: bold;
-        }
-
-        span:nth-child(2) {
-            color: $blurple;
-            text-decoration: underline;
-            font-weight: 600;
-            font-size: 13px;
-        }
+    @include for-tablet {
+      margin: 20px 24px 24px 24px;
+>>>>>>> Stashed changes
     }
 
-    &__list{
-        display: flex;
-        flex-direction: column;
-
-        @include for-tablet-portrait-up() {
-            margin: 20px 24px 24px 24px;
-        }
-
-        div:nth-child(-n + 2) {
-            margin-bottom: 8px;
-        }
+    span:nth-child(1) {
+      color: $darker-gray;
+      font-weight: bold;
     }
 
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
+    span:nth-child(2) {
+      color: $blurple;
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 13px;
+    }
+  }
 
-        div:nth-child(2) {
-            font-weight: bold;
-            color: $dark-gray;
-        }
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    @include for-tablet {
+      margin: 20px 24px 24px 24px;
     }
 
-    &__status {
-        display: flex;
-        align-items: center;
-        color: $dark-gray;
-        line-height: 23px;      
+    div:nth-child(-n + 2) {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    div:nth-child(2) {
+      font-weight: bold;
+      color: $dark-gray;
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    color: $dark-gray;
+    line-height: 23px;
+  }
+
+  &__dot {
+    display: inline-flex;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin-right: 15px;
+
+    &.planned {
+      background-color: $peach;
     }
 
-    &__dot {
-        display: inline-flex;
-        height: 8px;
-        width: 8px;
-        border-radius: 50%;
-        margin-right: 15px;
-
-        &.planned {
-            background-color: $peach;
-        }
-    
-        &.in-progress {
-            background-color: $violet;
-        }    
-    
-        &.live {
-            background-color: $sky-blue;
-        }
+    &.in-progress {
+      background-color: $violet;
     }
 
-
-   
+    &.live {
+      background-color: $sky-blue;
+    }
+  }
 }

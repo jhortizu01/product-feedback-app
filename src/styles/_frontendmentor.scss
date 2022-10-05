@@ -9,7 +9,7 @@
   line-height: 30px;
   height: fit-content;
 
-  @include for-tablet-portrait-up() {
+  @include for-tablet {
     width: 223px;
     height: 173px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

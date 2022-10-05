@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
 import { Filter } from '../components/Filter';
@@ -8,6 +9,7 @@ import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
+import { Feedback } from './Feedback';
 
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>(
@@ -23,6 +25,7 @@ const App = () => {
   const [mobileOverlay, setMobileOverlay] = useState<string>('');
   const [ontablet, setIsTablet] = useState('not-tablet');
   const [screenSize, setScreenSize] = useState('mobile');
+  const [currentFeedback, setCurrentFeedback] = useState<number>(0);
 
   const showAll = () => {
     setNoData('');
@@ -53,8 +56,7 @@ const App = () => {
   };
 
   const detectScreenSize = () => {
-    console.log('inner', window.innerWidth);
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 768) {
       setModalMobile('hidden');
       setScreenSize('mobile');
       setHamburgerState('close');
@@ -62,13 +64,13 @@ const App = () => {
       setModalMobile('');
     }
 
-    if (window.innerWidth >= 600) {
+    if (window.innerWidth >= 768) {
       setScreenSize('tablet');
       setModalMobile('');
       setHamburgerState('hidden');
     }
 
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= 1200) {
       setScreenSize('desktop');
     }
 
@@ -152,35 +154,54 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <div className={`App-col one ${screenSize}`}>
-        <FrontEndMentorHeader
-          hamburger={hamburger}
-          mobileToggleHamburger={mobileToggleHamburger}
-        />
-        <div className={`${modalMobile} filters`}>
-          <Filter filter={filter} showAll={showAll} />
-          <Roadmap />
-        </div>
-      </div>
-      <div className={`App-col ${mobileOverlay}`}>
-        <ToolBar
-          callback={handleChangeSort}
-          sortOption={sortOption}
-          check={check}
-          mobileOverlay={mobileOverlay}
-        />
-        {noData === 'none' || productRequests?.length === 0 ? (
-          <NoFeedback />
-        ) : (
-          <RequestCards
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="App">
+            <div className={`App-col one ${screenSize}`}>
+              <FrontEndMentorHeader
+                hamburger={hamburger}
+                mobileToggleHamburger={mobileToggleHamburger}
+              />
+              <div className={`${modalMobile} filters`}>
+                <Filter filter={filter} showAll={showAll} />
+                <Roadmap />
+              </div>
+            </div>
+            <div className={`App-col ${mobileOverlay}`}>
+              <ToolBar
+                callback={handleChangeSort}
+                sortOption={sortOption}
+                check={check}
+                mobileOverlay={mobileOverlay}
+              />
+              {noData === 'none' || productRequests?.length === 0 ? (
+                <NoFeedback />
+              ) : (
+                <RequestCards
+                  productRequests={productRequests}
+                  addUpVote={addUpVote}
+                  disabledUpVotes={disabledUpVotes}
+                  setCurrentFeedback={setCurrentFeedback}
+                />
+              )}
+            </div>
+          </div>
+        }
+      />
+      <Route
+        path="/feedback/:id"
+        element={
+          <Feedback
             productRequests={productRequests}
+            currentFeedback={currentFeedback}
             addUpVote={addUpVote}
             disabledUpVotes={disabledUpVotes}
           />
-        )}
-      </div>
-    </div>
+        }
+      />
+    </Routes>
   );
 };
 

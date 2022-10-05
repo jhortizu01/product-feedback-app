@@ -13,7 +13,7 @@
   width: 250px;
   margin: 25px 0;
 
-  @include for-tablet-portrait-up() {
+  @include for-tablet {
     width: 223px;
     height: 178px;
     margin: 0;

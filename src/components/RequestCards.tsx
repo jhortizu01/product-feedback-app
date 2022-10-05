@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../index.scss';
 import { ProductRequest } from '../types';
 
@@ -6,17 +7,22 @@ interface IProps {
   productRequests: ProductRequest[];
   addUpVote(e: any): void;
   disabledUpVotes: ProductRequest[];
+  setCurrentFeedback: any;
 }
 
 export const RequestCards = (props: IProps) => {
-  const { productRequests, addUpVote, disabledUpVotes } = props;
+  const { productRequests, addUpVote, disabledUpVotes, setCurrentFeedback } =
+    props;
+
+  const getCurrentId = (id: number) => {
+    setCurrentFeedback(id);
+  };
 
   return (
     <>
       {productRequests.map((item: ProductRequest) => {
         const { category, comments, description, id, title, upvotes } = item;
         const userComments: number = !comments ? 0 : comments?.length;
-
         const onClick = (event: any): void => {
           addUpVote(event);
 
@@ -44,10 +50,15 @@ export const RequestCards = (props: IProps) => {
               <div className="request-card-description">{description}</div>
               <div className="request-card-category">{category}</div>
             </section>
-            <div className="request-card-comments">
-              <i className="fa-solid fa-comment"></i>
-              <span>{userComments}</span>
-            </div>
+            <Link to={`/feedback/${id}`}>
+              <button
+                className="request-card-comments"
+                onClick={() => getCurrentId(id)}
+              >
+                <i className="fa-solid fa-comment"></i>
+                <span>{userComments}</span>
+              </button>
+            </Link>
           </div>
         );
       })}
