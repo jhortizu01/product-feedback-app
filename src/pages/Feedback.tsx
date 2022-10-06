@@ -50,8 +50,29 @@ export const Feedback = (props: IProps) => {
         <button className="add-feedback">Edit Feedback</button>
       </nav>
 
-      <section className="feedback__content">
-        <h2>{title}</h2>
+      {/* <section className="feedback__content"> */}
+      <div className="request-card">
+        <button
+          onClick={onClick}
+          id={title}
+          disabled={!!findDisabled}
+          className={`fa-solid fa-chevron-up`}
+        >
+          <span>{upvotes}</span>
+        </button>
+        <section className="request-card-text">
+          <div className="request-card-title">{title}</div>
+          <div className="request-card-description">{description}</div>
+          <div className="request-card-category">{category}</div>
+        </section>
+
+        <button className="request-card-comments">
+          <i className="fa-solid fa-comment"></i>
+          <span>{comments?.length}</span>
+        </button>
+      </div>
+
+      {/* <h2>{title}</h2>
         <p>{description}</p>
         <span className="request-card-category">{category}</span>
         <div className="feedback__buttons">
@@ -67,8 +88,8 @@ export const Feedback = (props: IProps) => {
             <i className="fa-solid fa-comment"></i>
             <span>{comments!.length}</span>
           </button>
-        </div>
-      </section>
+        </div> */}
+      {/* </section> */}
 
       <section className="feedback__container">
         <h2>{comments?.length} Comments</h2>

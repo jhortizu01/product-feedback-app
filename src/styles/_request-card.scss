@@ -25,6 +25,7 @@
 
   a {
     order: 3;
+    text-decoration: none;
   }
 
   &:hover {
@@ -32,7 +33,7 @@
   }
 
   button {
-    width: 70px !important;
+    width: 70px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -51,6 +52,9 @@
       order: 1;
       margin-left: 32px;
       margin-top: 28px;
+      width: 40px;
+      height: 53px;
+      flex-direction: column;
     }
 
     @include for-desktop() {
@@ -135,15 +139,17 @@
     font-weight: 700;
     color: $navy;
     display: flex;
-    flex-direction: row;
+    flex-direction: row !important;
     align-items: center;
     justify-content: center;
     order: 3;
     margin-right: 25px;
     margin: 0 25px 24px;
+    background-color: transparent !important;
 
     @include for-tablet() {
       margin: 0 25px 0;
+      align-items: end;
     }
 
     @include for-desktop() {

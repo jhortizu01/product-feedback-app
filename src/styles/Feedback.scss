@@ -1,7 +1,6 @@
 @import 'mixins.scss';
 
 .feedback {
-  border: solid black 1px;
   background-color: #f2f2f2;
   font-family: $font-jost;
 
@@ -12,6 +11,12 @@
     justify-content: space-between;
     align-items: center;
     margin: 24px;
+
+    @include for-tablet() {
+      width:calc(100% - 80px);
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     img {
       margin-right: 16px;
@@ -29,107 +34,127 @@
     }
   }
 
-  &__content {
-    width: 327px;
-    height: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    background-color: white;
+  .request-card {
+    &-comments {
+      background-color: transparent;
 
-    h2 {
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 18.79px;
-      color: #3a4374;
-      margin: 24px;
-      padding-top: 24px;
-    }
-
-    p {
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 18.79px;
-      color: #647196;
-      margin: 0 24px 10px;
-    }
-
-    button {
-      width: 70px;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      height: 32px;
-      background-color: $gray;
-      border: none;
-      border-radius: $border-radius;
-      font-weight: 700;
-      color: $blurple;
-      order: 2;
-
-      @include for-tablet {
-        order: 1;
-        margin-left: 32px;
-        margin-top: 28px;
-        width: 40px;
-        height: 55px;
+      @include for-tablet() {
+        order: 2;
       }
-
-      @include for-desktop() {
-        margin-top: 30px;
-        flex-direction: column;
-        order: 1;
-        width: 40px;
-        justify-content: center;
-        height: 55px;
-      }
-
-      span {
-        font-family: $font-jost;
-        color: $navy;
-      }
-
-      &:disabled,
-      &:active {
-        background-color: $blurple;
-        color: $white;
-
-        span {
-          color: $white;
-        }
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: $button-hover-background;
-      }
-    }
-
-    .request-card-comments {
-      margin: 0;
-    }
-
-    .request-card-category {
-      margin-left: 24px;
-    }
-
-    .feedback__buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 16px 24px;
-      padding-bottom: 24px;
     }
   }
+
+  // &__content {
+  //   width: calc(100% - 48px);
+  //   height: fit-content;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  //   border-radius: 10px;
+  //   background-color: white;
+
+  //   @include for-tablet() {
+  //     width: calc(100% - 80px);
+  //     margin-right: auto;
+  //     margin-left: auto;
+  //   }
+
+  //   h2 {
+  //     font-size: 15px;
+  //     font-weight: 700;
+  //     line-height: 18.79px;
+  //     color: #3a4374;
+  //     margin: 24px;
+  //     padding-top: 24px;
+  //   }
+
+  //   p {
+  //     font-size: 13px;
+  //     font-weight: 400;
+  //     line-height: 18.79px;
+  //     color: #647196;
+  //     margin: 0 24px 10px;
+  //   }
+
+  //   button {
+  //     width: 70px;
+  //     display: flex;
+  //     flex-wrap: wrap;
+  //     flex-direction: row;
+  //     justify-content: space-around;
+  //     align-items: center;
+  //     height: 32px;
+  //     background-color: $gray;
+  //     border: none;
+  //     border-radius: $border-radius;
+  //     font-weight: 700;
+  //     color: $blurple;
+  //     order: 2;
+
+  //     @include for-tablet {
+  //       order: 1;
+  //       margin-left: 32px;
+  //       margin-top: 28px;
+  //       width: 40px;
+  //       height: 55px;
+  //     }
+
+  //     @include for-desktop() {
+  //       margin-top: 30px;
+  //       flex-direction: column;
+  //       order: 1;
+  //       width: 40px;
+  //       justify-content: center;
+  //       height: 55px;
+  //     }
+
+  //     span {
+  //       font-family: $font-jost;
+  //       color: $navy;
+  //     }
+
+  //     &:disabled,
+  //     &:active {
+  //       background-color: $blurple;
+  //       color: $white;
+
+  //       span {
+  //         color: $white;
+  //       }
+  //     }
+
+  //     &:hover {
+  //       cursor: pointer;
+  //       background-color: $button-hover-background;
+  //     }
+  //   }
+
+  //   .request-card-comments {
+  //     margin: 0;
+  //   }
+
+  //   .request-card-category {
+  //     margin-left: 24px;
+  //   }
+
+  //   .feedback__buttons {
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: space-between;
+  //     margin: 16px 24px;
+  //     padding-bottom: 24px;
+  //   }
+  // }
 
   &__container {
     background-color: $white;
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
-    width: 327px;
+    width: calc(100% - 48px);
+
+    @include for-tablet() {
+      width: calc(100% - 80px);
+    }
 
     h2 {
       font-size: 18px;
@@ -182,7 +207,6 @@
     }
 
     .feedback__reply {
-      border: solid rebeccapurple 1px;
       margin-left: 35px;
       margin-right: 24px;
       margin-top: 24px;
@@ -190,6 +214,7 @@
       div:last-of-type {
         margin-right: 24px;
         margin-left: 24px;
+        margin-bottom: 40px;
       }
     }
 
@@ -205,10 +230,16 @@
   form {
     display: flex;
     flex-direction: column;
-    width: 327px;
+    width: calc(100% - 48px);
     background-color: white;
     border-radius: 10px;
     margin: 24px auto;
+
+    @include for-tablet() {
+      width: calc(100% - 80px);
+      margin-right: auto;
+      margin-left: auto;
+    }
 
     fieldset {
       border: transparent;
@@ -237,6 +268,11 @@
       justify-content: space-evenly;
       align-items: center;
       margin-bottom: 24px;
+
+      @include for-tablet() {
+        justify-content: space-between;
+        margin: 0 40px 24px 40px;
+      }
 
       span {
         width: fit-content;
