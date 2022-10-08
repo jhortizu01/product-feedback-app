@@ -3,6 +3,12 @@
 .feedback {
   background-color: #f2f2f2;
   font-family: $font-jost;
+  padding-bottom: 120px;
+
+  @include for-desktop() {
+    width: 730px;
+    margin: 0 auto;
+  }
 
   nav {
     background-color: #f2f2f2;
@@ -16,6 +22,11 @@
       width:calc(100% - 80px);
       margin-left: auto;
       margin-right: auto;
+    }
+
+    @include for-desktop() {
+      margin: 24px 0;
+      width: 100%;
     }
 
     img {
@@ -150,10 +161,15 @@
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
-    width: calc(100% - 48px);
+    width: calc(100% - 32px);
 
     @include for-tablet() {
       width: calc(100% - 80px);
+    }
+
+    @include for-desktop() {
+      width: 100%;
+      margin-top: 24px;
     }
 
     h2 {
@@ -230,7 +246,7 @@
   form {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 48px);
+    width: calc(100% - 32px);
     background-color: white;
     border-radius: 10px;
     margin: 24px auto;
@@ -239,6 +255,10 @@
       width: calc(100% - 80px);
       margin-right: auto;
       margin-left: auto;
+    }
+
+    @include for-desktop() {
+      width: 100%;
     }
 
     fieldset {

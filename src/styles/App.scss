@@ -36,6 +36,7 @@ html {
       margin-right: 30px;
       position: sticky;
       top: 30px;
+      flex-direction: column;
     }
   }
 
@@ -64,6 +65,29 @@ html {
       height: fit-content;
       flex-direction: row;
       background-color: transparent;
+    }
+
+    @include for-desktop() {
+      flex-direction: column;
+      position: relative;
+    }
+  }
+
+  .roadmap {
+    @include for-desktop() {
+      width: 250px;
+    }
+  }
+
+  .filter {
+    @include for-desktop() {
+      width: 250px;
+    }
+  }
+
+  .toolbar {
+    @include for-desktop() {
+      margin: 0;
     }
   }
 
