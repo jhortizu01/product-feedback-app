@@ -2,12 +2,12 @@
 
 .toolbar {
   background-color: $navy;
-height: 56px;
+  height: 56px;
   display: flex;
   flex-direction: row;
   font-family: $font-jost;
 
-  @include for-tablet-portrait-up() {
+  @include for-tablet {
     margin: 0 40px;
     border-radius: 10px;
   }
@@ -34,12 +34,12 @@ height: 56px;
       display: none;
 
       span {
-        @include for-tablet-portrait-up() {
+        @include for-tablet {
           width: 130px;
         }
       }
 
-      @include for-tablet-portrait-up() {
+      @include for-tablet {
         display: flex;
         align-items: center;
       }
@@ -80,7 +80,6 @@ height: 56px;
         top: 50px;
 
         button {
-          
           height: 48px;
           background-color: transparent;
           border: none;
@@ -90,7 +89,6 @@ height: 56px;
           flex-direction: row;
           align-items: center;
           padding-left: 24px;
-          
 
           &:last-of-type {
             border-bottom: none;

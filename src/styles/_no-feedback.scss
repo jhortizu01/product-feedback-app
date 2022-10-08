@@ -13,8 +13,8 @@
   margin-right: auto;
   margin-left: auto;
   margin: 32px auto 0;
-  
-  @include for-tablet-portrait-up() {
+
+  @include for-tablet {
     width: 689px;
   }
 
@@ -40,8 +40,8 @@
     text-align: center;
 
     @include for-desktop() {
-        width: 410px;
-        text-align: left;
+      width: 410px;
+      text-align: left;
     }
   }
 }

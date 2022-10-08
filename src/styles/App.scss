@@ -15,7 +15,7 @@ html {
   margin: 0px;
   position: relative;
 
-  @include for-tablet-portrait-up() {
+  @include for-tablet {
     padding-bottom: 54px;
   }
   @include for-desktop {
@@ -27,15 +27,16 @@ html {
   }
 
   .one {
-    position:relative;
+    position: relative;
 
-    @include for-tablet-portrait-up() {
+    @include for-tablet {
       display: flex;
     }
     @include for-desktop {
       margin-right: 30px;
       position: sticky;
       top: 30px;
+      flex-direction: column;
     }
   }
 
@@ -55,21 +56,38 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-   height: calc(100vh - 91px);
-    background-color: #F7F8FD;
+    height: calc(100vh - 91px);
+    background-color: #f7f8fd;
     width: 75%;
 
-    @include for-tablet-portrait-up() {
-      width:fit-content;
+    @include for-tablet {
+      width: fit-content;
       height: fit-content;
       flex-direction: row;
       background-color: transparent;
     }
 
     @include for-desktop() {
-      position: relative;
       flex-direction: column;
-      width: 100%;
+      position: relative;
+    }
+  }
+
+  .roadmap {
+    @include for-desktop() {
+      width: 250px;
+    }
+  }
+
+  .filter {
+    @include for-desktop() {
+      width: 250px;
+    }
+  }
+
+  .toolbar {
+    @include for-desktop() {
+      margin: 0;
     }
   }
 
@@ -85,5 +103,3 @@ html {
 .hidden {
   display: none !important;
 }
-
-
