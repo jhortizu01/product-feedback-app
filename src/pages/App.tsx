@@ -15,6 +15,7 @@ const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>(
     data.productRequests,
   );
+  const [currentUser, setUser] = useState<object>(data.currentUser);
   const [initialData, setInitialData] = useState<ProductRequest[]>([]);
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
@@ -198,6 +199,7 @@ const App = () => {
             currentFeedback={currentFeedback}
             addUpVote={addUpVote}
             disabledUpVotes={disabledUpVotes}
+            currentUser={currentUser}
           />
         }
       />
