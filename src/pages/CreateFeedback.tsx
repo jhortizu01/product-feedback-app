@@ -185,7 +185,7 @@ export const CreateFeedback = (props: IProps) => {
           onChange={changeFeedback}
         />
 
-        <div>
+        <div className="button-container">
           <input
             className="add-feedback"
             type="submit"

@@ -92,25 +92,51 @@
       padding-top: 10px;
     }
 
-    .add-feedback {
-      width: 100%;
-      height: 40px;
-      margin-top: 40px;
-    }
+    .button-container {
+        @include for-tablet() {
+            display: flex;
+            flex-direction: row;
+            margin-top: 32px;
+            justify-content: end;
+            padding-bottom: 40px;
+        }
+        .add-feedback {
+            width: 100%;
+            height: 40px;
+            margin-top: 40px;
 
-    .cancel {
-      width: 100%;
-      height: 40px;
-      margin-top: 16px;
-      border-radius: 10px;
-      border: none;
-      font-family: $font-jost;
-      background: #3a4374;
-      color: white;
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 18.79px;
-      margin-bottom: 24px;
+            @include for-tablet() {
+                width: fit-content;
+                padding-left: 25px;
+                padding-right: 25px;
+                margin-top: 0;
+                order: 2;
+                margin-left: 16px;
+            }
+          }
+      
+          .cancel {
+            width: 100%;
+            height: 40px;
+            margin-top: 16px;
+            border-radius: 10px;
+            border: none;
+            font-family: $font-jost;
+            background: #3a4374;
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+            line-height: 18.79px;
+            margin-bottom: 24px;
+
+            @include for-tablet() {
+                padding-left: 25px;
+                padding-right: 25px;
+                margin: 0;
+                order: 1;
+                
+            }
+          }
     }
 
     ul {
