@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../index.scss';
 import gear from '../assets/icon-gear.svg';
 import plus from '../assets/shared/icon-plus.svg';
+import { Link, useParams } from 'react-router-dom';
 
 interface IProps {
   callback(id: string): void;
@@ -64,10 +65,10 @@ export const ToolBar = (props: IProps) => {
         </div>
       </aside>
       <aside className="toolbar-right">
-        <button className="add-feedback">
+        <Link to="/create-feedback" className="add-feedback">
           <img src={plus} alt="plus" />
           Add Feedback
-        </button>
+        </Link>
       </aside>
     </div>
   );
