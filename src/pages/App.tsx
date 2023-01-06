@@ -10,6 +10,7 @@ import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
 import { Feedback } from './Feedback';
+import { CreateFeedback } from './CreateFeedback';
 
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>(
@@ -202,6 +203,10 @@ const App = () => {
             currentUser={currentUser}
           />
         }
+      />
+      <Route
+        path="/create-feedback/"
+        element={<CreateFeedback productRequests={productRequests} />}
       />
     </Routes>
   );

@@ -1,0 +1,235 @@
+@import 'mixins.scss';
+
+.create-feedback-page {
+  background-color: $whiteish;
+  font-family: $font-jost;
+  padding-bottom: 77px;
+  position: relative;
+
+  nav {
+    margin-top: 34px;
+    margin-left: 24px;
+
+    img {
+      margin-right: 15px;
+    }
+
+    a {
+      color: $dark-gray;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  }
+
+  .add {
+    position: absolute;
+    left: 48px;
+    top: 50px;
+  }
+
+  .create-feedback {
+    background-color: white;
+    margin: 55px 24px 0;
+    border-radius: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    h1 {
+      color: $grey-blue;
+      margin: 0px;
+      padding-top: 44px;
+      line-height: 26.01px;
+      font-size: 18px;
+      line-height: 26.01px;
+      letter-spacing: -0.25px;
+    }
+
+    &_heading {
+      display: block;
+
+      span:first-of-type {
+        display: block;
+        line-height: 18.79px;
+        margin-top: 24px;
+        font-weight: 700;
+        font-size: 13px;
+        color: $grey-blue;
+        letter-spacing: -0.18px;
+      }
+
+      span:last-of-type {
+        color: $dark-gray;
+        font-size: 13px;
+        line-height: 18.79px;
+      }
+    }
+
+    .text {
+      border: none;
+      background-color: $light-gray;
+      border-radius: 5px;
+      width: 100%;
+      height: 48px;
+      margin-bottom: 0;
+      resize: none;
+      padding-left: 15px;
+      padding-right: 15px;
+      box-sizing: border-box;
+      margin-top: 16px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        border: solid 1px $bright-blue;
+        outline: none !important;
+      }
+    }
+
+    textarea {
+      height: 120px !important;
+      padding-top: 10px;
+    }
+
+    .button-container {
+      @include for-tablet() {
+        display: flex;
+        flex-direction: row;
+        margin-top: 32px;
+        justify-content: end;
+        padding-bottom: 40px;
+      }
+      .add-feedback {
+        width: 100%;
+        height: 40px;
+        margin-top: 40px;
+
+        @include for-tablet() {
+          width: fit-content;
+          padding-left: 25px;
+          padding-right: 25px;
+          margin-top: 0;
+          order: 2;
+          margin-left: 16px;
+        }
+      }
+
+      .cancel {
+        width: 100%;
+        height: 40px;
+        margin-top: 16px;
+        border-radius: 10px;
+        border: none;
+        font-family: $font-jost;
+        background: $grey-blue;
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18.79px;
+        margin-bottom: 24px;
+
+        @include for-tablet() {
+          padding-left: 25px;
+          padding-right: 25px;
+          margin: 0;
+          order: 1;
+        }
+      }
+    }
+
+    .dropdown {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      margin-top: 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &__selected {
+        background-color: $light-gray;
+        width: 100%;
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        border-radius: 5px;
+        height: 48px;
+
+        span {
+          width: fit-content;
+          padding: 0;
+          background-color: transparent;
+          font-size: 15px;
+          line-height: 21.68px;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 24px;
+        }
+
+        img {
+          height: 10px;
+          margin-top: auto;
+          margin-bottom: auto;
+          padding-right: 24px;
+        }
+      }
+
+      &__list-container {
+        position: relative;
+        background-color: white;
+  
+
+        &[aria-expanded='false'] {
+          display: none;
+        }
+
+        .dropdown__list {
+          position: absolute;
+          width: 100%;
+          margin-top: 15px;
+          padding-left: 0px;
+          background-color: white;
+          list-style-type: none;
+
+          &-item {
+            height: 48px;
+            color: $dark-gray;
+            border-bottom: solid 1px $medium-gray;
+            width: 100%;
+            padding: 0;
+            font-size: 15px;
+            line-height: 21.68px;            
+            display: flex;
+            align-items: center;
+
+            &:last-of-type {
+              border-bottom: none;
+            }
+
+            .currentCategory {
+              background-color: yellow;
+            }
+
+            span {
+              height: fit-content;
+       
+              margin-left: 24px;
+
+              &:hover {
+                color: $violet;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.open {
+  border: solid 1px $bright-blue;
+}

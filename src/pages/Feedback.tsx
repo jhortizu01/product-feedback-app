@@ -44,7 +44,6 @@ export const Feedback = (props: IProps) => {
 
   const onInput = (event: any) => {
     setInputText(event.target.value);
-    console.log(inputText);
   };
 
   const addComment = (event: any) => {
