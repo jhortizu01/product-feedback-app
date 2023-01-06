@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { ProductRequest } from '../types';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import arrowDown from '../assets/shared/icon-arrow-down.svg';
 import arrowUp from '../assets/shared/icon-arrow-up.svg';
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   productRequests: ProductRequest[];
@@ -13,11 +12,11 @@ interface IProps {
 
 export const CreateFeedback = (props: IProps) => {
   const { productRequests } = props;
-  const [isOpen, setIsOpenState] = useState(false);
-  const [category, setCategory] = useState('Feature');
-  const [openBorder, setOpenBorder] = useState('');
-  const [title, setTitle] = useState('');
-  const [feedback, setFeedback] = useState('');
+  const [isOpen, setIsOpenState] = useState<boolean>(false);
+  const [category, setCategory] = useState<string>('Feature');
+  const [openBorder, setOpenBorder] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>('');
   const navigate = useNavigate();
 
   const openDropDown = () => {
@@ -94,26 +93,29 @@ export const CreateFeedback = (props: IProps) => {
         </label>
 
         <ul className="dropdown">
-          <div onClick={openDropDown} className={openBorder}>
-            <li
+          <li
+            onClick={openDropDown}
+            className={`${openBorder} dropdown__selected`}
+          >
+            <span
               role="button"
               aria-labelledby="dropdown-label"
               id="dropdown__selected"
               tabIndex={0}
             >
               {category}
-            </li>
+            </span>
             <img src={isOpen ? arrowUp : arrowDown} alt="arrow down" />
-          </div>
+          </li>
 
           <li
             aria-expanded={isOpen}
             role="list"
             className="dropdown__list-container"
           >
-            {isOpen === false ? null : (
-              <ul className="dropwdown_list">
-                <li className="dropdown_list-item" tabIndex={0}>
+            {isOpen && (
+              <ul className="dropdown__list">
+                <li className="dropdown__list-item" tabIndex={0}>
                   <span
                     id="Feature"
                     className={category === 'Feature' ? 'currentCategory' : ''}
@@ -122,7 +124,7 @@ export const CreateFeedback = (props: IProps) => {
                     Feature
                   </span>
                 </li>
-                <li className="dropdown_list-item" tabIndex={0}>
+                <li className="dropdown__list-item" tabIndex={0}>
                   <span
                     id="Enhancement"
                     className={
@@ -133,7 +135,7 @@ export const CreateFeedback = (props: IProps) => {
                     Enhancement
                   </span>
                 </li>
-                <li className="dropdown_list-item" tabIndex={0}>
+                <li className="dropdown__list-item" tabIndex={0}>
                   <span
                     id="Bug"
                     className={category === 'Bug' ? 'currentCategory' : ''}
@@ -143,7 +145,7 @@ export const CreateFeedback = (props: IProps) => {
                   </span>
                 </li>
                 <li
-                  className="dropdown_list-item"
+                  className="dropdown__list-item"
                   tabIndex={0}
                   id="UI"
                   onClick={changeCategory}
@@ -156,7 +158,7 @@ export const CreateFeedback = (props: IProps) => {
                     UI
                   </span>
                 </li>
-                <li className="dropdown_list-item" tabIndex={0}>
+                <li className="dropdown__list-item" tabIndex={0}>
                   <span
                     id="UX"
                     className={category === 'UX' ? 'currentCategory' : ''}

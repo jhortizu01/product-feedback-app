@@ -1,7 +1,7 @@
 @import 'mixins.scss';
 
 .create-feedback-page {
-  background-color: #f2f2f2;
+  background-color: $whiteish;
   font-family: $font-jost;
   padding-bottom: 77px;
   position: relative;
@@ -15,16 +15,16 @@
     }
 
     a {
-      color: #647196;
+      color: $dark-gray;
       font-weight: 700;
       text-decoration: none;
     }
   }
 
   .add {
-      position: absolute;
-      left: 48px;
-      top: 50px;
+    position: absolute;
+    left: 48px;
+    top: 50px;
   }
 
   .create-feedback {
@@ -35,7 +35,7 @@
     padding-right: 24px;
 
     h1 {
-      color: #3a4374;
+      color: $grey-blue;
       margin: 0px;
       padding-top: 44px;
       line-height: 26.01px;
@@ -53,12 +53,12 @@
         margin-top: 24px;
         font-weight: 700;
         font-size: 13px;
-        color: #3a4374;
+        color: $grey-blue;
         letter-spacing: -0.18px;
       }
 
       span:last-of-type {
-        color: #647196;
+        color: $dark-gray;
         font-size: 13px;
         line-height: 18.79px;
       }
@@ -66,7 +66,7 @@
 
     .text {
       border: none;
-      background-color: #f7f8fd;
+      background-color: $light-gray;
       border-radius: 5px;
       width: 100%;
       height: 48px;
@@ -82,7 +82,7 @@
       }
 
       &:focus {
-        border: solid 1px #4661e6;
+        border: solid 1px $bright-blue;
         outline: none !important;
       }
     }
@@ -93,53 +93,52 @@
     }
 
     .button-container {
+      @include for-tablet() {
+        display: flex;
+        flex-direction: row;
+        margin-top: 32px;
+        justify-content: end;
+        padding-bottom: 40px;
+      }
+      .add-feedback {
+        width: 100%;
+        height: 40px;
+        margin-top: 40px;
+
         @include for-tablet() {
-            display: flex;
-            flex-direction: row;
-            margin-top: 32px;
-            justify-content: end;
-            padding-bottom: 40px;
+          width: fit-content;
+          padding-left: 25px;
+          padding-right: 25px;
+          margin-top: 0;
+          order: 2;
+          margin-left: 16px;
         }
-        .add-feedback {
-            width: 100%;
-            height: 40px;
-            margin-top: 40px;
+      }
 
-            @include for-tablet() {
-                width: fit-content;
-                padding-left: 25px;
-                padding-right: 25px;
-                margin-top: 0;
-                order: 2;
-                margin-left: 16px;
-            }
-          }
-      
-          .cancel {
-            width: 100%;
-            height: 40px;
-            margin-top: 16px;
-            border-radius: 10px;
-            border: none;
-            font-family: $font-jost;
-            background: #3a4374;
-            color: white;
-            font-weight: 700;
-            font-size: 13px;
-            line-height: 18.79px;
-            margin-bottom: 24px;
+      .cancel {
+        width: 100%;
+        height: 40px;
+        margin-top: 16px;
+        border-radius: 10px;
+        border: none;
+        font-family: $font-jost;
+        background: $grey-blue;
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18.79px;
+        margin-bottom: 24px;
 
-            @include for-tablet() {
-                padding-left: 25px;
-                padding-right: 25px;
-                margin: 0;
-                order: 1;
-                
-            }
-          }
+        @include for-tablet() {
+          padding-left: 25px;
+          padding-right: 25px;
+          margin: 0;
+          order: 1;
+        }
+      }
     }
 
-    ul {
+    .dropdown {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -150,51 +149,8 @@
         cursor: pointer;
       }
 
-      li {
-        position: relative;
-        background-color: white;
-        display: flex;
-        
-        &[aria-expanded="false"] {
-            display: none;
-        }
-
-        ul {
-          position: absolute;
-          width: 100%;
-          margin-top: 15px;
-            border: solid red 1px;
-
-          .dropdown_list-item {
-            height: 48px;
-            color: #647196;
-            border-bottom: solid 1px #979797;
-
-            &:last-of-type {
-              border-bottom: none;
-            }
-
-            .currentCategory {
-              background-color: yellow;
-            }
-
-            span {
-              height: fit-content;
-              margin-top: auto;
-              margin-bottom: auto;
-              margin-left: 24px;
-
-              &:hover {
-                color: purple;
-              }
-            }
-          }
-        }
-      }
-
-      div {
-        //border: solid blue 1px;
-        background-color: #f7f8fd;
+      &__selected {
+        background-color: $light-gray;
         width: 100%;
         white-space: nowrap;
         display: flex;
@@ -203,7 +159,7 @@
         border-radius: 5px;
         height: 48px;
 
-        li {
+        span {
           width: fit-content;
           padding: 0;
           background-color: transparent;
@@ -219,6 +175,55 @@
           margin-top: auto;
           margin-bottom: auto;
           padding-right: 24px;
+        }
+      }
+
+      &__list-container {
+        position: relative;
+        background-color: white;
+  
+
+        &[aria-expanded='false'] {
+          display: none;
+        }
+
+        .dropdown__list {
+          position: absolute;
+          width: 100%;
+          margin-top: 15px;
+          padding-left: 0px;
+          background-color: white;
+          list-style-type: none;
+
+          &-item {
+            height: 48px;
+            color: #647196;
+            border-bottom: solid 1px $medium-gray;
+            width: 100%;
+            padding: 0;
+            font-size: 15px;
+            line-height: 21.68px;            
+            display: flex;
+            align-items: center;
+
+            &:last-of-type {
+              border-bottom: none;
+            }
+
+            .currentCategory {
+              background-color: yellow;
+            }
+
+            span {
+              height: fit-content;
+       
+              margin-left: 24px;
+
+              &:hover {
+                color: $violet;
+              }
+            }
+          }
         }
       }
     }
