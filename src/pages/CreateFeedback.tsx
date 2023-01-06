@@ -17,15 +17,18 @@ export const CreateFeedback = (props: IProps) => {
   const [openBorder, setOpenBorder] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [feedback, setFeedback] = useState<string>('');
+  const [arrow, setArrow] = useState<string>('down arrow');
   const navigate = useNavigate();
 
   const openDropDown = () => {
     if (isOpen === true) {
       setIsOpenState(false);
       setOpenBorder('');
+      setArrow('down arrow');
     } else {
       setIsOpenState(true);
       setOpenBorder('open');
+      setArrow('up arrow');
     }
   };
 
@@ -78,7 +81,6 @@ export const CreateFeedback = (props: IProps) => {
           <span>Add a short, descriptive headline</span>
         </label>
         <input
-          type="text"
           id="title"
           name="title"
           required
@@ -87,10 +89,10 @@ export const CreateFeedback = (props: IProps) => {
           onChange={changeTitle}
         />
 
-        <label htmlFor="category" className="create-feedback_heading">
+        <div className="create-feedback_heading">
           <span>Category</span>
           <span>Choose a category for your feedback</span>
-        </label>
+        </div>
 
         <ul className="dropdown">
           <li
@@ -105,7 +107,7 @@ export const CreateFeedback = (props: IProps) => {
             >
               {category}
             </span>
-            <img src={isOpen ? arrowUp : arrowDown} alt="arrow down" />
+            <img src={isOpen ? arrowUp : arrowDown} alt={`${arrow}`} />
           </li>
 
           <li
@@ -180,7 +182,7 @@ export const CreateFeedback = (props: IProps) => {
           </span>
         </label>
         <textarea
-          id="story"
+          id="title"
           name="story"
           className="text"
           value={feedback}

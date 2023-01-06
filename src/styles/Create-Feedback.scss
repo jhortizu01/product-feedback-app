@@ -197,7 +197,7 @@
 
           &-item {
             height: 48px;
-            color: #647196;
+            color: $dark-gray;
             border-bottom: solid 1px $medium-gray;
             width: 100%;
             padding: 0;
@@ -231,5 +231,5 @@
 }
 
 .open {
-  border: solid 1px #4661e6;
+  border: solid 1px $bright-blue;
 }
