@@ -18,8 +18,10 @@ export const CreateFeedback = (props: IProps) => {
   const [title, setTitle] = useState<string>('');
   const [feedback, setFeedback] = useState<string>('');
   const [arrow, setArrow] = useState<string>('down arrow');
-  const navigate = useNavigate();
+  const [titleError, setTitleError] = useState<string>('');
+  const [feedbackError, setFeedbackError] = useState<string>('');
 
+  const navigate = useNavigate();
   const openDropDown = () => {
     if (isOpen === true) {
       setIsOpenState(false);
@@ -58,8 +60,19 @@ export const CreateFeedback = (props: IProps) => {
       comments: [],
     };
 
-    productRequests.push(newFeedback);
-    navigate('/');
+    if (title.length === 0 && feedback.length === 0) {
+      setTitleError('error');
+      setFeedbackError('error');
+    } else if (title.length === 0) {
+      setTitleError('error');
+      setFeedbackError('');
+    } else if (feedback.length === 0) {
+      setTitleError('');
+      setFeedbackError('error');
+    } else {
+      productRequests.push(newFeedback);
+      navigate('/');
+    }
     event.preventDefault();
   };
 
@@ -76,24 +89,26 @@ export const CreateFeedback = (props: IProps) => {
       />
       <form className="create-feedback">
         <h1>Create New Feedback</h1>
-        <label htmlFor="title" className="create-feedback_heading">
-          <span>Feedback Title</span>
-          <span>Add a short, descriptive headline</span>
-        </label>
-        <input
-          id="title"
-          name="title"
-          required
-          className="text"
-          value={title}
-          onChange={changeTitle}
-        />
+        <div className="title-container">
+          <label htmlFor="title" className="create-feedback_heading">
+            <span>Feedback Title</span>
+            <span>Add a short, descriptive headline</span>
+          </label>
+          <span className={`title ${titleError}`}>Can't be empty</span>
+          <input
+            id="title"
+            name="title"
+            required
+            className={`text ${titleError}`}
+            value={title}
+            onChange={changeTitle}
+          />
+        </div>
 
         <div className="create-feedback_heading">
           <span>Category</span>
           <span>Choose a category for your feedback</span>
         </div>
-
         <ul className="dropdown">
           <li
             onClick={openDropDown}
@@ -173,22 +188,23 @@ export const CreateFeedback = (props: IProps) => {
             )}
           </li>
         </ul>
-
-        <label htmlFor="title" className="create-feedback_heading">
-          <span>Feedback Detail</span>
-          <span>
-            Include any specific comments on what should be improved, added,
-            etc.
-          </span>
-        </label>
-        <textarea
-          id="title"
-          name="story"
-          className="text"
-          value={feedback}
-          onChange={changeFeedback}
-        />
-
+        <div className="feedback-container">
+          <label htmlFor="title" className="create-feedback_heading">
+            <span>Feedback Detail</span>
+            <span>
+              Include any specific comments on what should be improved, added,
+              etc.
+            </span>
+          </label>
+          <span className={`title ${feedbackError}`}>Can't be empty</span>
+          <textarea
+            id="title"
+            name="story"
+            className="text"
+            value={feedback}
+            onChange={changeFeedback}
+          />
+        </div>
         <div className="button-container">
           <input
             className="add-feedback"
