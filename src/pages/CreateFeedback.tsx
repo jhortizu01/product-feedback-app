@@ -5,14 +5,27 @@ import arrowDown from '../assets/shared/icon-arrow-down.svg';
 import arrowUp from '../assets/shared/icon-arrow-up.svg';
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import Select from 'react-select';
+import { Category } from '@mui/icons-material';
+
+type Option = {
+  value: string;
+  label: string;
+};
+
+const options: Option[] = [
+  { value: 'Chocolate', label: 'Chocolate' },
+  { value: 'Strawberry', label: 'Strawberry' },
+  { value: 'Vanilla', label: 'Vanilla' },
+];
 interface IProps {
   productRequests: ProductRequest[];
 }
 
 type Inputs = {
-  titleRequired: string;
-  feedbackRequired: string;
+  title: string;
+  feedback: string;
   category: string;
 };
 
@@ -21,25 +34,28 @@ export const CreateFeedback = (props: IProps) => {
   const navigate = useNavigate();
 
   const {
+    control,
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+    getValues,
+  } = useForm<Inputs>({
+    defaultValues: { title: '', category: 'Vanilla', feedback: '' },
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     productRequests.push({
       id: productRequests.length + 1,
-      title: data.titleRequired,
+      title: data.title,
       category: data.category,
       upvotes: 0,
       status: 'suggestion',
-      description: data.feedbackRequired,
+      description: data.feedback,
       comments: [],
     });
 
     console.log(productRequests);
-    navigate('/');
+    // navigate('/');
   };
 
   return (
@@ -56,42 +72,54 @@ export const CreateFeedback = (props: IProps) => {
             <span>Feedback Title</span>
             <span>Add a short, descriptive headline</span>
           </label>
-          {errors.titleRequired && (
-            <span className="error">Can't be empty.</span>
-          )}
-          <input
-            type="text"
-            {...register('titleRequired', { required: true })}
-          />
+          {errors.title && <span className="error">Can't be empty.</span>}
+          <input type="text" {...register('title', { required: true })} />
         </div>
 
         <label htmlFor="category">
           <span>Category</span>
           <span>Choose a category for your feedback</span>
         </label>
-        <select id="category" {...register('category')}>
-          <option value="feature">Feature</option>
-          <option value="bug">Bug</option>
-          <option value="enhancement">Enhancement</option>
-          <option value="ui">UI</option>
-          <option value="ux">UX</option>
-        </select>
+        <Controller
+          control={control}
+          name="category"
+          render={({
+            field: { onChange, onBlur, value, name, ref },
+            fieldState: { invalid, isTouched, isDirty, error },
+            formState,
+          }) => (
+            <Select
+              name={name}
+              value={getValues('category')}
+              inputRef={ref}
+              options={options}
+              onChange={(selectedOption: Option) =>
+                onChange(selectedOption.value)
+              }
+            />
+          )}
+          rules={{ required: true }}
+        />
+        {/*  */}
+
+        {/* <select id="category" {...register('category')}>
+            <option value="feature">Feature</option>
+            <option value="bug">Bug</option>
+            <option value="enhancement">Enhancement</option>
+            <option value="ui">UI</option>
+            <option value="ux">UX</option>
+          </select> */}
 
         <div>
-          <label htmlFor="feedbackRequired">
+          <label htmlFor="feedback">
             <span>Feedback Detail</span>
             <span>
               Include any specific comments on what should be improved, added,
               etc.
             </span>
           </label>
-          {errors.feedbackRequired && (
-            <span className="error">Can't be empty.</span>
-          )}
-          <input
-            type="text"
-            {...register('feedbackRequired', { required: true })}
-          />
+          {errors.feedback && <span className="error">Can't be empty.</span>}
+          <input type="text" {...register('feedback', { required: true })} />
         </div>
 
         <input type="submit" value="Add Feedback" className="add-feedback" />
