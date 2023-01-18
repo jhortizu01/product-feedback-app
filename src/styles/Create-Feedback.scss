@@ -20,9 +20,10 @@
     display: flex;
     flex-direction: column;
 
-    div {
+    .container {
       display: flex;
       flex-direction: column;
+      justify-content: center;
 
       &:last-of-type {
         input {
@@ -41,21 +42,30 @@
         order: 3;
       }
 
-      input {
+      .text {
         order: 2;
         margin-right: 24px;
         margin-left: 24px;
         margin-top: 16px;
         background-color: $light-gray;
-        height: 48px !important;
         border: none;
         border-radius: 5px;
         padding-left: 24px;
-  
+
         &:focus {
           border: solid 1px $bright-blue !important;
         }
       }
+    }
+
+    input {
+      height: 48px
+    }
+
+    textarea {
+      height: 96px;
+      padding-top: 15px;
+      resize: none;
     }
 
     h1 {
@@ -89,20 +99,9 @@
       }
     }
 
-    input[type="text"] {
-
-    }
-
     select {
       margin-right: 24px;
       margin-left: 24px;
-    }
-
-    .add-feedback {
-      width: calc(100% - 48px);
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 40px;
     }
 
     .error {
@@ -131,24 +130,68 @@
     }
   }
 
-  .cancel {
-    background-color: $grey-blue;
-    color: $gray;
-    width: calc(100% - 48px);
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
+  .dropdown {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    font-family: $font-jost;
-    height: 40px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 18.79px;
-    margin-top: 16px;
-    margin-bottom: 24px;
+    width: calc(100% - 48px);
+    margin-right: auto;
+    margin-left: auto;
+
+    > div {
+      width: 100%;
+    }
+  }
+
+  .button-container {
+    @include for-tablet() {
+      display:flex;
+      padding: 24px;
+      justify-content: right;
+    }
+
+    .add-feedback {
+      
+      width: calc(100% - 48px);
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 40px;
+
+      @include for-tablet() {
+        margin: 0 16px 0 0;
+        height: 44px;
+        width: 144px;
+        order: 1;
+      }
+    }
+
+    .cancel {
+      background-color: $grey-blue;
+      color: $gray;
+      width: calc(100% - 48px);
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: $font-jost;
+      height: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 18.79px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+
+      @include for-tablet() {
+        width: 93px;
+        height: 44px;
+        margin: 0;
+        order: 2;
+      }
+    }
+  
   }
 }

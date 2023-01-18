@@ -1,27 +1,17 @@
-import { useState } from 'react';
-import { ProductRequest } from '../types';
-import { useNavigate, Link } from 'react-router-dom';
-import arrowDown from '../assets/shared/icon-arrow-down.svg';
-import arrowUp from '../assets/shared/icon-arrow-up.svg';
-import leftArrow from '../assets/shared/icon-arrow-left.svg';
-import newFeedback from '../assets/shared/icon-new-feedback.svg';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import Select from 'react-select';
-import { Category } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-type Option = {
-  value: string;
-  label: string;
-};
+// SVG
+import leftArrow from '../assets/shared/icon-arrow-left.svg';
+import newFeedback from '../assets/shared/icon-new-feedback.svg';
+import check from '../assets/shared/icon-check.svg';
 
-const options: Option[] = [
-  { value: 'Chocolate', label: 'Chocolate' },
-  { value: 'Strawberry', label: 'Strawberry' },
-  { value: 'Vanilla', label: 'Vanilla' },
-];
-interface IProps {
-  productRequests: ProductRequest[];
-}
+// Types
+import { ProductRequest, LabelValue } from '../types';
+import { colorstyles } from './colorstyle';
 
 type Inputs = {
   title: string;
@@ -29,18 +19,34 @@ type Inputs = {
   category: string;
 };
 
+const categoryOptions: LabelValue[] = [
+  {
+    value: 'Enhancement',
+    label: 'Enhancement',
+  },
+  { value: 'Bug', label: 'Bug' },
+  { value: 'Feature', label: 'Feature' },
+  { value: 'UI', label: 'UI' },
+  { value: 'UX', label: 'UX' },
+];
+
+interface IProps {
+  productRequests: ProductRequest[];
+}
+
 export const CreateFeedback = (props: IProps) => {
   const { productRequests } = props;
   const navigate = useNavigate();
+  const [isSearchable, setIsSearchable] = useState(false);
+  const [isClearable, setIsClearable] = useState(false);
 
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<Inputs>({
-    defaultValues: { title: '', category: 'Vanilla', feedback: '' },
+    defaultValues: { title: '', category: 'Enhancement', feedback: '' },
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -54,8 +60,7 @@ export const CreateFeedback = (props: IProps) => {
       comments: [],
     });
 
-    console.log(productRequests);
-    // navigate('/');
+    navigate('/');
   };
 
   return (
@@ -67,50 +72,53 @@ export const CreateFeedback = (props: IProps) => {
       <img className="add" src={newFeedback} alt="plus sign" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Create New Feedback</h1>
-        <div>
+        <div className="container">
           <label htmlFor="titleRequired">
             <span>Feedback Title</span>
             <span>Add a short, descriptive headline</span>
           </label>
           {errors.title && <span className="error">Can't be empty.</span>}
-          <input type="text" {...register('title', { required: true })} />
+          <input
+            type="text"
+            className="text"
+            {...register('title', { required: true })}
+          />
         </div>
 
         <label htmlFor="category">
           <span>Category</span>
           <span>Choose a category for your feedback</span>
         </label>
-        <Controller
-          control={control}
-          name="category"
-          render={({
-            field: { onChange, onBlur, value, name, ref },
-            fieldState: { invalid, isTouched, isDirty, error },
-            formState,
-          }) => (
-            <Select
-              name={name}
-              value={getValues('category')}
-              inputRef={ref}
-              options={options}
-              onChange={(selectedOption: Option) =>
-                onChange(selectedOption.value)
-              }
-            />
-          )}
-          rules={{ required: true }}
-        />
-        {/*  */}
+        <div className="dropdown">
+          <Controller
+            name="category"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value, name, ref } }) => {
+              const currentSelection = categoryOptions.find(
+                (c: LabelValue) => c.value === value,
+              );
 
-        {/* <select id="category" {...register('category')}>
-            <option value="feature">Feature</option>
-            <option value="bug">Bug</option>
-            <option value="enhancement">Enhancement</option>
-            <option value="ui">UI</option>
-            <option value="ux">UX</option>
-          </select> */}
-
-        <div>
+              return (
+                <Select
+                  name={name}
+                  options={categoryOptions}
+                  onChange={(selectedOption: LabelValue | null): void => {
+                    onChange(selectedOption?.value);
+                  }}
+                  ref={ref}
+                  value={currentSelection}
+                  isSearchable={isSearchable}
+                  isClearable={isClearable}
+                  styles={colorstyles}
+                />
+              );
+            }}
+          />
+        </div>
+        <div className="container">
           <label htmlFor="feedback">
             <span>Feedback Detail</span>
             <span>
@@ -119,14 +127,18 @@ export const CreateFeedback = (props: IProps) => {
             </span>
           </label>
           {errors.feedback && <span className="error">Can't be empty.</span>}
-          <input type="text" {...register('feedback', { required: true })} />
+          <textarea
+            className="text"
+            {...register('feedback', { required: true })}
+          />
         </div>
 
-        <input type="submit" value="Add Feedback" className="add-feedback" />
-
-        <Link to={'/'} className="cancel">
-          Cancel
-        </Link>
+        <div className="button-container">
+          <input type="submit" value="Add Feedback" className="add-feedback" />
+          <Link to={'/'} className="cancel">
+            Cancel
+          </Link>
+        </div>
       </form>
     </section>
   );
