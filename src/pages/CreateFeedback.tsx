@@ -37,8 +37,6 @@ interface IProps {
 export const CreateFeedback = (props: IProps) => {
   const { productRequests } = props;
   const navigate = useNavigate();
-  const [isSearchable, setIsSearchable] = useState(false);
-  const [isClearable, setIsClearable] = useState(false);
 
   const {
     control,
@@ -110,8 +108,6 @@ export const CreateFeedback = (props: IProps) => {
                   }}
                   ref={ref}
                   value={currentSelection}
-                  isSearchable={isSearchable}
-                  isClearable={isClearable}
                   styles={colorstyles}
                 />
               );
@@ -128,6 +124,7 @@ export const CreateFeedback = (props: IProps) => {
           </label>
           {errors.feedback && <span className="error">Can't be empty.</span>}
           <textarea
+            id="feedback"
             className="text"
             {...register('feedback', { required: true })}
           />
