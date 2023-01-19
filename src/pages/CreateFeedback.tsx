@@ -1,44 +1,65 @@
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import Select from 'react-select';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ProductRequest } from '../types';
-import { useNavigate, Link } from 'react-router-dom';
-import arrowDown from '../assets/shared/icon-arrow-down.svg';
-import arrowUp from '../assets/shared/icon-arrow-up.svg';
+
+// SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import check from '../assets/shared/icon-check.svg';
+
+// Types
+import { ProductRequest, LabelValue } from '../types';
+import { colorstyles } from './colorstyle';
+
+type Inputs = {
+  title: string;
+  feedback: string;
+  category: string;
+};
+
+const categoryOptions: LabelValue[] = [
+  {
+    value: 'Enhancement',
+    label: 'Enhancement',
+  },
+  { value: 'Bug', label: 'Bug' },
+  { value: 'Feature', label: 'Feature' },
+  { value: 'UI', label: 'UI' },
+  { value: 'UX', label: 'UX' },
+];
+
 interface IProps {
   productRequests: ProductRequest[];
 }
 
-type Inputs = {
-  titleRequired: string;
-  feedbackRequired: string;
-  category: string;
-};
-
 export const CreateFeedback = (props: IProps) => {
   const { productRequests } = props;
   const navigate = useNavigate();
+  const [isSearchable, setIsSearchable] = useState(false);
+  const [isClearable, setIsClearable] = useState(false);
 
   const {
+    control,
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: { title: '', category: 'Enhancement', feedback: '' },
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     productRequests.push({
       id: productRequests.length + 1,
-      title: data.titleRequired,
+      title: data.title,
       category: data.category,
       upvotes: 0,
       status: 'suggestion',
-      description: data.feedbackRequired,
+      description: data.feedback,
       comments: [],
     });
 
-    console.log(productRequests);
     navigate('/');
   };
 
@@ -51,17 +72,16 @@ export const CreateFeedback = (props: IProps) => {
       <img className="add" src={newFeedback} alt="plus sign" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Create New Feedback</h1>
-        <div>
+        <div className="container">
           <label htmlFor="titleRequired">
             <span>Feedback Title</span>
             <span>Add a short, descriptive headline</span>
           </label>
-          {errors.titleRequired && (
-            <span className="error">Can't be empty.</span>
-          )}
+          {errors.title && <span className="error">Can't be empty.</span>}
           <input
             type="text"
-            {...register('titleRequired', { required: true })}
+            className="text"
+            {...register('title', { required: true })}
           />
         </div>
 
@@ -69,36 +89,56 @@ export const CreateFeedback = (props: IProps) => {
           <span>Category</span>
           <span>Choose a category for your feedback</span>
         </label>
-        <select id="category" {...register('category')}>
-          <option value="feature">Feature</option>
-          <option value="bug">Bug</option>
-          <option value="enhancement">Enhancement</option>
-          <option value="ui">UI</option>
-          <option value="ux">UX</option>
-        </select>
+        <div className="dropdown">
+          <Controller
+            name="category"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value, name, ref } }) => {
+              const currentSelection = categoryOptions.find(
+                (c: LabelValue) => c.value === value,
+              );
 
-        <div>
-          <label htmlFor="feedbackRequired">
+              return (
+                <Select
+                  name={name}
+                  options={categoryOptions}
+                  onChange={(selectedOption: LabelValue | null): void => {
+                    onChange(selectedOption?.value);
+                  }}
+                  ref={ref}
+                  value={currentSelection}
+                  isSearchable={isSearchable}
+                  isClearable={isClearable}
+                  styles={colorstyles}
+                />
+              );
+            }}
+          />
+        </div>
+        <div className="container">
+          <label htmlFor="feedback">
             <span>Feedback Detail</span>
             <span>
               Include any specific comments on what should be improved, added,
               etc.
             </span>
           </label>
-          {errors.feedbackRequired && (
-            <span className="error">Can't be empty.</span>
-          )}
-          <input
-            type="text"
-            {...register('feedbackRequired', { required: true })}
+          {errors.feedback && <span className="error">Can't be empty.</span>}
+          <textarea
+            className="text"
+            {...register('feedback', { required: true })}
           />
         </div>
 
-        <input type="submit" value="Add Feedback" className="add-feedback" />
-
-        <Link to={'/'} className="cancel">
-          Cancel
-        </Link>
+        <div className="button-container">
+          <input type="submit" value="Add Feedback" className="add-feedback" />
+          <Link to={'/'} className="cancel">
+            Cancel
+          </Link>
+        </div>
       </form>
     </section>
   );

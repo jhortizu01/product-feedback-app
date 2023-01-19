@@ -1,5 +1,10 @@
 import { STATUSES } from './enums';
 
+export type LabelValue = {
+  value: string;
+  label: string;
+};
+
 export type ProductRequest = {
   id: number;
   title: string;
