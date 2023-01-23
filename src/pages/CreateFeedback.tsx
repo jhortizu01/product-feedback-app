@@ -48,16 +48,6 @@ export const CreateFeedback = (props: IProps) => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // productRequests.push({
-    //   id: productRequests.length + 1,
-    //   title: data.title,
-    //   category: data.category,
-    //   upvotes: 0,
-    //   status: 'suggestion',
-    //   description: data.feedback,
-    //   comments: [],
-    // });
-
     fetch('/api/productRequests', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
