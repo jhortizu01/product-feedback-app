@@ -13,10 +13,8 @@ import { Feedback } from './Feedback';
 import { CreateFeedback } from './CreateFeedback';
 
 const App = () => {
-  const [productRequests, setProductRequests] = useState<ProductRequest[]>(
-    data.productRequests,
-  );
-  const [currentUser, setUser] = useState<object>(data.currentUser);
+  const [productRequests, setProductRequests] = useState<ProductRequest[]>([]);
+  const [currentUser, setUser] = useState<object>({});
   const [initialData, setInitialData] = useState<ProductRequest[]>([]);
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
@@ -28,10 +26,35 @@ const App = () => {
   const [ontablet, setIsTablet] = useState('not-tablet');
   const [screenSize, setScreenSize] = useState('mobile');
   const [currentFeedback, setCurrentFeedback] = useState<number>(0);
+  const [test, setTest] = useState();
+
+  const fetchProductRequests = () =>
+    fetch('/api/productrequests')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setProductRequests(data);
+        setUser(data.currentUser);
+      })
+      .catch((error: any) => console.log(error));
+
+  const fetchUser = () =>
+    fetch('/api/user')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error: any) => console.log(error));
+
+  useEffect(() => {
+    Promise.all([fetchProductRequests(), fetchUser()]);
+  }, []);
 
   const showAll = () => {
     setNoData('');
-    setProductRequests(initialData);
   };
 
   //not sure why but this works?
