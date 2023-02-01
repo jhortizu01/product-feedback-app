@@ -1,8 +1,9 @@
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller, set } from 'react-hook-form';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 // SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
@@ -12,6 +13,7 @@ import check from '../assets/shared/icon-check.svg';
 // Types
 import { ProductRequest, LabelValue } from '../types';
 import { colorstyles } from './colorstyle';
+import { response } from 'msw';
 
 type Inputs = {
   title: string;
@@ -32,10 +34,11 @@ const categoryOptions: LabelValue[] = [
 
 interface IProps {
   productRequests: ProductRequest[];
+  setProductRequests: any;
 }
 
 export const CreateFeedback = (props: IProps) => {
-  const { productRequests } = props;
+  const { productRequests, setProductRequests } = props;
   const navigate = useNavigate();
 
   const {
@@ -47,24 +50,74 @@ export const CreateFeedback = (props: IProps) => {
     defaultValues: { title: '', category: 'Enhancement', feedback: '' },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    fetch('/api/productRequests', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: productRequests.length + 1,
-        title: data.title,
-        category: data.category,
-        upvotes: 0,
-        status: 'suggestion',
-        description: data.feedback,
-        comments: [],
-      }),
-    })
-      .then((response) => response.json())
-      .catch((error) => console.log(error));
+  const onSubmit: SubmitHandler<Inputs> = async (data, event: any) => {
+    const body = {
+      id: productRequests.length + 1,
+      title: data.title,
+      category: data.category,
+      upvotes: 0,
+      status: 'suggestion',
+      description: data.feedback,
+      comments: [],
+    };
 
-    navigate('/');
+    //const bodyFormData = new FormData(body);
+
+    // product_id_list.forEach((item) => {
+    //     bodyFormData.append('product_id_list[]', item);
+    // });
+
+    axios.post('https://test.com/api/get_product', body);
+    axios
+      .post('/api/productrequests', body)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     id: productRequests.length + 1,
+    //     title: data.title,
+    //     category: data.category,
+    //     upvotes: 0,
+    //     status: 'suggestion',
+    //     description: data.feedback,
+    //     comments: [],
+    //   }),
+    // };
+    // fetch('/api/productrequests', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     id: productRequests.length + 1,
+    //     title: data.title,
+    //     category: data.category,
+    //     upvotes: 0,
+    //     status: 'suggestion',
+    //     description: data.feedback,
+    //     comments: [],
+    //   }),
+    //   headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => console.log(json))
+    //   .catch((err) => console.log(err));
+
+    // productRequests.push({
+    //   id: productRequests.length + 1,
+    //   title: data.title,
+    //   category: data.category,
+    //   upvotes: 0,
+    //   status: 'suggestion',
+    //   description: data.feedback,
+    //   comments: [],
+    // });
+    // navigate('/');
+    console.log(productRequests);
   };
 
   return (

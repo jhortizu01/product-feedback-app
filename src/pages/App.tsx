@@ -5,12 +5,12 @@ import { Filter } from '../components/Filter';
 import { Roadmap } from '../components/Roadmap';
 import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
-import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'components/NoFeedback';
 import '../styles/App.scss';
 import { Feedback } from './Feedback';
 import { CreateFeedback } from './CreateFeedback';
+import axios from 'axios';
 
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>([]);
@@ -28,30 +28,55 @@ const App = () => {
   const [currentFeedback, setCurrentFeedback] = useState<number>(0);
   const [test, setTest] = useState();
 
-  const fetchProductRequests = () =>
-    fetch('/api/productrequests')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setProductRequests(data);
-        setUser(data.currentUser);
-      })
-      .catch((error: any) => console.log(error));
+  const productRequestData = axios.create({
+    baseURL: '/api/productrequests',
+  });
 
-  const fetchUser = () =>
-    fetch('/api/user')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((error: any) => console.log(error));
+  const userData = axios.create({
+    baseURL: '/api/user',
+  });
+
+  const getProductRequests = () => {
+    productRequestData.get('/').then((res) => {
+      setProductRequests(res.data);
+    });
+  };
+
+  const getUser = () => {
+    userData.get('/').then((res) => {
+      setUser(res.data);
+    });
+  };
 
   useEffect(() => {
-    Promise.all([fetchProductRequests(), fetchUser()]);
-  }, []);
+    getProductRequests();
+    getUser();
+  }, [productRequests.length]);
+
+  // const fetchProductRequests = () =>
+  //   fetch('/api/productrequests')
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setProductRequests(data);
+  //       setUser(data.currentUser);
+  //     })
+  //     .catch((error: any) => console.log(error));
+
+  // const fetchUser = () =>
+  //   fetch('/api/user')
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setUser(data);
+  //     })
+  //     .catch((error: any) => console.log(error));
+
+  // useEffect(() => {
+  //   Promise.all([fetchProductRequests(), fetchUser()]);
+  // }, []);
 
   const showAll = () => {
     setNoData('');
@@ -178,6 +203,8 @@ const App = () => {
     setProductRequests(addVotes);
   };
 
+  console.log('from app', productRequests);
+
   return (
     <Routes>
       <Route
@@ -229,7 +256,12 @@ const App = () => {
       />
       <Route
         path="/create-feedback/"
-        element={<CreateFeedback productRequests={productRequests} />}
+        element={
+          <CreateFeedback
+            productRequests={productRequests}
+            setProductRequests={setProductRequests}
+          />
+        }
       />
     </Routes>
   );
