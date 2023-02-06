@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { FrontEndMentorHeader } from '../components/FrontEndMentor';
-import { Filter } from '../filter/Filter';
+import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
+import { Filter } from '../components/Filter';
 import { Roadmap } from '../components/Roadmap';
 import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
@@ -15,7 +15,8 @@ import { CreateFeedback } from './CreateFeedback';
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>([]);
   const [currentUser, setUser] = useState<object>({});
-  const [initialData, setInitialData] = useState<ProductRequest[]>([]);
+  const [initialData, setInitialData] =
+    useState<ProductRequest[]>(productRequests);
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('Most Up Votes');
@@ -36,6 +37,7 @@ const App = () => {
       .then((data) => {
         setProductRequests(data);
         setUser(data.currentUser);
+        setInitialData(data);
       })
       .catch((error: any) => console.log(error));
 
@@ -55,6 +57,7 @@ const App = () => {
 
   const showAll = () => {
     setNoData('');
+    fetchProductRequests();
   };
 
   //not sure why but this works?
@@ -98,8 +101,6 @@ const App = () => {
     if (window.innerWidth >= 1200) {
       setScreenSize('desktop');
     }
-
-    console.log(window.innerWidth);
   };
 
   const filter = (productCategory: string): void => {
@@ -185,7 +186,7 @@ const App = () => {
         element={
           <div className="App">
             <div className={`App-col one ${screenSize}`}>
-              <FrontEndMentorHeader
+              <FrontEndMentor
                 hamburger={hamburger}
                 mobileToggleHamburger={mobileToggleHamburger}
               />
