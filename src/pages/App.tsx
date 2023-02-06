@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FrontEndMentorHeader } from '../components/FrontEndMentor';
-import { Filter } from '../components/Filter';
+import { Filter } from '../filter/Filter';
 import { Roadmap } from '../components/Roadmap';
 import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
