@@ -1,4 +1,4 @@
-@import '_mixins.scss';
+@import 'styles/_mixins.scss';
 
 .front-end-mentor-header {
   background-image: url('../assets/suggestions/desktop/background-header.png');
@@ -44,7 +44,7 @@
     }
   }
 
-  span:nth-child(1) {
+  h1 {
     font-weight: bold;
     font-size: 20px;
     margin-top: 16px;
@@ -53,7 +53,7 @@
     }
   }
 
-  span:nth-child(2) {
+  h2 {
     font-weight: normal;
     font-size: 16px;
     margin-bottom: 15px;
