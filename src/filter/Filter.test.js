@@ -28,13 +28,13 @@ describe('Filter Block', () => {
     expect(enhancementButton.textContent).toBe('Enhancement');
   });
 
-  test('Filter has a button called Enhancement', () => {
+  test('Filter has a button called Bug', () => {
     render(<Filter />);
     const bugButton = screen.getByRole('button', { name: 'Bug' });
     expect(bugButton.textContent).toBe('Bug');
   });
 
-  test('Filter has a button called Enhancement', () => {
+  test('Filter has a button called Feature', () => {
     render(<Filter />);
     const featureButton = screen.getByRole('button', { name: 'Feature' });
     expect(featureButton.textContent).toBe('Feature');
