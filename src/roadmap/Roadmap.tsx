@@ -28,29 +28,28 @@ export const Roadmap = () => {
 
   return (
     <section className="roadmap">
-      <div className="roadmap__text">
+      <ul className="roadmap__text">
         <h1>Roadmap</h1>
         <button>View</button>
-      </div>
-      <div className="roadmap__list">
-        {statuses.map((status: Status, idx: number) => {
-          const dotClass = classNames({
-            planned: status.status === STATUSES.PLANNED,
-            'in-progress': status.status === STATUSES.IN_PROGRESS,
-            live: status.status === STATUSES.LIVE,
-            roadmap__dot: true,
-          });
-          return (
-            <div role="listitem" className="roadmap__item" key={idx}>
-              <div className="roadmap__status">
-                <div className={dotClass} />
-                {status.status}
-              </div>
-              <div>{status.count}</div>
+      </ul>
+
+      {statuses.map((status: Status, idx: number) => {
+        const dotClass = classNames({
+          planned: status.status === STATUSES.PLANNED,
+          'in-progress': status.status === STATUSES.IN_PROGRESS,
+          live: status.status === STATUSES.LIVE,
+          roadmap__dot: true,
+        });
+        return (
+          <li className="roadmap__item" key={idx}>
+            <div className="roadmap__status" data-testid={status.status}>
+              <div className={dotClass} />
+              {status.status}
             </div>
-          );
-        })}
-      </div>
+            <div>{status.count}</div>
+          </li>
+        );
+      })}
     </section>
   );
 };

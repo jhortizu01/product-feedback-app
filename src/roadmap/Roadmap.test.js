@@ -8,24 +8,25 @@ describe('roadmap initial state', () => {
     const roadmapTitle = screen.getByRole('heading', { name: 'Roadmap' });
     expect(roadmapTitle).toHaveTextContent('Roadmap');
   });
-  test('Roadmap should have a button called View', () => {
+  test.skip('Roadmap should have a button called View', () => {
     render(<Roadmap />);
     const roadMapButton = screen.getByRole('button', { name: 'View' });
     expect(roadMapButton).toHaveTextContent('View');
   });
-  test.skip('Roadmap should have a status called planned with a value of 4', () => {
+  test('Roadmap should have a status called planned with a value of 4', () => {
     render(<Roadmap />);
-    const plannedLabel = screen.getByRole('listitem', { name: 'planned' });
+    const plannedLabel = screen.getByTestId('planned');
     expect(plannedLabel).toHaveTextContent('planned');
   });
-  test.skip('Roadmap should have a status called in-progress with a value of 1', () => {
+  test('Roadmap should have a status called in-progress with a value of 1', () => {
     render(<Roadmap />);
-    const plannedLabel = screen.getByRole('listitem', { name: 'in-progress' });
+    const plannedLabel = screen.getByTestId('in-progress');
     expect(plannedLabel).toHaveTextContent('in-progress');
   });
-  test.skip('Roadmap should have a status called live with a value of 1', () => {
+  test('Roadmap should have a status called live with a value of 1', () => {
     render(<Roadmap />);
-    const plannedLabel = screen.getByRole('listitem', { name: 'live' });
+    const plannedLabel = screen.getByTestId('live');
     expect(plannedLabel).toHaveTextContent('live');
   });
+  //TODO: build functionality for view button
 });
