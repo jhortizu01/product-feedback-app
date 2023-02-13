@@ -29,8 +29,8 @@ export const Roadmap = () => {
   return (
     <section className="roadmap">
       <div className="roadmap__text">
-        <span>Roadmap</span>
-        <span>View</span>
+        <h1>Roadmap</h1>
+        <button>View</button>
       </div>
       <div className="roadmap__list">
         {statuses.map((status: Status, idx: number) => {
@@ -41,7 +41,7 @@ export const Roadmap = () => {
             roadmap__dot: true,
           });
           return (
-            <div className="roadmap__item" key={idx}>
+            <div role="listitem" className="roadmap__item" key={idx}>
               <div className="roadmap__status">
                 <div className={dotClass} />
                 {status.status}
