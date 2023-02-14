@@ -6,28 +6,22 @@ import { Toolbar } from './Toolbar';
 
 describe('Toolbar Initial State', () => {
   //gear icon is on page
-  test('Gear Icon is visible', () => {
+  test('Gear Icon is visible, number of suggestions render in the toolbar, sorted by most upvotes, add feedback button is visible', () => {
     render(
       <BrowserRouter>
-        <Toolbar />
+        <Toolbar numberOfRequests={12} />
       </BrowserRouter>,
     );
-    const gearIcon = screen.getByAltText('gear icon');
-    expect(gearIcon).toBeInTheDocument();
-  });
-  //TODO: build functionality for Suggestions
-  test('Number of suggestions match number of request cards', () => {});
-  //TODO: Change sort to react select
-  test('Sort by is sorted by Most Up Votes', () => {});
-  //Add Feedback
-  test('Add feedback button is in document and directs you to create feedback page upon click', async () => {
-    const user = userEvent.setup();
+    screen.getByAltText('gear icon');
 
-    render(
-      <BrowserRouter>
-        <Toolbar />
-      </BrowserRouter>,
-    );
-    
+    screen.getByRole('heading', {
+      name: '12 Suggestions',
+      level: 2,
+    });
+
+    const sortSelection = screen.getByRole('option', {
+      name: 'Most Upvotes',
+      selected: true,
+    });
   });
 });

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
 import { Filter } from '../filter/Filter';
 import { Roadmap } from '../components/Roadmap';
-import { ToolBar } from '../components/ToolBar';
+import { Toolbar } from '../toolbar/Toolbar';
 import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
@@ -196,11 +196,12 @@ const App = () => {
               </div>
             </div>
             <div className={`App-col ${mobileOverlay}`}>
-              <ToolBar
+              <Toolbar
                 callback={handleChangeSort}
                 sortOption={sortOption}
                 check={check}
                 mobileOverlay={mobileOverlay}
+                numberOfRequests={productRequests?.length}
               />
               {noData === 'none' || productRequests?.length === 0 ? (
                 <NoFeedback />
