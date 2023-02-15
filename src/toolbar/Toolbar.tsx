@@ -3,26 +3,41 @@ import '../index.scss';
 import gear from '../assets/icon-gear.svg';
 import plus from '../assets/shared/icon-plus.svg';
 import { Link, useParams } from 'react-router-dom';
-import Select from 'react-select';
-import { NoEncryptionSharp } from '@mui/icons-material';
-import { autocompleteClasses } from '@mui/material';
+import Select, { components, OptionProps } from 'react-select';
+import { colorstyles } from './colorstyles';
+import check from '../assets/shared/icon-check.svg';
+
+//TODO: import color styles, remove below
+//TODO: Checkmark on selected
 interface IProps {
   callback(id: string): void;
   sortOption: string;
   check: any;
   mobileOverlay: string;
   numberOfRequests?: number;
+  setSortOption: any;
 }
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+type OptionType = {
+  value: string;
+  label: string;
+};
+
+const options: OptionType[] = [
+  { value: 'most-upvotes', label: 'Most Upvotes' },
+  { value: 'least-upvotes', label: 'Least Upvotes' },
+  { value: 'most-comments', label: 'Most Comments' },
+  { value: 'least-comments', label: 'Least Comments' },
 ];
 
 export const Toolbar = (props: IProps) => {
-  const { callback, sortOption, mobileOverlay, numberOfRequests } = props;
-  const [hiddenState, setHiddenState] = useState<string>('hidden');
+  const {
+    callback,
+    sortOption,
+    mobileOverlay,
+    numberOfRequests,
+    setSortOption,
+  } = props;
 
   return (
     <div className={`toolbar ${mobileOverlay}`}>
@@ -33,9 +48,11 @@ export const Toolbar = (props: IProps) => {
         </div>
       </aside>
       <div className="toolbar__sort" id="sort">
-        <span>Sort By: </span>
+        <span>Sort By : </span>
         <Select
           options={options}
+          defaultValue={options[0]}
+          onChange={(selectedOption) => callback(selectedOption!.value)}
           placeholder="Most Upvotes"
           styles={{
             control: (baseStyles: any, state: any) => ({
@@ -46,10 +63,20 @@ export const Toolbar = (props: IProps) => {
                 cursor: 'pointer',
                 border: 'transparent',
               },
+              boxShadow: 'none',
             }),
             indicatorSeparator: () => ({
-              backgroundColor: 'transparent',
+              display: 'none',
             }),
+            singleValue: () => ({
+              color: 'white',
+            }),
+            valueContainer: () => ({
+              display: 'flex',
+              alignItems: 'center',
+              color: '$mid-gray',
+            }),
+            placeholder: () => ({}),
             menu: () => ({
               width: '255px',
               top: '65px',
@@ -58,6 +85,10 @@ export const Toolbar = (props: IProps) => {
               backgroundColor: 'white',
               boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
               borderRadius: '5px',
+              color: '#647196',
+              ':hover': {
+                color: '$violet',
+              },
             }),
             dropdownIndicator: (base: any, state: any) => ({
               ...base,
@@ -66,6 +97,20 @@ export const Toolbar = (props: IProps) => {
               display: 'flex',
               justifyContent: 'center',
               transform: state.isFocused ? 'rotate(180deg)' : 'rotate(0deg)',
+            }),
+            option: (state: any) => ({
+              border: 'solid red 1px',
+              height: '47px',
+              fontSize: '16px',
+              padding: '0 24px',
+              display: 'flex',
+              alignItems: 'center',
+              fontFamily: '$font-jost',
+              ':hover': {
+                color: '#AD1FEA',
+                cursor: 'pointer',
+              },
+              backgroundColor: state.hasValue ? 'yellow' : 'red',
             }),
           }}
         />
