@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
 import { Filter } from '../filter/Filter';
 import { Roadmap } from '../components/Roadmap';
-import { ToolBar } from '../components/ToolBar';
+import { Toolbar } from '../toolbar/Toolbar';
 import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
@@ -19,7 +19,7 @@ const App = () => {
     useState<ProductRequest[]>(productRequests);
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
-  const [sortOption, setSortOption] = useState<string>('Most Up Votes');
+  const [sortOption, setSortOption] = useState<string>('most-upvotes');
   const [check, setCheck] = useState('');
   const [hamburger, setHamburgerState] = useState<string>('close');
   const [modalMobile, setModalMobile] = useState<string>('');
@@ -27,7 +27,6 @@ const App = () => {
   const [ontablet, setIsTablet] = useState('not-tablet');
   const [screenSize, setScreenSize] = useState('mobile');
   const [currentFeedback, setCurrentFeedback] = useState<number>(0);
-  const [test, setTest] = useState();
 
   const fetchProductRequests = () =>
     fetch('/api/productrequests')
@@ -121,7 +120,7 @@ const App = () => {
   const handleChangeSort = (id: string) => {
     if (id === 'most-upvotes') {
       let mostUpVotes = productRequests.sort((a: any, b: any) => {
-        setSortOption('Most Up Votes');
+        setSortOption('most-upvotes');
         return b.upvotes - a.upvotes;
       });
       setProductRequests(mostUpVotes);
@@ -196,11 +195,13 @@ const App = () => {
               </div>
             </div>
             <div className={`App-col ${mobileOverlay}`}>
-              <ToolBar
+              <Toolbar
                 callback={handleChangeSort}
                 sortOption={sortOption}
                 check={check}
                 mobileOverlay={mobileOverlay}
+                numberOfRequests={productRequests?.length}
+                setSortOption={setSortOption}
               />
               {noData === 'none' || productRequests?.length === 0 ? (
                 <NoFeedback />
