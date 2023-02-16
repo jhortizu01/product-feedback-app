@@ -38,6 +38,7 @@
     width: 278px;
     margin-bottom: 50px;
     text-align: center;
+    font-weight: 400;
 
     @include for-desktop() {
       width: 410px;
