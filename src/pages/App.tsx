@@ -7,7 +7,7 @@ import { ToolBar } from '../components/ToolBar';
 import { RequestCards } from '../components/RequestCards';
 import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
-import { NoFeedback } from 'components/NoFeedback';
+import { NoFeedback } from 'nofeedback/NoFeedback';
 import '../styles/App.scss';
 import { Feedback } from './Feedback';
 import { CreateFeedback } from './CreateFeedback';
