@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { Toolbar } from './Toolbar';
 
 describe('Toolbar Initial State', () => {
-  //gear icon is on page
   test('Gear Icon is visible, number of suggestions render in the toolbar, sorted by most upvotes, add feedback button is visible', () => {
     render(
       <BrowserRouter>
