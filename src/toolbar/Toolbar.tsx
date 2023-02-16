@@ -12,7 +12,6 @@ import check from '../assets/shared/icon-check.svg';
 interface IProps {
   callback(id: string): void;
   sortOption: string;
-  check: any;
   mobileOverlay: string;
   numberOfRequests?: number;
   setSortOption: any;
@@ -38,7 +37,7 @@ export const Toolbar = (props: IProps) => {
     numberOfRequests,
     setSortOption,
   } = props;
-  console.log(sortOption);
+
   return (
     <div className={`toolbar ${mobileOverlay}`}>
       <aside className="toolbar-left">
