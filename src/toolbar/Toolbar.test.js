@@ -49,4 +49,16 @@ describe('Toolbar interaction', () => {
     const leastComments = screen.queryByText('Least Comments');
     expect(leastComments).toBeInTheDocument();
   });
+  test('Add feedback button directs to create feedback page', () => {
+    render(
+      <BrowserRouter>
+        <Toolbar numberOfRequests={12} />
+      </BrowserRouter>,
+    );
+
+    const addFeedbackLink = screen.getByRole('link', {
+      name: 'plus Add Feedback',
+    });
+    expect(addFeedbackLink).toHaveAttribute('href', '/create-feedback');
+  });
 });
