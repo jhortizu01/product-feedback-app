@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { getByDisplayValue, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
@@ -19,9 +19,34 @@ describe('Toolbar Initial State', () => {
       level: 2,
     });
 
-    const sortSelection = screen.getByRole('option', {
-      name: 'Most Upvotes',
-      selected: true,
+    screen.getByText('Most Upvotes');
+
+    const addFeedbackBtn = screen.getByRole('button', {
+      name: 'plus Add Feedback',
     });
+    expect(addFeedbackBtn).toBeInTheDocument();
+  });
+});
+
+describe('Toolbar interaction', () => {
+  test('Should start closed and when clicked should show options', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrowserRouter>
+        <Toolbar numberOfRequests={12} />
+      </BrowserRouter>,
+    );
+
+    const nullLeastUpvotes = screen.queryByText('Least Upvotes');
+    expect(nullLeastUpvotes).not.toBeInTheDocument();
+    const mostUpvotes = screen.getByText('Most Upvotes');
+
+    await user.click(mostUpvotes);
+    const leastUpvotes = screen.queryByText('Least Upvotes');
+    expect(leastUpvotes).toBeInTheDocument();
+    const mostComments = screen.queryByText('Most Comments');
+    expect(mostComments).toBeInTheDocument();
+    const leastComments = screen.queryByText('Least Comments');
+    expect(leastComments).toBeInTheDocument();
   });
 });

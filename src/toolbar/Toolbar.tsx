@@ -3,7 +3,7 @@ import '../index.scss';
 import gear from '../assets/icon-gear.svg';
 import plus from '../assets/shared/icon-plus.svg';
 import { Link, useParams } from 'react-router-dom';
-import Select, { components, OptionProps } from 'react-select';
+import Select from 'react-select';
 import { colorstyles } from './colorstyles';
 import check from '../assets/shared/icon-check.svg';
 
@@ -38,7 +38,7 @@ export const Toolbar = (props: IProps) => {
     numberOfRequests,
     setSortOption,
   } = props;
-
+  console.log(sortOption);
   return (
     <div className={`toolbar ${mobileOverlay}`}>
       <aside className="toolbar-left">
@@ -54,6 +54,7 @@ export const Toolbar = (props: IProps) => {
           defaultValue={options[0]}
           onChange={(selectedOption) => callback(selectedOption!.value)}
           placeholder="Most Upvotes"
+          className="sortBy"
           styles={{
             control: (baseStyles: any, state: any) => ({
               ...baseStyles,
@@ -116,10 +117,12 @@ export const Toolbar = (props: IProps) => {
         />
       </div>
       <aside className="toolbar-right">
-        <Link to="/create-feedback" className="add-feedback">
-          <img src={plus} alt="plus" />
-          Add Feedback
-        </Link>
+        <button>
+          <Link to="/create-feedback" className="add-feedback">
+            <img src={plus} alt="plus" />
+            Add Feedback
+          </Link>
+        </button>
       </aside>
     </div>
   );

@@ -120,7 +120,7 @@ const App = () => {
   const handleChangeSort = (id: string) => {
     if (id === 'most-upvotes') {
       let mostUpVotes = productRequests.sort((a: any, b: any) => {
-        setSortOption('Most Up Votes');
+        setSortOption('most-upvotes');
         return b.upvotes - a.upvotes;
       });
       setProductRequests(mostUpVotes);

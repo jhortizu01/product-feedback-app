@@ -80,6 +80,11 @@
     flex-direction: row;
     justify-content: end;
     margin-right: 25px;
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
   }
 }
 
