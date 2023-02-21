@@ -2,7 +2,6 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 // SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
@@ -11,7 +10,7 @@ import check from '../assets/shared/icon-check.svg';
 
 // Types
 import { ProductRequest, LabelValue } from '../types';
-import { colorstyles } from './colorstyle';
+import { colorstyles } from './colorstyles';
 
 type Inputs = {
   title: string;
