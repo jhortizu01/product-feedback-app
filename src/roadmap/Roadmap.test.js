@@ -22,7 +22,7 @@ describe('roadmap initial state', () => {
     const roadMapButton = screen.getByRole('button', { name: 'View' });
     expect(roadMapButton).toHaveTextContent('View');
   });
-  test('Roadmap should have a status called planned with a value of 4', () => {
+  test('Roadmap should have a status called planned with a value', () => {
     render(
       <BrowserRouter>
         <Roadmap />
@@ -31,7 +31,7 @@ describe('roadmap initial state', () => {
     const plannedLabel = screen.getByTestId('planned');
     expect(plannedLabel).toHaveTextContent('planned');
   });
-  test('Roadmap should have a status called in-progress with a value of 1', () => {
+  test('Roadmap should have a status called in-progress with a value', () => {
     render(
       <BrowserRouter>
         <Roadmap />
@@ -40,7 +40,7 @@ describe('roadmap initial state', () => {
     const plannedLabel = screen.getByTestId('in-progress');
     expect(plannedLabel).toHaveTextContent('in-progress');
   });
-  test('Roadmap should have a status called live with a value of 1', () => {
+  test('Roadmap should have a status called live with a value', () => {
     render(
       <BrowserRouter>
         <Roadmap />
