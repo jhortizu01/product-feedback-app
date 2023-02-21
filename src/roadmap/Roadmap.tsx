@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { data } from 'data';
+import { Link } from 'react-router-dom';
 
 //styles
 import '../index.scss';
@@ -30,7 +31,9 @@ export const Roadmap = () => {
     <section className="roadmap">
       <ul className="roadmap__text">
         <h1>Roadmap</h1>
-        <button>View</button>
+        <Link to="#">
+          <button>View</button>
+        </Link>
       </ul>
 
       {statuses.map((status: Status, idx: number) => {
