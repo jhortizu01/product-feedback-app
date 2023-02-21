@@ -20,7 +20,6 @@ const App = () => {
   const [disabledUpVotes, setDisableUpVote] = useState<ProductRequest[]>([]);
   const [noData, setNoData] = useState('');
   const [sortOption, setSortOption] = useState<string>('most-upvotes');
-  const [check, setCheck] = useState('');
   const [hamburger, setHamburgerState] = useState<string>('close');
   const [modalMobile, setModalMobile] = useState<string>('');
   const [mobileOverlay, setMobileOverlay] = useState<string>('');
@@ -198,7 +197,6 @@ const App = () => {
               <Toolbar
                 callback={handleChangeSort}
                 sortOption={sortOption}
-                check={check}
                 mobileOverlay={mobileOverlay}
                 numberOfRequests={productRequests?.length}
                 setSortOption={setSortOption}

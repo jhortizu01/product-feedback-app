@@ -64,17 +64,28 @@ export const Toolbar = (props: IProps) => {
                 border: 'transparent',
               },
               boxShadow: 'none',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
             }),
             indicatorSeparator: () => ({
               display: 'none',
             }),
             singleValue: () => ({
               color: 'white',
+              fontSize: '13px',
+              whiteSpace: 'nowrap',
+              '@include for-desktop()': {
+                fontSize: '16px',
+              },
             }),
             valueContainer: () => ({
               display: 'flex',
               alignItems: 'center',
               color: '$mid-gray',
+            }),
+            input: () => ({
+              display: 'none',
             }),
             placeholder: () => ({}),
             menu: () => ({
@@ -89,6 +100,9 @@ export const Toolbar = (props: IProps) => {
               ':hover': {
                 color: '$violet',
               },
+            }),
+            indicatorsContainer: () => ({
+              padding: '0 !important',
             }),
             dropdownIndicator: (base: any, state: any) => ({
               ...base,
