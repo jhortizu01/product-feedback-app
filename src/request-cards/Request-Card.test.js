@@ -20,7 +20,7 @@ describe('Request Card Initial state', () => {
   });
 });
 
-describe('Upvote functionality', () => {
+describe('Buttons functionality', () => {
   test('Button should start with a numerical value and when clicked should increase by 1', async () => {
     const user = userEvent.setup();
     const baseProps = {
