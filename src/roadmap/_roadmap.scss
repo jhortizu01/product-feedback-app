@@ -18,6 +18,11 @@
     width: 255px;
     margin: 0;
   }
+
+  ul {
+    padding: 0;
+  }
+
   &__text {
     display: flex;
     flex-direction: row;
