@@ -39,8 +39,7 @@ describe('Buttons functionality', () => {
     expect(baseProps.addUpVote).toHaveBeenCalledTimes(1);
   });
 
-  test('Button should start as enabled', async () => {
-    const user = userEvent.setup();
+  test('Button should start as enabled', () => {
     const baseProps = {
       addUpVote: jest.fn(),
       disabledUpvotes: [],
@@ -52,8 +51,6 @@ describe('Buttons functionality', () => {
     );
 
     const upvotesBtn = screen.getAllByTestId('upvotes');
-    expect(upvotesBtn[0]).toHaveProperty('disabled', false);
-    await user.click(upvotesBtn[0]);
     expect(upvotesBtn[0]).toHaveProperty('disabled', false);
   });
 

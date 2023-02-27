@@ -25,14 +25,11 @@ export const RequestCards = (props: IProps) => {
           if (event.target.id === title) {
             disabledUpVotes?.push(item);
           }
-          console.log('butst');
         };
 
         const findDisabled = disabledUpVotes?.find((upvote: ProductRequest) => {
           return upvote.title === title;
         });
-
-        console.log(findDisabled);
 
         return (
           <div className="request-card" key={id}>
