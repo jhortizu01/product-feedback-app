@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 // SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import check from '../assets/shared/icon-check.svg';
 
 // Types
 import { ProductRequest, LabelValue } from '../types';
@@ -80,7 +79,11 @@ export const CreateFeedback = (props: IProps) => {
             <h2>Feedback Title</h2>
             <p>Add a short, descriptive headline</p>
           </label>
-          {errors.title && <span className="error">Can't be empty.</span>}
+          {errors.title && (
+            <span className="error" data-testid="error-title">
+              Can't be empty.
+            </span>
+          )}
           <input
             type="text"
             className="text"
@@ -128,7 +131,11 @@ export const CreateFeedback = (props: IProps) => {
               etc.
             </p>
           </label>
-          {errors.feedback && <span className="error">Can't be empty.</span>}
+          {errors.feedback && (
+            <span className="error" data-testId="error-description">
+              Can't be empty.
+            </span>
+          )}
           <textarea
             id="feedback"
             className="text"
