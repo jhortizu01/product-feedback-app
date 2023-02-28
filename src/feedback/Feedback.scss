@@ -105,7 +105,6 @@
     background-color: $white;
     margin-right: auto;
     margin-left: auto;
-    padding-bottom: 40px;
     border-radius: 10px;
     width: calc(100% - 32px);
     color: #647196;
@@ -132,7 +131,8 @@
       flex-direction: row;
       justify-content: space-around;
       align-items: end;
-      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
 
       @include for-tablet() {
         justify-content: space-between;
