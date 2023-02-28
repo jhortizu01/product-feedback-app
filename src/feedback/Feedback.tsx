@@ -66,6 +66,7 @@ export const Feedback = (props: IProps) => {
 
   return (
     <div className="feedback">
+      <div></div>
       <nav>
         <button className="go-back">
           <img src={leftArrow} alt="left arrow" />
@@ -116,14 +117,15 @@ export const Feedback = (props: IProps) => {
                     <div>
                       <span data-testid="fullname">{name}</span>
                       <span data-testid="username">{username}</span>
+                      <p data-testid="user-comment">{comment?.content}</p>
                     </div>
                     <a href="#" className="reply">
                       Reply
                     </a>
                   </div>
-                  <div>
+                  {/* <div>
                     <p data-testid="user-comment">{comment?.content}</p>
-                  </div>
+                  </div> */}
                 </article>
                 {comment.replies?.length &&
                   comment.replies?.map((reply: any) => {

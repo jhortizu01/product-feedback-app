@@ -67,81 +67,87 @@ export const CreateFeedback = (props: IProps) => {
   };
 
   return (
-    <section className="feedback">
-      <Link to={'/'} className="go-back">
-        <img src={leftArrow} alt="left arrow" />
-        Go Back
-      </Link>
-      <img className="add" src={newFeedback} alt="plus sign" />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Create New Feedback</h1>
-        <div className="container">
-          <label htmlFor="titleRequired">
-            <span>Feedback Title</span>
-            <span>Add a short, descriptive headline</span>
+    <section className="create-feedback">
+      <div className="create-feedback__container">
+        <Link to={'/'} className="go-back">
+          <img src={leftArrow} alt="left arrow" />
+          Go Back
+        </Link>
+        <img className="add" src={newFeedback} alt="plus sign" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h1>Create New Feedback</h1>
+          <div className="container">
+            <label htmlFor="titleRequired">
+              <span>Feedback Title</span>
+              <span>Add a short, descriptive headline</span>
+            </label>
+            {errors.title && <span className="error">Can't be empty.</span>}
+            <input
+              type="text"
+              className="text"
+              {...register('title', { required: true })}
+            />
+          </div>
+
+          <label htmlFor="category">
+            <span>Category</span>
+            <span>Choose a category for your feedback</span>
           </label>
-          {errors.title && <span className="error">Can't be empty.</span>}
-          <input
-            type="text"
-            className="text"
-            {...register('title', { required: true })}
-          />
-        </div>
+          <div className="dropdown">
+            <Controller
+              name="category"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value, name, ref } }) => {
+                const currentSelection = categoryOptions.find(
+                  (c: LabelValue) => c.value === value,
+                );
 
-        <label htmlFor="category">
-          <span>Category</span>
-          <span>Choose a category for your feedback</span>
-        </label>
-        <div className="dropdown">
-          <Controller
-            name="category"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, value, name, ref } }) => {
-              const currentSelection = categoryOptions.find(
-                (c: LabelValue) => c.value === value,
-              );
+                return (
+                  <Select
+                    name={name}
+                    options={categoryOptions}
+                    onChange={(selectedOption: LabelValue | null): void => {
+                      onChange(selectedOption?.value);
+                    }}
+                    ref={ref}
+                    value={currentSelection}
+                    styles={colorstyles}
+                  />
+                );
+              }}
+            />
+          </div>
+          <div className="container">
+            <label htmlFor="feedback">
+              <span>Feedback Detail</span>
+              <span>
+                Include any specific comments on what should be improved, added,
+                etc.
+              </span>
+            </label>
+            {errors.feedback && <span className="error">Can't be empty.</span>}
+            <textarea
+              id="feedback"
+              className="text"
+              {...register('feedback', { required: true })}
+            />
+          </div>
 
-              return (
-                <Select
-                  name={name}
-                  options={categoryOptions}
-                  onChange={(selectedOption: LabelValue | null): void => {
-                    onChange(selectedOption?.value);
-                  }}
-                  ref={ref}
-                  value={currentSelection}
-                  styles={colorstyles}
-                />
-              );
-            }}
-          />
-        </div>
-        <div className="container">
-          <label htmlFor="feedback">
-            <span>Feedback Detail</span>
-            <span>
-              Include any specific comments on what should be improved, added,
-              etc.
-            </span>
-          </label>
-          {errors.feedback && <span className="error">Can't be empty.</span>}
-          <textarea
-            id="feedback"
-            className="text"
-            {...register('feedback', { required: true })}
-          />
-        </div>
-
-        <div className="button-container">
-          <input type="submit" value="Add Feedback" className="add-feedback" />
-          <Link to={'/'} className="cancel">
-            Cancel
-          </Link>
-        </div>
-      </form>
+          <div className="button-container">
+            <input
+              type="submit"
+              value="Add Feedback"
+              className="add-feedback"
+            />
+            <Link to={'/'} className="cancel">
+              Cancel
+            </Link>
+          </div>
+        </form>
+      </div>
     </section>
   );
 };
