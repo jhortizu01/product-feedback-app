@@ -9,7 +9,7 @@ import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'nofeedback/NoFeedback';
 import '../styles/App.scss';
-import { Feedback } from './Feedback';
+import { Feedback } from '../feedback/Feedback';
 import { CreateFeedback } from './CreateFeedback';
 
 const App = () => {

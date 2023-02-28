@@ -1,4 +1,4 @@
-@import 'mixins.scss';
+@import 'styles/mixins.scss';
 
 .feedback {
   background-color: #f2f2f2;
@@ -27,6 +27,11 @@
     @include for-desktop() {
       margin: 24px 0;
       width: 100%;
+    }
+
+    .go-back {
+      background-color: transparent;
+      border: none;
     }
 
     img {
@@ -62,107 +67,6 @@
     }
   }
 
-  // &__content {
-  //   width: calc(100% - 48px);
-  //   height: fit-content;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  //   border-radius: 10px;
-  //   background-color: white;
-
-  //   @include for-tablet() {
-  //     width: calc(100% - 80px);
-  //     margin-right: auto;
-  //     margin-left: auto;
-  //   }
-
-  //   h2 {
-  //     font-size: 15px;
-  //     font-weight: 700;
-  //     line-height: 18.79px;
-  //     color: #3a4374;
-  //     margin: 24px;
-  //     padding-top: 24px;
-  //   }
-
-  //   p {
-  //     font-size: 13px;
-  //     font-weight: 400;
-  //     line-height: 18.79px;
-  //     color: #647196;
-  //     margin: 0 24px 10px;
-  //   }
-
-  //   button {
-  //     width: 70px;
-  //     display: flex;
-  //     flex-wrap: wrap;
-  //     flex-direction: row;
-  //     justify-content: space-around;
-  //     align-items: center;
-  //     height: 32px;
-  //     background-color: $gray;
-  //     border: none;
-  //     border-radius: $border-radius;
-  //     font-weight: 700;
-  //     color: $blurple;
-  //     order: 2;
-
-  //     @include for-tablet {
-  //       order: 1;
-  //       margin-left: 32px;
-  //       margin-top: 28px;
-  //       width: 40px;
-  //       height: 55px;
-  //     }
-
-  //     @include for-desktop() {
-  //       margin-top: 30px;
-  //       flex-direction: column;
-  //       order: 1;
-  //       width: 40px;
-  //       justify-content: center;
-  //       height: 55px;
-  //     }
-
-  //     span {
-  //       font-family: $font-jost;
-  //       color: $navy;
-  //     }
-
-  //     &:disabled,
-  //     &:active {
-  //       background-color: $blurple;
-  //       color: $white;
-
-  //       span {
-  //         color: $white;
-  //       }
-  //     }
-
-  //     &:hover {
-  //       cursor: pointer;
-  //       background-color: $button-hover-background;
-  //     }
-  //   }
-
-  //   .request-card-comments {
-  //     margin: 0;
-  //   }
-
-  //   .request-card-category {
-  //     margin-left: 24px;
-  //   }
-
-  //   .feedback__buttons {
-  //     display: flex;
-  //     flex-direction: row;
-  //     justify-content: space-between;
-  //     margin: 16px 24px;
-  //     padding-bottom: 24px;
-  //   }
-  // }
-
   &__container {
     background-color: $white;
     margin-right: auto;
@@ -181,7 +85,7 @@
       margin-top: 24px;
     }
 
-    h2 {
+    h4 {
       font-size: 18px;
       font-weight: 700;
       color: #3a4374;

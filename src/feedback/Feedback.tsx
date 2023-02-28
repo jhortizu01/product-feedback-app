@@ -67,36 +67,41 @@ export const Feedback = (props: IProps) => {
   return (
     <div className="feedback">
       <nav>
-        <div>
+        <button className="go-back">
           <img src={leftArrow} alt="left arrow" />
           <Link to="/">Go Back</Link>
-        </div>
+        </button>
         <button className="add-feedback">Edit Feedback</button>
       </nav>
 
-      <div className="request-card">
+      <div className="request-card" data-testid="request-card">
         <button
           onClick={onClick}
           id={title}
           disabled={!!findDisabled}
           className={`fa-solid fa-chevron-up`}
+          data-testid="upvotes"
         >
           <span>{upvotes}</span>
         </button>
         <section className="request-card-text">
-          <div className="request-card-title">{title}</div>
-          <div className="request-card-description">{description}</div>
-          <div className="request-card-category">{category}</div>
+          <h3 className="request-card-title">{title}</h3>
+          <p className="request-card-description" data-testid="description">
+            {description}
+          </p>
+          <div className="request-card-category" data-testid="category">
+            {category}
+          </div>
         </section>
 
-        <button className="request-card-comments">
+        <button className="request-card-comments" data-testid="comments">
           <i className="fa-solid fa-comment"></i>
           <span>{comments?.length}</span>
         </button>
       </div>
 
-      <section className="feedback__container">
-        <h2>{comments?.length} Comments</h2>
+      <section className="feedback__container" data-testid="feedback-container">
+        <h4>{comments?.length} Comments</h4>
 
         {comments?.length &&
           comments.map((comment) => {
@@ -109,15 +114,15 @@ export const Feedback = (props: IProps) => {
                     {' '}
                     <img src={image} alt="user" />
                     <div>
-                      <span>{name}</span>
-                      <span>{username}</span>
+                      <span data-testid="fullname">{name}</span>
+                      <span data-testid="username">{username}</span>
                     </div>
                     <a href="#" className="reply">
                       Reply
                     </a>
                   </div>
                   <div>
-                    <span>{comment?.content}</span>
+                    <p data-testid="user-comment">{comment?.content}</p>
                   </div>
                 </article>
                 {comment.replies?.length &&
@@ -128,8 +133,8 @@ export const Feedback = (props: IProps) => {
                         <div className="feedback__user-info">
                           <img src={image} alt="user" />
                           <div>
-                            <span>{name}</span>
-                            <span>@{username}</span>
+                            <span data-testid="fullname">{name}</span>
+                            <span data-testid="username">@{username}</span>
                           </div>
                           <a href="#" className="reply">
                             Reply
@@ -145,37 +150,11 @@ export const Feedback = (props: IProps) => {
               </>
             );
           })}
-
-        {/* {comments?.map((comment) => {
-          if (comment?.replies !== undefined) {
-            return comment?.replies?.map((reply) => {
-              return (
-                <article className="feedback__reply">
-                  <div className="feedback__user-info">
-                    <img src={reply?.user.image} alt="user" />
-                    <div>
-                      <span>{reply?.user.name}</span>
-                      <span>@{reply?.user.username}</span>
-                    </div>
-                    <a href="#" className="reply">
-                      Reply
-                    </a>
-                  </div>
-
-                  <div>
-                    <span>@{reply?.replyingTo}</span>
-                    <span>{reply?.content}</span>
-                  </div>
-                </article>
-              );
-            });
-          }
-        })} */}
       </section>
 
-      <form>
+      <form data-testid="add-comment">
         <fieldset>
-          <label htmlFor="comment">Add Comment</label>
+          <legend>Add Comment</legend>
           <span className={error}>Please add comment</span>
           <textarea
             id="comment"
@@ -190,7 +169,7 @@ export const Feedback = (props: IProps) => {
         </fieldset>
 
         <section>
-          <span>
+          <span data-testid="characters-left">
             {inputText !== undefined ? 250 - inputText.length : 250} Characters
             Left
           </span>
