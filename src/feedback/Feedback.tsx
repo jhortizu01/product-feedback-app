@@ -80,7 +80,7 @@ export const Feedback = (props: IProps) => {
           onClick={onClick}
           id={title}
           disabled={!!findDisabled}
-          className={`fa-solid fa-chevron-up`}
+          className={`fa-solid fa-chevron-up request-card-upvotes`}
           data-testid="upvotes"
         >
           <span>{upvotes}</span>
@@ -94,11 +94,12 @@ export const Feedback = (props: IProps) => {
             {category}
           </div>
         </section>
-
-        <button className="request-card-comments" data-testid="comments">
-          <i className="fa-solid fa-comment"></i>
-          <span>{comments?.length}</span>
-        </button>
+        <div className="request-card-container">
+          <button data-testid="comments">
+            <i className="fa-solid fa-comment"></i>
+            <span>{comments?.length}</span>
+          </button>
+        </div>
       </div>
 
       <section className="feedback__container" data-testid="feedback-container">

@@ -10,10 +10,6 @@
     margin: 0 auto;
   }
 
-  .request-card-text {
-    width: 100%;
-  }
-
   nav {
     background-color: #f2f2f2;
     display: flex;
@@ -23,7 +19,7 @@
     margin: 24px;
 
     @include for-tablet() {
-      width:calc(100% - 80px);
+      width: calc(100% - 80px);
       margin-left: auto;
       margin-right: auto;
     }
@@ -55,11 +51,45 @@
   }
 
   .request-card {
+    padding-top: 28px;
+    padding-bottom: 28px;
 
-    button {
-      flex-wrap: nowrap;
+    &-text {
+      padding-top: 0;
+      padding-bottom: 0;
     }
-    &-comments {
+
+    &-title {
+      margin-top: 0;
+    }
+
+    &-container {
+      order: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        display: flex;
+        flex-direction: row;
+        background-color: transparent;
+        width: fit-content;
+        i {
+          color: $comment-bubble;
+        }
+        
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    &-upvotes {
+      flex-wrap: nowrap;
+      margin-top: 0;
+    }
+
+    &__comments {
       background-color: transparent;
       margin: 0 24px 24px 25px;
 
@@ -174,7 +204,7 @@
         margin-left: 77px;
       }
 
-      div:last-of-type { 
+      div:last-of-type {
         font-size: 13px;
         line-height: 18.79px;
 
@@ -255,8 +285,6 @@
       }
     }
   }
-
-
 }
 
 .hidden {
