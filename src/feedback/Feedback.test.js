@@ -122,7 +122,25 @@ describe('Feedback functionality', () => {
   });
 
   //need to build feature
-  test.skip('Clicking the reply button opens up a text box for users to type in a rply and a button to post a reply and adds the reply', () => {});
+  test('Clicking the reply button opens up a text box for users to type in a rply and a button to post a reply and adds the reply', () => {
+    const user = userEvent.setup();
+    const baseProps = {
+      addUpVote: jest.fn(),
+    };
+    render(
+      <BrowserRouter>
+        <Feedback
+          {...baseProps}
+          productRequests={data.productRequests}
+          currentFeedback={1}
+          currentUser={data.currentUser}
+          disabledUpVotes={[]}
+        />
+      </BrowserRouter>,
+    );
+
+    
+  });
 
   test('User can type a comment, post the comment, and have new number of comments', async () => {
     const user = userEvent.setup();
