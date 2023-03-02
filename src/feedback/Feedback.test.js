@@ -5,6 +5,8 @@ import { data } from '../data.ts';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
+//beforeeach jest
+
 describe('Feedback Initial State', () => {
   test('Should display a back button that goes back to the home page, edit feedback button that takes you to the edit feedback page, a request card, comments with replies if any,  and a form to submit comments', () => {
     const baseProps = {
@@ -91,7 +93,7 @@ describe('Feedback Initial State', () => {
     );
 
     screen.getByRole('group', { name: 'Add Comment' });
-    screen.getByRole('textbox');
+    screen.getByTestId('comment-box');
     screen.getByTestId('characters-left');
     screen.getByRole('button', { name: 'Post Comment' });
   });
@@ -121,27 +123,6 @@ describe('Feedback functionality', () => {
     expect(baseProps.addUpVote).toHaveBeenCalledTimes(1);
   });
 
-  //need to build feature
-  test('Clicking the reply button opens up a text box for users to type in a rply and a button to post a reply and adds the reply', () => {
-    const user = userEvent.setup();
-    const baseProps = {
-      addUpVote: jest.fn(),
-    };
-    render(
-      <BrowserRouter>
-        <Feedback
-          {...baseProps}
-          productRequests={data.productRequests}
-          currentFeedback={1}
-          currentUser={data.currentUser}
-          disabledUpVotes={[]}
-        />
-      </BrowserRouter>,
-    );
-
-    
-  });
-
   test('User can type a comment, post the comment, and have new number of comments', async () => {
     const user = userEvent.setup();
     const baseProps = {
@@ -159,7 +140,7 @@ describe('Feedback functionality', () => {
       </BrowserRouter>,
     );
 
-    const commentBox = screen.getByRole('textbox');
+    const commentBox = screen.getByTestId('comment-box');
     const postBtn = screen.getByRole('button', { name: 'Post Comment' });
 
     await user.type(commentBox, 'Test');

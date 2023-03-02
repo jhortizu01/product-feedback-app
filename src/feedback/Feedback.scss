@@ -151,14 +151,30 @@
 
     .feedback__user-info {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: end;
       display: flex;
       align-items: flex-start;
 
       @include for-tablet() {
         justify-content: space-between;
+      }
+
+      div:first-of-type {
+        border: solid pink 1px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        div:first-of-type {
+          border:solid red 1px;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      button {
+        background-color: transparent;
+        border: none;
       }
 
       div {
@@ -272,6 +288,11 @@
       font-weight: 700;
       color: $darker-gray;
 
+      .disable {
+        font-weight: 400;
+        color: red;
+      }
+
       label {
         color: #3a4374;
         font-weight: 700;
@@ -321,6 +342,3 @@
   display: none;
 }
 
-// article[data-component] {
-//   background-color: lime;
-// }
