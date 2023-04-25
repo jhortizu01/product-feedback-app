@@ -4,7 +4,7 @@ import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
 import { Filter } from '../filter/Filter';
 import { Roadmap } from '../components/Roadmap';
 import { Toolbar } from '../toolbar/Toolbar';
-import { RequestCards } from '../components/RequestCards';
+import { RequestCards } from '../request-cards/RequestCards';
 import { data } from 'data';
 import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'nofeedback/NoFeedback';
