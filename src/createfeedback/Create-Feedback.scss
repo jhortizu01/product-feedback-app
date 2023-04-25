@@ -1,4 +1,4 @@
-@import 'mixins.scss';
+@import 'styles/mixins.scss';
 
 .create-feedback {
   padding-right: 24px;
@@ -36,10 +36,29 @@
       width: 540px;
     }
 
+    h2 {
+      color: $darker-gray;
+      font-size: 13px;
+      margin: 0;
+      line-height: 19px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 19px;
+      color: $dark-gray;
+    }
+
     .container {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-bottom: 24px;
+    
+      &:first-of-type {
+        margin-top: 24px;
+      }
 
       &:last-of-type {
         input {
@@ -54,7 +73,7 @@
         order: 1;
       }
 
-      span {
+      .error {
         order: 3;
       }
 
@@ -153,6 +172,7 @@
     width: calc(100% - 48px);
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 24px;
 
     > div {
       width: 100%;
@@ -183,7 +203,7 @@
 
     .cancel {
       background-color: $grey-blue;
-      color: $gray;
+      border: none;
       width: calc(100% - 48px);
       margin-left: auto;
       margin-right: auto;
@@ -194,12 +214,16 @@
       align-items: center;
       font-family: $font-jost;
       height: 40px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 18.79px;
       margin-top: 16px;
       margin-bottom: 24px;
+
+      a {
+        color: $gray;
+        text-decoration: none;
+        line-height: 18.79px;
+        font-size: 13px;
+        font-weight: 700;
+      }
 
       @include for-tablet() {
         width: 93px;

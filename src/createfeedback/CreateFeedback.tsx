@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 // SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import check from '../assets/shared/icon-check.svg';
 
 // Types
 import { ProductRequest, LabelValue } from '../types';

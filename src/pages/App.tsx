@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
 import { Filter } from '../filter/Filter';
-import { Roadmap } from '../components/Roadmap';
+import { Roadmap } from '../roadmap/Roadmap';
 import { Toolbar } from '../toolbar/Toolbar';
 import { RequestCards } from '../request-cards/RequestCards';
 import { data } from 'data';
@@ -10,7 +10,7 @@ import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'nofeedback/NoFeedback';
 import '../styles/App.scss';
 import { Feedback } from '../feedback/Feedback';
-import { CreateFeedback } from './CreateFeedback';
+import { CreateFeedback } from '../createfeedback/CreateFeedback';
 
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>([]);
