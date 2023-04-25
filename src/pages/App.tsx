@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FrontEndMentor } from '../front-end-mentor/FrontEndMentor';
 import { Filter } from '../filter/Filter';
-import { Roadmap } from '../components/Roadmap';
+import { Roadmap } from '../roadmap/Roadmap';
 import { Toolbar } from '../toolbar/Toolbar';
 import { RequestCards } from '../request-cards/RequestCards';
 import { data } from 'data';

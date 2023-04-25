@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { data } from 'data';
+import { Link } from 'react-router-dom';
 
 //styles
 import '../index.scss';
@@ -28,11 +29,14 @@ export const Roadmap = () => {
 
   return (
     <section className="roadmap">
-      <div className="roadmap__text">
-        <span>Roadmap</span>
-        <span>View</span>
-      </div>
-      <div className="roadmap__list">
+      <ul>
+        <div className="roadmap__text">
+          <h1>Roadmap</h1>
+          <Link to="#">
+            <button>View</button>
+          </Link>
+        </div>
+
         {statuses.map((status: Status, idx: number) => {
           const dotClass = classNames({
             planned: status.status === STATUSES.PLANNED,
@@ -41,16 +45,16 @@ export const Roadmap = () => {
             roadmap__dot: true,
           });
           return (
-            <div className="roadmap__item" key={idx}>
-              <div className="roadmap__status">
+            <li className="roadmap__item" key={idx}>
+              <div className="roadmap__status" data-testid={status.status}>
                 <div className={dotClass} />
                 {status.status}
               </div>
               <div>{status.count}</div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 };
