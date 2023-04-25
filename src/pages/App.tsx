@@ -10,7 +10,7 @@ import { AllData, ProductRequest } from 'types';
 import { NoFeedback } from 'nofeedback/NoFeedback';
 import '../styles/App.scss';
 import { Feedback } from './Feedback';
-import { CreateFeedback } from './CreateFeedback';
+import { CreateFeedback } from '../createfeedback/CreateFeedback';
 
 const App = () => {
   const [productRequests, setProductRequests] = useState<ProductRequest[]>([]);

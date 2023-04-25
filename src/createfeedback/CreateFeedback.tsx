@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 // SVG
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
 import newFeedback from '../assets/shared/icon-new-feedback.svg';
-import check from '../assets/shared/icon-check.svg';
 
 // Types
 import { ProductRequest, LabelValue } from '../types';
@@ -77,20 +76,25 @@ export const CreateFeedback = (props: IProps) => {
         <h1>Create New Feedback</h1>
         <div className="container">
           <label htmlFor="titleRequired">
-            <span>Feedback Title</span>
-            <span>Add a short, descriptive headline</span>
+            <h2>Feedback Title</h2>
+            <p>Add a short, descriptive headline</p>
           </label>
-          {errors.title && <span className="error">Can't be empty.</span>}
+          {errors.title && (
+            <span className="error" data-testid="error-title">
+              Can't be empty.
+            </span>
+          )}
           <input
             type="text"
             className="text"
+            data-testId="feedback-title"
             {...register('title', { required: true })}
           />
         </div>
 
         <label htmlFor="category">
-          <span>Category</span>
-          <span>Choose a category for your feedback</span>
+          <h2>Category</h2>
+          <p>Choose a category for your feedback</p>
         </label>
         <div className="dropdown">
           <Controller
@@ -121,13 +125,17 @@ export const CreateFeedback = (props: IProps) => {
         </div>
         <div className="container">
           <label htmlFor="feedback">
-            <span>Feedback Detail</span>
-            <span>
+            <h2>Feedback Detail</h2>
+            <p>
               Include any specific comments on what should be improved, added,
               etc.
-            </span>
+            </p>
           </label>
-          {errors.feedback && <span className="error">Can't be empty.</span>}
+          {errors.feedback && (
+            <span className="error" data-testId="error-description">
+              Can't be empty.
+            </span>
+          )}
           <textarea
             id="feedback"
             className="text"
@@ -137,9 +145,9 @@ export const CreateFeedback = (props: IProps) => {
 
         <div className="button-container">
           <input type="submit" value="Add Feedback" className="add-feedback" />
-          <Link to={'/'} className="cancel">
-            Cancel
-          </Link>
+          <button className="cancel">
+            <Link to={'/'}>Cancel</Link>
+          </button>
         </div>
       </form>
     </section>
