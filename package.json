@@ -45,13 +45,10 @@
         ]
     },
     "devDependencies": {
-<<<<<<< HEAD
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.11",
-=======
         "@testing-library/dom": "^9.0.0",
         "@testing-library/user-event": "^14.4.3",
->>>>>>> f1c1b62d572a19f49831ca0683c9325cf35a3c01
         "@types/react-select": "^5.0.1",
         "@types/sass": "^1.43.1",
         "@types/sass-loader": "^8.0.3",
