@@ -1,4 +1,4 @@
-@import 'mixins.scss';
+@import 'styles/mixins.scss';
 
 .feedback {
   background-color: #f2f2f2;
@@ -19,7 +19,7 @@
     margin: 24px;
 
     @include for-tablet() {
-      width:calc(100% - 80px);
+      width: 90%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -27,6 +27,11 @@
     @include for-desktop() {
       margin: 24px 0;
       width: 100%;
+    }
+
+    .go-back {
+      background-color: transparent;
+      border: none;
     }
 
     img {
@@ -42,15 +47,72 @@
     .add-feedback {
       background-color: $blurple;
       width: 120px;
+      height: 40px;
+      background-color: $blurple !important;
     }
   }
 
   .request-card {
+    padding-top: 28px;
+    padding-bottom: 28px;
 
-    button {
-      flex-wrap: nowrap;
+    @include for-tablet {
+      margin: 16px auto;
+      width: 90%;
     }
-    &-comments {
+
+    @include for-desktop {
+      width: 100%;
+    }
+
+    &-text {
+      padding-top: 0;
+      padding-bottom: 0;
+      width: 100%;
+    }
+
+    &-title {
+      margin-top: 0;
+    }
+
+    &-category {
+      margin-bottom: 14px;
+
+      @include for-tablet {
+        margin-bottom: 0;
+      }
+    }
+
+    &-container {
+      order: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        display: flex;
+        flex-direction: row;
+        background-color: transparent;
+        width: fit-content;
+        margin-bottom: 0;
+        flex-wrap: nowrap;
+        i {
+          color: $comment-bubble;
+        }
+
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    &-upvotes {
+      flex-wrap: nowrap;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &__comments {
       background-color: transparent;
       margin: 0 24px 24px 25px;
 
@@ -62,118 +124,16 @@
     }
   }
 
-  // &__content {
-  //   width: calc(100% - 48px);
-  //   height: fit-content;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  //   border-radius: 10px;
-  //   background-color: white;
-
-  //   @include for-tablet() {
-  //     width: calc(100% - 80px);
-  //     margin-right: auto;
-  //     margin-left: auto;
-  //   }
-
-  //   h2 {
-  //     font-size: 15px;
-  //     font-weight: 700;
-  //     line-height: 18.79px;
-  //     color: #3a4374;
-  //     margin: 24px;
-  //     padding-top: 24px;
-  //   }
-
-  //   p {
-  //     font-size: 13px;
-  //     font-weight: 400;
-  //     line-height: 18.79px;
-  //     color: #647196;
-  //     margin: 0 24px 10px;
-  //   }
-
-  //   button {
-  //     width: 70px;
-  //     display: flex;
-  //     flex-wrap: wrap;
-  //     flex-direction: row;
-  //     justify-content: space-around;
-  //     align-items: center;
-  //     height: 32px;
-  //     background-color: $gray;
-  //     border: none;
-  //     border-radius: $border-radius;
-  //     font-weight: 700;
-  //     color: $blurple;
-  //     order: 2;
-
-  //     @include for-tablet {
-  //       order: 1;
-  //       margin-left: 32px;
-  //       margin-top: 28px;
-  //       width: 40px;
-  //       height: 55px;
-  //     }
-
-  //     @include for-desktop() {
-  //       margin-top: 30px;
-  //       flex-direction: column;
-  //       order: 1;
-  //       width: 40px;
-  //       justify-content: center;
-  //       height: 55px;
-  //     }
-
-  //     span {
-  //       font-family: $font-jost;
-  //       color: $navy;
-  //     }
-
-  //     &:disabled,
-  //     &:active {
-  //       background-color: $blurple;
-  //       color: $white;
-
-  //       span {
-  //         color: $white;
-  //       }
-  //     }
-
-  //     &:hover {
-  //       cursor: pointer;
-  //       background-color: $button-hover-background;
-  //     }
-  //   }
-
-  //   .request-card-comments {
-  //     margin: 0;
-  //   }
-
-  //   .request-card-category {
-  //     margin-left: 24px;
-  //   }
-
-  //   .feedback__buttons {
-  //     display: flex;
-  //     flex-direction: row;
-  //     justify-content: space-between;
-  //     margin: 16px 24px;
-  //     padding-bottom: 24px;
-  //   }
-  // }
-
   &__container {
     background-color: $white;
     margin-right: auto;
     margin-left: auto;
-    padding-bottom: 40px;
     border-radius: 10px;
-    width: calc(100% - 32px);
+    width: 90%;
     color: #647196;
 
     @include for-tablet() {
-      width: calc(100% - 80px);
+      width: 90%;
     }
 
     @include for-desktop() {
@@ -181,7 +141,7 @@
       margin-top: 24px;
     }
 
-    h2 {
+    h4 {
       font-size: 18px;
       font-weight: 700;
       color: #3a4374;
@@ -191,13 +151,30 @@
 
     .feedback__user-info {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: end;
-      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
 
       @include for-tablet() {
         justify-content: space-between;
+      }
+
+      div:first-of-type {
+        border: solid pink 1px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        div:first-of-type {
+          border:solid red 1px;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      button {
+        background-color: transparent;
+        border: none;
       }
 
       div {
@@ -206,6 +183,7 @@
         justify-content: space-between;
         font-size: 13px;
         line-height: 19px;
+        width: 83%;
 
         @include for-tablet() {
           font-size: 14px !important;
@@ -265,7 +243,7 @@
         margin-left: 77px;
       }
 
-      div:last-of-type { 
+      div:last-of-type {
         font-size: 13px;
         line-height: 18.79px;
 
@@ -288,13 +266,13 @@
   form {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 32px);
+    width: 90%;
     background-color: white;
     border-radius: 10px;
     margin: 24px auto;
 
     @include for-tablet() {
-      width: calc(100% - 80px);
+      width: 90%;
       margin-right: auto;
       margin-left: auto;
     }
@@ -307,6 +285,13 @@
       border: transparent;
       margin: 24px;
       padding: 0;
+      font-weight: 700;
+      color: $darker-gray;
+
+      .disable {
+        font-weight: 400;
+        color: red;
+      }
 
       label {
         color: #3a4374;
@@ -341,19 +326,19 @@
         color: #647196;
       }
 
-      .add-feedback {
-        width: 120px;
+      a {
+        text-decoration: none;
+
+        .add-feedback {
+          width: 120px;
+          height: 40px;
+        }
       }
     }
   }
-
-
 }
 
 .hidden {
   display: none;
 }
 
-// article[data-component] {
-//   background-color: lime;
-// }

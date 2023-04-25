@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { ProductRequest } from '../types';
 import { Link, useParams } from 'react-router-dom';
 import leftArrow from '../assets/shared/icon-arrow-left.svg';
+import { ariaHidden } from '@mui/base';
+import reactSelect from 'react-select';
 
 // Types
 interface IProps {
@@ -15,6 +17,7 @@ interface IProps {
 export const Feedback = (props: IProps) => {
   const [inputText, setInputText] = useState<string>();
   const [error, setErrorState] = useState('hidden');
+  const [selectedReplies, setSelectedReplies] = useState<number[]>([]);
   const {
     productRequests,
     currentFeedback,
@@ -31,6 +34,7 @@ export const Feedback = (props: IProps) => {
   const { category, comments, description, status, title, upvotes } = find!;
 
   const onClick = (event: any): void => {
+    console.log(event.target.id);
     addUpVote(event);
 
     if (event.target.id === title) {
@@ -64,60 +68,82 @@ export const Feedback = (props: IProps) => {
     }
   };
 
+  const openReplyTextbox = (comment: number) => {
+    setSelectedReplies((selectedReplies) => [...selectedReplies, comment]);
+  };
+
   return (
     <div className="feedback">
+      <div></div>
       <nav>
-        <div>
+        <button className="go-back">
           <img src={leftArrow} alt="left arrow" />
           <Link to="/">Go Back</Link>
-        </div>
+        </button>
         <button className="add-feedback">Edit Feedback</button>
       </nav>
 
-      <div className="request-card">
+      <div className="request-card" data-testid="request-card">
         <button
           onClick={onClick}
           id={title}
           disabled={!!findDisabled}
-          className={`fa-solid fa-chevron-up`}
+          className={`fa-solid fa-chevron-up request-card-upvotes`}
+          data-testid="upvotes"
         >
           <span>{upvotes}</span>
         </button>
         <section className="request-card-text">
-          <div className="request-card-title">{title}</div>
-          <div className="request-card-description">{description}</div>
-          <div className="request-card-category">{category}</div>
+          <h3 className="request-card-title">{title}</h3>
+          <p className="request-card-description" data-testid="description">
+            {description}
+          </p>
+          <div className="request-card-category" data-testid="category">
+            {category}
+          </div>
         </section>
-
-        <button className="request-card-comments">
-          <i className="fa-solid fa-comment"></i>
-          <span>{comments?.length}</span>
-        </button>
+        <div className="request-card-container">
+          <button data-testid="comments">
+            <i className="fa-solid fa-comment"></i>
+            <span>{comments?.length}</span>
+          </button>
+        </div>
       </div>
 
-      <section className="feedback__container">
-        <h2>{comments?.length} Comments</h2>
+      <section className="feedback__container" data-testid="feedback-container">
+        <h4>{comments?.length} Comments</h4>
 
         {comments?.length &&
           comments.map((comment) => {
             const { image, name, username } = comment.user;
+            const hidden = selectedReplies.includes(comment.id) ? '' : 'hidden';
 
             return (
               <>
                 <article className="feedback__comments" data-component={id}>
                   <div className="feedback__user-info">
                     {' '}
-                    <img src={image} alt="user" />
                     <div>
-                      <span>{name}</span>
-                      <span>{username}</span>
+                      <img src={image} alt="user" />
+                      <div>
+                        <span data-testid="fullname">{name}</span>
+                        <span data-testid="username">{username}</span>
+                      </div>
+                      <button
+                        className="reply"
+                        onClick={() => openReplyTextbox(comment?.id)}
+                      >
+                        Reply
+                      </button>
                     </div>
-                    <a href="#" className="reply">
-                      Reply
-                    </a>
-                  </div>
-                  <div>
-                    <span>{comment?.content}</span>
+                    <p data-testid="user-comment">{comment?.content}</p>
+                    <div
+                      data-textid="reply-textbox"
+                      className={`reply-input__container ${hidden}`}
+                    >
+                      <textarea></textarea>
+                      <button>Post Reply</button>
+                    </div>
                   </div>
                 </article>
                 {comment.replies?.length &&
@@ -128,12 +154,10 @@ export const Feedback = (props: IProps) => {
                         <div className="feedback__user-info">
                           <img src={image} alt="user" />
                           <div>
-                            <span>{name}</span>
-                            <span>@{username}</span>
+                            <span data-testid="fullname">{name}</span>
+                            <span data-testid="username">@{username}</span>
                           </div>
-                          <a href="#" className="reply">
-                            Reply
-                          </a>
+                          <button className="reply">Reply</button>
                         </div>
                         <div>
                           <span>@{reply?.replyingTo}</span>
@@ -145,37 +169,11 @@ export const Feedback = (props: IProps) => {
               </>
             );
           })}
-
-        {/* {comments?.map((comment) => {
-          if (comment?.replies !== undefined) {
-            return comment?.replies?.map((reply) => {
-              return (
-                <article className="feedback__reply">
-                  <div className="feedback__user-info">
-                    <img src={reply?.user.image} alt="user" />
-                    <div>
-                      <span>{reply?.user.name}</span>
-                      <span>@{reply?.user.username}</span>
-                    </div>
-                    <a href="#" className="reply">
-                      Reply
-                    </a>
-                  </div>
-
-                  <div>
-                    <span>@{reply?.replyingTo}</span>
-                    <span>{reply?.content}</span>
-                  </div>
-                </article>
-              );
-            });
-          }
-        })} */}
       </section>
 
-      <form>
+      <form data-testid="add-comment">
         <fieldset>
-          <label htmlFor="comment">Add Comment</label>
+          <legend>Add Comment</legend>
           <span className={error}>Please add comment</span>
           <textarea
             id="comment"
@@ -186,11 +184,12 @@ export const Feedback = (props: IProps) => {
             maxLength={250}
             placeholder="Your text here"
             onChange={(event) => onInput(event)}
+            data-testid="comment-box"
           />
         </fieldset>
 
         <section>
-          <span>
+          <span data-testid="characters-left">
             {inputText !== undefined ? 250 - inputText.length : 250} Characters
             Left
           </span>
