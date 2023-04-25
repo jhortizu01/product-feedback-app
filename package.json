@@ -45,15 +45,15 @@
         ]
     },
     "devDependencies": {
-        "@types/react": "^18.0.28",
-        "@types/react-dom": "^18.0.11",
         "@testing-library/dom": "^9.0.0",
         "@testing-library/user-event": "^14.4.3",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
         "@types/react-select": "^5.0.1",
         "@types/sass": "^1.43.1",
         "@types/sass-loader": "^8.0.3",
         "@types/webpack": "^5.28.0",
         "eslint-plugin-prettier": "^4.0.0",
-        "prettier": "^2.6.2"
-    }
+        "prettier": "^2.8.8"
+        }
 }
